@@ -14,7 +14,8 @@ requirements:
   bike_types: [gravel, cyclocross]
   # allroad/fitness/road-race are model-name verdicts, not ad labels: an ad
   # saying "gravel" over the word "Sirrus" is selling a flat-bar fitness bike.
-  reject_types: [mtb, city, kids, ebike, trekking, allroad, fitness, road-race]
+  reject_types: [mtb, city, kids, ebike, trekking, allroad, fitness, road-race,
+                 accessory]
   brakes: hydraulic_disc
   handlebar: drop
   # Shimano GRX (any), Tiagra 2x10 and equivalents.  Tier 3 is the floor:

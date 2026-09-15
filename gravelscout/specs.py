@@ -24,7 +24,17 @@ TYPE_PATTERNS: list[tuple[str, str]] = [
     ("gravel", r"\bgravel\b|\bgravl\b|\bgrevel\b|\badventure\s+bike\b|\bsljunk"),
     ("cyclocross", r"\bciklo[\s-]?kros\b|\bcyclo[\s-]?cross\b|\bcyclocross\b|\bciklokros\b|\bcx\b"),
     ("ebike", r"\be-?bike\b|\belektri(c|cn)"),
-    ("kids", r"\bdec(j|ij)i\b|\bdecak\b|\bdecji\b|\bza dete\b|\bdecije\b"),
+    # Not a bicycle at all.  Accessories, spares and the odd kitchen appliance
+    # get filed under "Bicikli" because that is where the buyers are, and they
+    # carry no disqualifying word, so without this they land in the shortlist as
+    # "nothing rules it out".  Each phrase is one a whole-bike ad does not use:
+    # a bike ad may mention a pump, it is not titled "pumpa za".
+    ("accessory", r"\bcerada\b|\bkaciga\b|\bdres\b|\btrenazer\b|\bprikolica\b|"
+                  r"\bblatobran\b|\bbidon\b|\bgepek\b|\baparat\s+za\b|"
+                  r"\b(?:pumpa|brava|korpa|torba|drzac|nosac|svetlo|sedalo)\s+za\b|"
+                  r"\bdelovi\s+za\b|\brezervni\s+deo\b"),
+    ("kids", r"\bdec(j|ij)i\b|\bdecak\b|\bdecji\b|\bza dete\b|\bza decu\b|"
+             r"\bdecije\b|\btricikl\b"),
     ("mtb", r"\bmtb\b|\bbrdski\b|\bplaninski\b|\bmountain\s*bike\b|\bhardtail\b|\bfull\s*suspension\b|\bdownhill\b|\benduro\b"),
     ("trekking", r"\btrek(k)?ing\b|\btreking\b|\bturing\b|\btouring\b|\bhibrid\b|\bhybrid\b|\bkrosover\b"),
     ("city", r"\bgradski\b|\bcity\s*bike\b|\bholandski\b|\bsklopiv\b|\bfolding\b"),
@@ -34,6 +44,7 @@ TYPE_PATTERNS: list[tuple[str, str]] = [
 # Model names that are unambiguously gravel, in case the ad text never says so.
 GRAVEL_MODELS = r"""
  revolt|devote|grail|grizl|inflite|topstone|checkpoint|diverge|crux|domane\s*\+?gravel|
+ backroad|
  warbird|cutthroat|midnight\s*special|fargo|vaya|straggler|crosscheck|crust|
  gt\s*grade|grade\s*carbon|jari|superx|caadx|arkose|
  addict\s*gravel|speedster\s*gravel|contessa\s*speedster\s*gravel|
@@ -76,7 +87,7 @@ FITNESS_MODELS = r"""
 ROAD_RACE_MODELS = r"""
  plasma|supersix|foil|emonda|madone|aeroad|ultimate|oltre|specialissima|
  addict(?!\s*gravel)|speedster(?!\s*gravel)|tarmac|venge|shiv|trinity|
- propel|tcr|aethos
+ propel|tcr|aethos|xlite
 """.replace("\n", "").replace(" ", r"\s*")
 
 MODEL_FAMILIES = (("allroad", ALLROAD_MODELS), ("fitness", FITNESS_MODELS),

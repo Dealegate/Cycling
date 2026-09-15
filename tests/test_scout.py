@@ -58,6 +58,25 @@ class TestSpecs(unittest.TestCase):
         self.assertEqual(detect_type_with_model("Scott Addict Gravel 20").value, "gravel")
         self.assertEqual(detect_type_with_model("Trek Checkpoint AL 4").value, "gravel")
 
+    def test_a_popcorn_machine_is_not_a_bicycle(self):
+        """All of these were in the shortlist, filed by their sellers under Bicikli."""
+        for title in ("Aparat za kokice bicikli", "Bicikli: Cerada zastitna. 100x200.",
+                      "Atran Velo cycle lab gepek Slanje"):
+            self.assertEqual(detect_type_with_model(title).value, "accessory", title)
+        self.assertEqual(detect_type_with_model("Tricikl za Decu").value, "kids")
+        # ...while an ad that merely mentions a part is still a whole bike.
+        self.assertEqual(
+            detect_type_with_model("Kona gravel, Garmin pedale, Mavic tockovi").value, "gravel")
+
+    def test_the_board_s_own_category_counts(self):
+        """The seller picks it from a menu, so it lies less often than the title."""
+        l = Listing(source="kp", source_id="1", title="FISCHER SPORTS atb Terra",
+                    url="https://www.kupujemprodajem.com/bicikli/elektricni/fischer/oglas/1")
+        self.assertEqual(detect_type_with_model(l.text).value, "ebike")
+        l = Listing(source="kp", source_id="2", title='cross GRX 7 29" MDB 2021',
+                    url="https://www.kupujemprodajem.com/bicikli/mountainbike/cross/oglas/2")
+        self.assertEqual(detect_type_with_model(l.text).value, "mtb")
+
     def test_grx_codes(self):
         g = detect_groupset("Shimano GRX RX810 2x11")
         self.assertEqual((g.family, g.model_code, g.speeds, g.chainrings), ("grx", "rx810", 11, 2))

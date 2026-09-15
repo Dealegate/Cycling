@@ -3,12 +3,24 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 
 
 def _utcnow() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def url_category(url: str) -> str:
+    """The section the board itself filed the ad under, e.g. "elektricni".
+
+    The seller picks this from a menu rather than typing it, so it is often
+    more honest than the headline: an ad under /bicikli/elektricni/ is an
+    e-bike whatever the title says it is.
+    """
+    m = re.search(r"/bicikli/([a-z-]+)/", url or "")
+    return m.group(1).replace("-", " ") if m else ""
 
 
 @dataclass
@@ -40,7 +52,8 @@ class Listing:
     @property
     def text(self) -> str:
         """Everything a detector should read."""
-        parts = [self.title, self.description, self.category or ""]
+        parts = [self.title, self.description, self.category or "",
+                 url_category(self.url)]
         for k in ("attributes", "specs"):
             v = self.raw.get(k)
             if isinstance(v, dict):
