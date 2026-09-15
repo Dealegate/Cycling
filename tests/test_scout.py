@@ -79,6 +79,14 @@ class TestSizing(unittest.TestCase):
         self.assertEqual(w.check(parse_size("vel. 52"))[0], "ok")
         self.assertEqual(w.check(parse_size("bicikl povoljno"))[0], "unknown")
 
+    def test_52_is_the_ceiling(self):
+        """54 and 55 are not near misses - the rider has ruled them out."""
+        w = Config.load().size_window
+        self.assertEqual(w.check(parse_size("vel. 53"))[0], "out")
+        self.assertEqual(w.check(parse_size("Canyon Grizl M/54"))[0], "out")
+        self.assertEqual(w.check(parse_size("vel. M"))[0], "out")
+        self.assertEqual(w.check(parse_size("vel. S"))[0], "ok")
+
 
 class TestFit(unittest.TestCase):
     def setUp(self):

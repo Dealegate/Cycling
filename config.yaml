@@ -24,11 +24,12 @@ requirements:
   allow_1x: true
 
 size:
-  # Frame sizes worth opening.  Deliberately one notch wider than S/52 in both
-  # directions, as requested.
+  # Frame sizes worth opening.  52 is the hard ceiling: the rider has ruled out
+  # anything larger, so a 54 or a 55 is not a near miss, it is the wrong bike.
+  # Downwards there is still room - a 49 with a longer stem can work.
   cm_min: 47
-  cm_max: 55
-  letters: [xxs, xs, s, ml, m]
+  cm_max: 52
+  letters: [xxs, xs, s]
 
 fit:
   # Tolerance around the anchor bike's stack/reach, in millimetres.

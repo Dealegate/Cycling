@@ -33,8 +33,8 @@ class Config:
     @property
     def size_window(self) -> SizeWindow:
         s = self.raw.get("size", {})
-        return SizeWindow(cm_min=s.get("cm_min", 47), cm_max=s.get("cm_max", 55),
-                          letters=tuple(s.get("letters", ["xs", "s", "m"])))
+        return SizeWindow(cm_min=s.get("cm_min", 47), cm_max=s.get("cm_max", 52),
+                          letters=tuple(s.get("letters", ["xxs", "xs", "s"])))
 
     def fit_window(self, db: GeometryDB) -> FitWindow:
         f = self.raw.get("fit", {})

@@ -118,8 +118,8 @@ class SizeWindow:
     """The frame sizes we are willing to look at."""
 
     cm_min: float = 47.0
-    cm_max: float = 55.0
-    letters: tuple[str, ...] = ("xxs", "xs", "s", "ml", "m")
+    cm_max: float = 52.0
+    letters: tuple[str, ...] = ("xxs", "xs", "s")
 
     def check(self, size: Size) -> tuple[str, str]:
         """Return ``(verdict, reason)`` where verdict is ok / out / unknown."""
