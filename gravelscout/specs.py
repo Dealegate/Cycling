@@ -313,3 +313,97 @@ def detect_material(text: str) -> Detection:
         if m:
             return Detection(name, m.group(0))
     return Detection(None, None)
+
+
+# --------------------------------------------------------------------------
+# Bike brands
+# --------------------------------------------------------------------------
+# How each brand actually turns up in a Serbian ad, after ``norm`` has folded
+# the Cyrillic and the diacritics.  Only brands that can be matched without
+# catching something else are listed: "force" would collide with SRAM Force,
+# "max" and "ultra" with ordinary adjectives, so those stay out rather than
+# rejecting a good bike over a word in the description.
+BIKE_BRANDS = {
+    # wanted tier
+    "rose": r"\brose\b(?!\s*(?:boja|zlat))",
+    "giant": r"\bgiant\b",
+    "liv": r"\bliv\b",
+    "specialized": r"\bspecializ?ed\b|\bspesh\b",
+    "scott": r"\bscott\b",
+    "cannondale": r"\bcannondale\b|\bcanondale\b",
+    "trek": r"\btrek\b",
+    "bianchi": r"\bbianchi\b",
+    "cervelo": r"\bcervelo\b",
+    "bmc": r"\bbmc\b",
+    "ridley": r"\bridley\b",
+    "orbea": r"\borbea\b",
+    "wilier": r"\bwilier\b",
+    "pinarello": r"\bpinarello\b",
+    "colnago": r"\bcolnago\b",
+    "santa cruz": r"\bsanta\s*cruz\b",
+    "niner": r"\bniner\b",
+    "salsa": r"\bsalsa\b",
+    "surly": r"\bsurly\b",
+    "kona": r"\bkona\b",
+    "marin": r"\bmarin\b",
+    "fuji": r"\bfuji\b",
+    "lauf": r"\blauf\b",
+    "3t": r"\b3t\b",
+    "open": r"\bopen\s*(?:u\.?p\.?|wi\.?de)\b",
+    "ibis": r"\bibis\b",
+    "rondo": r"\brondo\b",
+    "cinelli": r"\bcinelli\b",
+    "mason": r"\bmason\b",
+    "bombtrack": r"\bbombtrack\b",
+    "vitus": r"\bvitus\b",
+    "basso": r"\bbasso\b",
+    "look": r"\blook\s*7\d\d\b|\blook\s*(?:huez|765|785|795)\b",
+    "felt": r"\bfelt\b",
+    "gt": r"\bgt\s*(?:grade|avalanche|zaskar)\b",
+    "norco": r"\bnorco\b",
+
+    # neither wanted nor ruled out: detected so the ad can say so out loud
+    "genesis": r"\bgenesis\b",
+
+    # ruled out on build quality - the shop-brand tier and below
+    "merida": r"\bmerida\b",
+    "focus": r"\bfocus\b",
+    "ghost": r"\bghost\b",
+    "bergamont": r"\bbergamont\b",
+    "ktm": r"\bktm\b",
+    "kross": r"\bkross\b",
+    "stevens": r"\bstevens\b",
+    "lapierre": r"\blapierre\b",
+    "cube": r"\bcube\b",
+    "canyon": r"\bcanyon\b|\bkanjon\b",
+    "axess": r"\baxess\b",
+    "capriolo": r"\bcapriolo\b|\bkapriolo\b",
+    "visitor": r"\bvisitor\b",
+    "venssini": r"\bvenssini\b|\bvensini\b",
+    "explorer": r"\bx?explorer\b|\bxplorer\b",
+    "galaxy": r"\bgalaxy\b",
+    "favorit": r"\bfavorit\b",
+    "adria": r"\badria\b",
+    "btwin": r"\bb\s*twin\b|\bbtwin\b",
+    "rockrider": r"\brockrider\b",
+    "triban": r"\btriban\b",
+    "alpina": r"\balpina\b",
+    "mercury": r"\bmercury\b",
+    "crosswind": r"\bcrosswind\b",
+}
+
+
+def detect_brand(text: str) -> Detection:
+    """Name the bike's maker, or return nothing rather than guess.
+
+    The longest match wins, so "Santa Cruz" is not read as a stray "cruz" and a
+    title that names both a brand and a component maker still resolves to the
+    bike.
+    """
+    t = norm(text)
+    best: tuple[int, str, str] | None = None
+    for brand, pat in BIKE_BRANDS.items():
+        m = re.search(pat, t)
+        if m and (best is None or len(m.group(0)) > best[0]):
+            best = (len(m.group(0)), brand, m.group(0))
+    return Detection(best[1], best[2]) if best else Detection(None, None)

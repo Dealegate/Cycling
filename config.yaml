@@ -39,6 +39,20 @@ fit:
   standover_clearance_mm: 20   # subtracted from the smaller inseam
   seat_tube_max_mm: 530
 
+brands:
+  # Build quality matters more here than the spec sheet: a mid-tier frame with a
+  # good groupset hung on it is still a mid-tier frame.  A brand in `reject` is a
+  # hard no.  A brand in neither list is not rejected - it is surfaced with a
+  # note, because an unknown name is a thing to look up, not a thing to bin.
+  preferred: [rose, giant, liv, specialized, scott, cannondale, trek, bianchi,
+              cervelo, bmc, ridley, orbea, wilier, pinarello, colnago,
+              santa cruz, niner, salsa, surly, kona, marin, fuji, lauf, 3t,
+              open, ibis, rondo, cinelli, mason, bombtrack, vitus, basso,
+              look, felt, gt, norco]
+  reject: [cube, canyon, axess, focus, ghost, bergamont, ktm, merida, kross,
+           stevens, lapierre, capriolo, visitor, venssini, explorer, galaxy,
+           favorit, adria, btwin, rockrider, triban, alpina, mercury, crosswind]
+
 price:
   max_eur: 2500        # listings above this are still reported, just scored lower
   rsd_per_eur: 117.0

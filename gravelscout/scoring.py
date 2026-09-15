@@ -17,7 +17,7 @@ from .geometry import GeometryDB, FitWindow, check_fit
 from .models import Assessment, Listing
 from .sizing import parse_size
 from .specs import (
-    detect_bar, detect_brakes, detect_groupset, detect_material,
+    detect_bar, detect_brakes, detect_brand, detect_groupset, detect_material,
     detect_type_with_model, detect_women,
 )
 
@@ -50,6 +50,20 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         unknowns.append(f"listed as a road bike ({t.evidence}) - could still be gravel-capable")
     elif t.value is None:
         unknowns.append("the ad never says what kind of bike this is")
+
+    # -- brand ------------------------------------------------------------
+    bd = detect_brand(text)
+    a.brand = bd.value
+    preferred, rejected = cfg.brand_lists
+    if bd.value in rejected:
+        blockers.append(f"{bd.value.title()} is ruled out on build quality ({bd.evidence})")
+    elif bd.value in preferred:
+        reasons.append(f"{bd.value.title()} is a brand the rider wants")
+    elif bd.value:
+        unknowns.append(f"{bd.value.title()} is on neither list - look the frame "
+                        "up before spending a trip on it")
+    else:
+        unknowns.append("the ad never names the brand")
 
     # -- groupset ---------------------------------------------------------
     gs = detect_groupset(text)
@@ -145,14 +159,14 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         a.score = 0
         return a
 
-    a.score = _score(a, listing, gs)
+    a.score = _score(a, listing, gs, preferred)
     a.verdict = "match" if not unknowns else "maybe"
     if a.verdict == "match" and todos:
         reasons.append("hard requirements all confirmed; geometry still to be verified")
     return a
 
 
-def _score(a: Assessment, listing: Listing, gs) -> int:
+def _score(a: Assessment, listing: Listing, gs, preferred: set[str]) -> int:
     """0-100, used only to sort the shortlist."""
     score = 40
     score += {5: 25, 4: 20, 3: 12, 2: 4, 1: 0, 0: 0}.get(a.groupset_tier, 0)
@@ -160,6 +174,8 @@ def _score(a: Assessment, listing: Listing, gs) -> int:
         score += 12
     if a.bike_type in ("gravel", "cyclocross"):
         score += 8
+    if a.brand in preferred:
+        score += 10
     if a.size_verdict == "ok":
         score += 8
     if a.fit:

@@ -7,6 +7,7 @@ from pathlib import Path
 import yaml
 
 from .geometry import FitWindow, GeometryDB
+from .normalize import norm
 from .sizing import SizeWindow, max_standover_mm, saddle_height_range
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -35,6 +36,13 @@ class Config:
         s = self.raw.get("size", {})
         return SizeWindow(cm_min=s.get("cm_min", 47), cm_max=s.get("cm_max", 52),
                           letters=tuple(s.get("letters", ["xxs", "xs", "s"])))
+
+    @property
+    def brand_lists(self) -> tuple[set[str], set[str]]:
+        """``(preferred, rejected)`` brand names, normalised for comparison."""
+        b = self.raw.get("brands", {})
+        return ({norm(x) for x in b.get("preferred", [])},
+                {norm(x) for x in b.get("reject", [])})
 
     def fit_window(self, db: GeometryDB) -> FitWindow:
         f = self.raw.get("fit", {})

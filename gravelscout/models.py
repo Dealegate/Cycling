@@ -69,6 +69,7 @@ class Assessment:
     unknowns: list[str] = field(default_factory=list)
     todos: list[str] = field(default_factory=list)   # work for a human/agent, not ad defects
     bike_type: str | None = None
+    brand: str | None = None
     groupset: str | None = None
     groupset_tier: int = 0
     brakes: str | None = None

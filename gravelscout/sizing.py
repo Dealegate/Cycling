@@ -87,6 +87,9 @@ def parse_size(text: str) -> Size:
 
     # Letter size, e.g. "vel. S", "size M", "S/M", "(S)".
     lm = (re.search(_SIZE_WORDS + r"\s*[:\-]?\s*" + _LETTER + r"\b", t)
+          # "M-SIZE", "L size", "XS ram" - the same thing written backwards,
+          # and common enough in Serbian titles to matter for the size ceiling.
+          or re.search(r"\b" + _LETTER + r"\s*[-\s]\s*" + _SIZE_WORDS[2:] + r"\b", t)
           or re.search(r"\b" + _LETTER + r"\s*(?:/|\s)\s*(\d{2})\s*(?:cm)?\b", t)
           or re.search(r"\((" + _LETTER[1:-1] + r")\)", t))
     if lm:

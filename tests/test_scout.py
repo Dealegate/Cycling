@@ -19,8 +19,8 @@ from gravelscout.sizing import SizeWindow, parse_size
 from gravelscout.sources.base import HttpClient, challenge_reason
 from gravelscout.sources.dvabike import DvaBike
 from gravelscout.sources.kupujemprodajem import KupujemProdajem
-from gravelscout.specs import (detect_bar, detect_brakes, detect_groupset,
-                               detect_type_with_model)
+from gravelscout.specs import (detect_bar, detect_brakes, detect_brand,
+                               detect_groupset, detect_type_with_model)
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures"
 
@@ -168,7 +168,7 @@ class TestParsers(unittest.TestCase):
         src = DvaBike({}, self._http())
         found = src.parse_page(html, "https://www.2bike.rs/cikloberza")
         titles = sorted(l.title for l in found)
-        self.assertEqual(len(found), 2, f"got {titles}")
+        self.assertEqual(len(found), 3, f"got {titles}")
         grizl = next(l for l in found if "Grizl" in l.title)
         self.assertEqual(grizl.price_eur, 1850.0)
         self.assertEqual(grizl.source_id, "44231")
@@ -180,8 +180,48 @@ class TestParsers(unittest.TestCase):
         html = (FIXTURES / "2bike_list.html").read_text(encoding="utf-8")
         found = DvaBike({}, self._http()).parse_page(html, "https://www.2bike.rs/cikloberza")
         verdicts = {l.title.split(",")[0]: assess(l, cfg, db).verdict for l in found}
-        self.assertEqual(verdicts["Canyon Grizl 7 GRX RX810"], "match")
+        self.assertEqual(verdicts["Giant Revolt 2 GRX RX600 2x11"], "match")
         self.assertEqual(verdicts["Bianchi Via Nirone 7 Sora"], "reject")
+        # Right bike, right size, right groupset - and still out, on the badge.
+        self.assertEqual(verdicts["Canyon Grizl 7 GRX RX810"], "reject")
+
+
+class TestBrands(unittest.TestCase):
+    def setUp(self):
+        self.cfg, self.db = Config.load(), GeometryDB()
+
+    def _a(self, title, desc=""):
+        return assess(Listing(source="t", source_id="1", url="u", title=title,
+                              description=desc), self.cfg, self.db)
+
+    def test_detection(self):
+        self.assertEqual(detect_brand("Rose Backroad GRX").value, "rose")
+        self.assertEqual(detect_brand("Кањон Гризл 7").value, "canyon")
+        self.assertEqual(detect_brand("Santa Cruz Stigmata").value, "santa cruz")
+        self.assertEqual(detect_brand("B'Twin Triban 520").value, "btwin")
+
+    def test_component_brands_are_not_bike_brands(self):
+        """SRAM Force must not read as the Czech bicycle brand Force."""
+        self.assertIsNone(detect_brand("gravel, SRAM Force 1x11").value)
+        self.assertIsNone(detect_brand("bicikl povoljno, malo koriscen").value)
+
+    def test_rejected_brand_blocks_an_otherwise_perfect_ad(self):
+        a = self._a("Cube Nuroad Race vel. S",
+                    "gravel, Shimano GRX 600 2x11, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "reject")
+        self.assertTrue(any("Cube" in b for b in a.blockers))
+
+    def test_wanted_brand_is_a_reason(self):
+        a = self._a("Rose Backroad vel. 52",
+                    "gravel, GRX RX810 2x11, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "match")
+        self.assertTrue(any("Rose" in r for r in a.reasons))
+
+    def test_unlisted_brand_is_a_question_not_a_no(self):
+        a = self._a("Carver gravel vel. 52",
+                    "gravel, GRX 600 2x11, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "maybe")
+        self.assertTrue(any("brand" in u for u in a.unknowns))
 
 
 class TestBotWall(unittest.TestCase):
