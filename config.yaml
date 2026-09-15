@@ -63,11 +63,17 @@ sources:
   # Every source can be turned off without touching the code.
   kupujemprodajem:
     enabled: true
-    pages: 3
+    pages: 5
+    keyword_pages: 2
     categories:
       - {name: "Drumski, trkacki", path: "/bicikli/drumski-trkacki/grupa/912/919"}
       - {name: "Ostali bicikli",   path: "/bicikli/ostali-bicikli/grupa/912/928"}
-    keywords: [gravel, grx, ciklokros, cyclocross, tiagra]
+    # Search covers category 912 whole, so a gravel bike filed under touring or
+    # MTB by mistake still turns up.  Model names earn their place here: sellers
+    # who never write "gravel" still write "Topstone".
+    keywords: [gravel, grx, ciklokros, cyclocross, tiagra, apex, rival, ekar,
+               revolt, checkpoint, topstone, diverge, backroad, terra, jaroon,
+               crux, kanzo, aspero, rove, gestalt, devote, stigmata, arkose]
   2bike:
     enabled: true
     pages: 3
@@ -78,11 +84,11 @@ sources:
     enabled: true
     pages: 2
   lalafo:
-    enabled: false
-    pages: 2
+    enabled: true
+    pages: 3
   halooglasi:
-    enabled: false
-    pages: 2
+    enabled: true
+    pages: 3
 
 http:
   # Be a polite guest: one request at a time, with a pause between them.

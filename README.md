@@ -57,8 +57,8 @@ Domane и прочие эндуранс-рамы уезжают в `reject` по
 | `2bike` | [2bike.rs / Cikloberza](https://www.2bike.rs/cikloberza/mali-oglasi/bicikli-6/gravel-ciklokros-189) | Есть отдельная категория Gravel/Ciklokros, продавцы честно пишут навеску |
 | `kupujemprodajem` | [KupujemProdajem](https://www.kupujemprodajem.com/bicikli/drumski-trkacki/grupa/912/919/1) | Самый большой объём, гравийники лежат в «Drumski, trkački» |
 | `polovniautomobili` | [Polovni Automobili](https://www.polovniautomobili.com/bicikli) | Большой раздел велосипедов |
-| `lalafo` | [Lalafo.rs](https://lalafo.rs/serbia/bicikli) | Выключен по умолчанию, описания скудные |
-| `halooglasi` | [Halo oglasi](https://www.halooglasi.com/sport-i-rekreacija/gradski-bicikli) | Выключен по умолчанию |
+| `lalafo` | [Lalafo.rs](https://lalafo.rs/serbia/bicikli) | Описания скудные, но объём есть |
+| `halooglasi` | [Halo oglasi](https://www.halooglasi.com/sport-i-rekreacija/drumski-bicikli) | Разделы «Друмски» и «Остали» |
 
 Ни у одного из них нет API, и разметку они время от времени меняют. Поэтому
 парсер пробует три стратегии и берёт ту, что нашла больше:
@@ -79,9 +79,44 @@ Domane и прочие эндуранс-рамы уезжают в `reject` по
 этот домен не стучится, вместо того чтобы полторы минуты перебирать страницы,
 которые все ответят одинаково.
 
-С домашнего сербского провайдера те же адреса обычно открываются, так что
-локальный `python -m gravelscout run` видит больше, чем тот же скрипт в Actions.
-KupujemProdajem — самый крупный источник — отдаётся и там, и там.
+Это касается не только 2bike: из облака закрыты четыре источника из пяти —
+`2bike`, `polovniautomobili`, `lalafo`, `halooglasi`. Открыт только
+KupujemProdajem, он же самый крупный. То есть Actions видит примерно половину
+рынка, и именно ту половину, где нет отдельной категории Gravel/Ciklokros.
+
+С домашнего сербского провайдера все пятеро обычно открываются. Поэтому все
+источники включены в конфиге: в облаке заблокированные просто честно скажут
+`HTTP 403, Cloudflare challenge` и пропустятся, а локальный прогон соберёт всё.
+
+### Локальный прогон
+
+Один раз:
+
+```bash
+git clone https://github.com/Dealegate/Cycling.git
+cd Cycling
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Дальше каждый раз:
+
+```bash
+git pull
+python -m gravelscout probe          # проверить, что доски открываются
+python -m gravelscout run --all      # полный проход, отчёт в out/shortlist.md
+```
+
+`probe` — первое, что стоит запустить: если напротив источника стоит число, он
+живой; если `Cloudflare challenge` — закрыт и с этой машины.
+
+Результат лежит в `out/shortlist.md` (всё) и `out/new.md` (появившееся с
+прошлого раза). Чтобы «новое» считалось правильно, состояние надо вернуть в
+репозиторий:
+
+```bash
+git add data/seen.json && git commit -m "scout: local run" && git push
+```
 
 ## Запуск
 
