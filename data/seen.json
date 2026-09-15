@@ -1,9 +1,9 @@
 {
- "count": 295,
+ "count": 296,
  "listings": {
   "kupujemprodajem:114778605": {
    "first_seen": "2026-09-15T15:14:43+00:00",
-   "last_seen": "2026-09-15T15:45:00+00:00",
+   "last_seen": "2026-09-15T15:55:25+00:00",
    "price_eur": 3.58,
    "price_history": [
     [
@@ -19,8 +19,9 @@
   },
   "kupujemprodajem:136762210": {
    "first_seen": "2026-09-15T15:12:17+00:00",
-   "last_seen": "2026-09-15T15:43:26+00:00",
-   "price_eur": 1650.0,
+   "last_seen": "2026-09-15T15:54:05+00:00",
+   "previous_price_eur": 1650.0,
+   "price_eur": 1050.0,
    "price_history": [
     [
      "2026-09-15T15:12:17+00:00",
@@ -29,6 +30,10 @@
     [
      "2026-09-15T15:43:26+00:00",
      1650.0
+    ],
+    [
+     "2026-09-15T15:54:05+00:00",
+     1050.0
     ]
    ],
    "score": 44,
@@ -39,7 +44,7 @@
   },
   "kupujemprodajem:146845185": {
    "first_seen": "2026-09-15T15:15:18+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 385.0,
    "price_history": [
     [
@@ -55,7 +60,7 @@
   },
   "kupujemprodajem:149438917": {
    "first_seen": "2026-09-15T15:06:54+00:00",
-   "last_seen": "2026-09-15T15:38:44+00:00",
+   "last_seen": "2026-09-15T15:49:33+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -71,7 +76,7 @@
   },
   "kupujemprodajem:152950340": {
    "first_seen": "2026-09-15T15:15:21+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -87,8 +92,9 @@
   },
   "kupujemprodajem:156700765": {
    "first_seen": "2026-09-15T15:12:20+00:00",
-   "last_seen": "2026-09-15T15:43:26+00:00",
-   "price_eur": 1650.0,
+   "last_seen": "2026-09-15T15:54:05+00:00",
+   "previous_price_eur": 1650.0,
+   "price_eur": 1050.0,
    "price_history": [
     [
      "2026-09-15T15:12:20+00:00",
@@ -97,6 +103,10 @@
     [
      "2026-09-15T15:43:26+00:00",
      1650.0
+    ],
+    [
+     "2026-09-15T15:54:05+00:00",
+     1050.0
     ]
    ],
    "score": 0,
@@ -107,7 +117,7 @@
   },
   "kupujemprodajem:160347289": {
    "first_seen": "2026-09-15T15:07:57+00:00",
-   "last_seen": "2026-09-15T15:39:24+00:00",
+   "last_seen": "2026-09-15T15:50:10+00:00",
    "price_eur": 51.28,
    "price_history": [
     [
@@ -123,7 +133,7 @@
   },
   "kupujemprodajem:163914316": {
    "first_seen": "2026-09-15T15:09:17+00:00",
-   "last_seen": "2026-09-15T15:40:41+00:00",
+   "last_seen": "2026-09-15T15:51:23+00:00",
    "price_eur": 80.0,
    "price_history": [
     [
@@ -139,7 +149,7 @@
   },
   "kupujemprodajem:165083445": {
    "first_seen": "2026-09-15T15:08:00+00:00",
-   "last_seen": "2026-09-15T15:39:26+00:00",
+   "last_seen": "2026-09-15T15:50:12+00:00",
    "price_eur": 55.0,
    "price_history": [
     [
@@ -155,7 +165,7 @@
   },
   "kupujemprodajem:167202132": {
    "first_seen": "2026-09-15T15:10:48+00:00",
-   "last_seen": "2026-09-15T15:42:04+00:00",
+   "last_seen": "2026-09-15T15:52:46+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -171,7 +181,7 @@
   },
   "kupujemprodajem:167341483": {
    "first_seen": "2026-09-15T15:10:51+00:00",
-   "last_seen": "2026-09-15T15:42:07+00:00",
+   "last_seen": "2026-09-15T15:52:49+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -187,7 +197,7 @@
   },
   "kupujemprodajem:169044814": {
    "first_seen": "2026-09-15T15:10:54+00:00",
-   "last_seen": "2026-09-15T15:42:10+00:00",
+   "last_seen": "2026-09-15T15:52:52+00:00",
    "price_eur": 799.0,
    "price_history": [
     [
@@ -203,7 +213,7 @@
   },
   "kupujemprodajem:170945067": {
    "first_seen": "2026-09-15T15:15:21+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -219,7 +229,7 @@
   },
   "kupujemprodajem:171155930": {
    "first_seen": "2026-09-15T15:08:03+00:00",
-   "last_seen": "2026-09-15T15:39:29+00:00",
+   "last_seen": "2026-09-15T15:50:15+00:00",
    "price_eur": 1.46,
    "price_history": [
     [
@@ -235,7 +245,7 @@
   },
   "kupujemprodajem:173096464": {
    "first_seen": "2026-09-15T15:08:06+00:00",
-   "last_seen": "2026-09-15T15:39:32+00:00",
+   "last_seen": "2026-09-15T15:50:17+00:00",
    "price_eur": 310.0,
    "price_history": [
     [
@@ -251,7 +261,7 @@
   },
   "kupujemprodajem:173903459": {
    "first_seen": "2026-09-15T15:05:57+00:00",
-   "last_seen": "2026-09-15T15:38:26+00:00",
+   "last_seen": "2026-09-15T15:49:23+00:00",
    "price_eur": 1600.0,
    "price_history": [
     [
@@ -267,7 +277,7 @@
   },
   "kupujemprodajem:176920581": {
    "first_seen": "2026-09-15T15:08:09+00:00",
-   "last_seen": "2026-09-15T15:39:35+00:00",
+   "last_seen": "2026-09-15T15:50:20+00:00",
    "price_eur": 60.0,
    "price_history": [
     [
@@ -283,7 +293,7 @@
   },
   "kupujemprodajem:177741447": {
    "first_seen": "2026-09-15T15:09:20+00:00",
-   "last_seen": "2026-09-15T15:40:43+00:00",
+   "last_seen": "2026-09-15T15:51:26+00:00",
    "price_eur": 90.0,
    "price_history": [
     [
@@ -299,7 +309,7 @@
   },
   "kupujemprodajem:178833896": {
    "first_seen": "2026-09-15T15:09:23+00:00",
-   "last_seen": "2026-09-15T15:40:47+00:00",
+   "last_seen": "2026-09-15T15:51:28+00:00",
    "price_eur": 860.0,
    "price_history": [
     [
@@ -315,7 +325,7 @@
   },
   "kupujemprodajem:178877381": {
    "first_seen": "2026-09-15T15:08:12+00:00",
-   "last_seen": "2026-09-15T15:39:38+00:00",
+   "last_seen": "2026-09-15T15:50:22+00:00",
    "price_eur": 1.1,
    "price_history": [
     [
@@ -331,7 +341,7 @@
   },
   "kupujemprodajem:180450267": {
    "first_seen": "2026-09-15T15:05:10+00:00",
-   "last_seen": "2026-09-15T15:37:53+00:00",
+   "last_seen": "2026-09-15T15:48:46+00:00",
    "price_eur": 450.0,
    "price_history": [
     [
@@ -347,7 +357,7 @@
   },
   "kupujemprodajem:180564652": {
    "first_seen": "2026-09-15T15:10:56+00:00",
-   "last_seen": "2026-09-15T15:42:13+00:00",
+   "last_seen": "2026-09-15T15:52:55+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -363,7 +373,7 @@
   },
   "kupujemprodajem:180669936": {
    "first_seen": "2026-09-15T15:12:20+00:00",
-   "last_seen": "2026-09-15T15:43:26+00:00",
+   "last_seen": "2026-09-15T15:54:05+00:00",
    "price_eur": 599.0,
    "price_history": [
     [
@@ -379,7 +389,7 @@
   },
   "kupujemprodajem:181775981": {
    "first_seen": "2026-09-15T15:08:15+00:00",
-   "last_seen": "2026-09-15T15:39:40+00:00",
+   "last_seen": "2026-09-15T15:50:25+00:00",
    "price_eur": 444.44,
    "price_history": [
     [
@@ -395,7 +405,7 @@
   },
   "kupujemprodajem:182270324": {
    "first_seen": "2026-09-15T15:06:57+00:00",
-   "last_seen": "2026-09-15T15:38:46+00:00",
+   "last_seen": "2026-09-15T15:49:35+00:00",
    "price_eur": 2000.0,
    "price_history": [
     [
@@ -411,7 +421,7 @@
   },
   "kupujemprodajem:183171433": {
    "first_seen": "2026-09-15T15:10:59+00:00",
-   "last_seen": "2026-09-15T15:42:16+00:00",
+   "last_seen": "2026-09-15T15:52:58+00:00",
    "price_eur": 34.19,
    "price_history": [
     [
@@ -427,7 +437,7 @@
   },
   "kupujemprodajem:183552205": {
    "first_seen": "2026-09-15T15:11:02+00:00",
-   "last_seen": "2026-09-15T15:42:20+00:00",
+   "last_seen": "2026-09-15T15:53:01+00:00",
    "price_eur": 1.53,
    "price_history": [
     [
@@ -443,7 +453,7 @@
   },
   "kupujemprodajem:184313147": {
    "first_seen": "2026-09-15T15:08:18+00:00",
-   "last_seen": "2026-09-15T15:39:43+00:00",
+   "last_seen": "2026-09-15T15:50:27+00:00",
    "price_eur": 38.46,
    "price_history": [
     [
@@ -459,7 +469,7 @@
   },
   "kupujemprodajem:184714948": {
    "first_seen": "2026-09-15T15:11:05+00:00",
-   "last_seen": "2026-09-15T15:42:22+00:00",
+   "last_seen": "2026-09-15T15:53:03+00:00",
    "price_eur": 55.0,
    "price_history": [
     [
@@ -475,7 +485,7 @@
   },
   "kupujemprodajem:185487804": {
    "first_seen": "2026-09-15T15:08:21+00:00",
-   "last_seen": "2026-09-15T15:39:47+00:00",
+   "last_seen": "2026-09-15T15:50:30+00:00",
    "price_eur": 444.44,
    "price_history": [
     [
@@ -491,7 +501,7 @@
   },
   "kupujemprodajem:186345224": {
    "first_seen": "2026-09-15T15:14:19+00:00",
-   "last_seen": "2026-09-15T15:44:49+00:00",
+   "last_seen": "2026-09-15T15:55:13+00:00",
    "price_eur": 1200.0,
    "price_history": [
     [
@@ -507,7 +517,7 @@
   },
   "kupujemprodajem:187021844": {
    "first_seen": "2026-09-15T15:14:43+00:00",
-   "last_seen": "2026-09-15T15:45:00+00:00",
+   "last_seen": "2026-09-15T15:55:25+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -523,7 +533,7 @@
   },
   "kupujemprodajem:187736400": {
    "first_seen": "2026-09-15T15:15:24+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 450.0,
    "price_history": [
     [
@@ -539,7 +549,7 @@
   },
   "kupujemprodajem:187787870": {
    "first_seen": "2026-09-15T15:11:08+00:00",
-   "last_seen": "2026-09-15T15:42:22+00:00",
+   "last_seen": "2026-09-15T15:53:03+00:00",
    "price_eur": 85.0,
    "price_history": [
     [
@@ -555,7 +565,7 @@
   },
   "kupujemprodajem:187961392": {
    "first_seen": "2026-09-15T15:15:27+00:00",
-   "last_seen": "2026-09-15T15:45:09+00:00",
+   "last_seen": "2026-09-15T15:55:33+00:00",
    "price_eur": 490.0,
    "price_history": [
     [
@@ -571,7 +581,7 @@
   },
   "kupujemprodajem:189031901": {
    "first_seen": "2026-09-15T15:06:00+00:00",
-   "last_seen": "2026-09-15T15:38:28+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -587,7 +597,7 @@
   },
   "kupujemprodajem:189167701": {
    "first_seen": "2026-09-15T15:12:23+00:00",
-   "last_seen": "2026-09-15T15:43:29+00:00",
+   "last_seen": "2026-09-15T15:54:08+00:00",
    "price_eur": 2000.0,
    "price_history": [
     [
@@ -603,7 +613,7 @@
   },
   "kupujemprodajem:189324487": {
    "first_seen": "2026-09-15T15:14:45+00:00",
-   "last_seen": "2026-09-15T15:45:03+00:00",
+   "last_seen": "2026-09-15T15:55:28+00:00",
    "price_eur": 2100.0,
    "price_history": [
     [
@@ -619,7 +629,7 @@
   },
   "kupujemprodajem:189378953": {
    "first_seen": "2026-09-15T15:11:11+00:00",
-   "last_seen": "2026-09-15T15:42:26+00:00",
+   "last_seen": "2026-09-15T15:53:06+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -635,7 +645,7 @@
   },
   "kupujemprodajem:189402748": {
    "first_seen": "2026-09-15T15:08:24+00:00",
-   "last_seen": "2026-09-15T15:39:50+00:00",
+   "last_seen": "2026-09-15T15:50:33+00:00",
    "price_eur": 60.0,
    "price_history": [
     [
@@ -651,7 +661,7 @@
   },
   "kupujemprodajem:189818957": {
    "first_seen": "2026-09-15T15:13:20+00:00",
-   "last_seen": "2026-09-15T15:44:13+00:00",
+   "last_seen": "2026-09-15T15:54:40+00:00",
    "price_eur": 295.0,
    "price_history": [
     [
@@ -659,15 +669,15 @@
      295.0
     ]
    ],
-   "score": 36,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Xceed gravel  vel.( L )",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/xceed-gravel-vel-l/oglas/189818957",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:190222844": {
    "first_seen": "2026-09-15T15:15:27+00:00",
-   "last_seen": "2026-09-15T15:45:09+00:00",
+   "last_seen": "2026-09-15T15:55:33+00:00",
    "price_eur": 580.0,
    "price_history": [
     [
@@ -683,7 +693,7 @@
   },
   "kupujemprodajem:190243877": {
    "first_seen": "2026-09-15T15:13:23+00:00",
-   "last_seen": "2026-09-15T15:44:16+00:00",
+   "last_seen": "2026-09-15T15:54:43+00:00",
    "price_eur": 1950.0,
    "price_history": [
     [
@@ -699,7 +709,7 @@
   },
   "kupujemprodajem:190285807": {
    "first_seen": "2026-09-15T15:14:22+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 3750.0,
    "price_history": [
     [
@@ -715,7 +725,7 @@
   },
   "kupujemprodajem:190287101": {
    "first_seen": "2026-09-15T15:12:26+00:00",
-   "last_seen": "2026-09-15T15:43:32+00:00",
+   "last_seen": "2026-09-15T15:54:11+00:00",
    "price_eur": 2400.0,
    "price_history": [
     [
@@ -731,8 +741,7 @@
   },
   "kupujemprodajem:190758118": {
    "first_seen": "2026-09-15T15:09:26+00:00",
-   "last_seen": "2026-09-15T15:40:50+00:00",
-   "previous_price_eur": 50.0,
+   "last_seen": "2026-09-15T15:51:31+00:00",
    "price_eur": 25.64,
    "price_history": [
     [
@@ -752,7 +761,7 @@
   },
   "kupujemprodajem:190895875": {
    "first_seen": "2026-09-15T15:05:12+00:00",
-   "last_seen": "2026-09-15T15:37:55+00:00",
+   "last_seen": "2026-09-15T15:48:49+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -768,7 +777,7 @@
   },
   "kupujemprodajem:191139788": {
    "first_seen": "2026-09-15T15:12:26+00:00",
-   "last_seen": "2026-09-15T15:43:32+00:00",
+   "last_seen": "2026-09-15T15:54:11+00:00",
    "price_eur": 4500.0,
    "price_history": [
     [
@@ -784,7 +793,7 @@
   },
   "kupujemprodajem:191325660": {
    "first_seen": "2026-09-15T15:12:29+00:00",
-   "last_seen": "2026-09-15T15:43:32+00:00",
+   "last_seen": "2026-09-15T15:54:11+00:00",
    "price_eur": 2400.0,
    "price_history": [
     [
@@ -800,7 +809,7 @@
   },
   "kupujemprodajem:191451549": {
    "first_seen": "2026-09-15T15:13:26+00:00",
-   "last_seen": "2026-09-15T15:44:19+00:00",
+   "last_seen": "2026-09-15T15:54:46+00:00",
    "price_eur": 4250.0,
    "price_history": [
     [
@@ -816,7 +825,7 @@
   },
   "kupujemprodajem:191581334": {
    "first_seen": "2026-09-15T15:13:29+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 1350.0,
    "price_history": [
     [
@@ -832,7 +841,7 @@
   },
   "kupujemprodajem:191657439": {
    "first_seen": "2026-09-15T15:13:32+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -848,7 +857,7 @@
   },
   "kupujemprodajem:191731483": {
    "first_seen": "2026-09-15T15:13:35+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 1350.0,
    "price_history": [
     [
@@ -864,7 +873,7 @@
   },
   "kupujemprodajem:191939713": {
    "first_seen": "2026-09-15T15:12:32+00:00",
-   "last_seen": "2026-09-15T15:43:35+00:00",
+   "last_seen": "2026-09-15T15:54:14+00:00",
    "price_eur": 3450.0,
    "price_history": [
     [
@@ -880,7 +889,7 @@
   },
   "kupujemprodajem:191948558": {
    "first_seen": "2026-09-15T15:12:35+00:00",
-   "last_seen": "2026-09-15T15:43:38+00:00",
+   "last_seen": "2026-09-15T15:54:17+00:00",
    "price_eur": 599.0,
    "price_history": [
     [
@@ -896,7 +905,7 @@
   },
   "kupujemprodajem:191984573": {
    "first_seen": "2026-09-15T15:05:15+00:00",
-   "last_seen": "2026-09-15T15:37:58+00:00",
+   "last_seen": "2026-09-15T15:48:51+00:00",
    "price_eur": 820.0,
    "price_history": [
     [
@@ -912,7 +921,7 @@
   },
   "kupujemprodajem:191987490": {
    "first_seen": "2026-09-15T15:12:38+00:00",
-   "last_seen": "2026-09-15T15:43:41+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 2000.0,
    "price_history": [
     [
@@ -928,7 +937,7 @@
   },
   "kupujemprodajem:192008188": {
    "first_seen": "2026-09-15T15:05:17+00:00",
-   "last_seen": "2026-09-15T15:38:00+00:00",
+   "last_seen": "2026-09-15T15:48:54+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -944,7 +953,7 @@
   },
   "kupujemprodajem:192055327": {
    "first_seen": "2026-09-15T15:11:14+00:00",
-   "last_seen": "2026-09-15T15:42:26+00:00",
+   "last_seen": "2026-09-15T15:53:06+00:00",
    "price_eur": 1.1,
    "price_history": [
     [
@@ -960,7 +969,7 @@
   },
   "kupujemprodajem:192204433": {
    "first_seen": "2026-09-15T15:11:17+00:00",
-   "last_seen": "2026-09-15T15:42:29+00:00",
+   "last_seen": "2026-09-15T15:53:09+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -976,7 +985,7 @@
   },
   "kupujemprodajem:192220576": {
    "first_seen": "2026-09-15T15:09:29+00:00",
-   "last_seen": "2026-09-15T15:40:53+00:00",
+   "last_seen": "2026-09-15T15:51:34+00:00",
    "price_eur": 25.0,
    "price_history": [
     [
@@ -992,7 +1001,7 @@
   },
   "kupujemprodajem:192252552": {
    "first_seen": "2026-09-15T15:07:00+00:00",
-   "last_seen": "2026-09-15T15:38:49+00:00",
+   "last_seen": "2026-09-15T15:49:38+00:00",
    "price_eur": 5900.0,
    "price_history": [
     [
@@ -1008,7 +1017,7 @@
   },
   "kupujemprodajem:192252950": {
    "first_seen": "2026-09-15T15:07:00+00:00",
-   "last_seen": "2026-09-15T15:38:49+00:00",
+   "last_seen": "2026-09-15T15:49:38+00:00",
    "price_eur": 5700.0,
    "price_history": [
     [
@@ -1024,7 +1033,7 @@
   },
   "kupujemprodajem:192539843": {
    "first_seen": "2026-09-15T15:08:27+00:00",
-   "last_seen": "2026-09-15T15:39:53+00:00",
+   "last_seen": "2026-09-15T15:50:36+00:00",
    "price_eur": 40.0,
    "price_history": [
     [
@@ -1040,7 +1049,7 @@
   },
   "kupujemprodajem:192550226": {
    "first_seen": "2026-09-15T15:11:20+00:00",
-   "last_seen": "2026-09-15T15:42:32+00:00",
+   "last_seen": "2026-09-15T15:53:12+00:00",
    "price_eur": 126.0,
    "price_history": [
     [
@@ -1056,7 +1065,7 @@
   },
   "kupujemprodajem:192576671": {
    "first_seen": "2026-09-15T15:06:03+00:00",
-   "last_seen": "2026-09-15T15:38:28+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -1072,7 +1081,7 @@
   },
   "kupujemprodajem:192645299": {
    "first_seen": "2026-09-15T15:13:35+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 430.0,
    "price_history": [
     [
@@ -1088,7 +1097,7 @@
   },
   "kupujemprodajem:192764512": {
    "first_seen": "2026-09-15T15:11:23+00:00",
-   "last_seen": "2026-09-15T15:42:35+00:00",
+   "last_seen": "2026-09-15T15:53:15+00:00",
    "price_eur": 29.91,
    "price_history": [
     [
@@ -1104,7 +1113,7 @@
   },
   "kupujemprodajem:192771470": {
    "first_seen": "2026-09-15T15:15:30+00:00",
-   "last_seen": "2026-09-15T15:45:12+00:00",
+   "last_seen": "2026-09-15T15:55:36+00:00",
    "price_eur": 670.0,
    "price_history": [
     [
@@ -1120,7 +1129,7 @@
   },
   "kupujemprodajem:192771742": {
    "first_seen": "2026-09-15T15:14:45+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:28+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -1136,7 +1145,7 @@
   },
   "kupujemprodajem:192801543": {
    "first_seen": "2026-09-15T15:38:03+00:00",
-   "last_seen": "2026-09-15T15:38:03+00:00",
+   "last_seen": "2026-09-15T15:48:57+00:00",
    "price_eur": 370.0,
    "price_history": [
     [
@@ -1152,7 +1161,7 @@
   },
   "kupujemprodajem:192898246": {
    "first_seen": "2026-09-15T15:11:26+00:00",
-   "last_seen": "2026-09-15T15:42:38+00:00",
+   "last_seen": "2026-09-15T15:53:18+00:00",
    "price_eur": 219.0,
    "price_history": [
     [
@@ -1168,7 +1177,7 @@
   },
   "kupujemprodajem:192967296": {
    "first_seen": "2026-09-15T15:08:30+00:00",
-   "last_seen": "2026-09-15T15:39:56+00:00",
+   "last_seen": "2026-09-15T15:50:39+00:00",
    "price_eur": 39.0,
    "price_history": [
     [
@@ -1184,9 +1193,9 @@
   },
   "kupujemprodajem:192974083": {
    "first_seen": "2026-09-15T15:07:03+00:00",
-   "last_seen": "2026-09-15T15:38:52+00:00",
-   "previous_price_eur": 400.0,
-   "price_eur": 300.0,
+   "last_seen": "2026-09-15T15:49:40+00:00",
+   "previous_price_eur": 300.0,
+   "price_eur": 145.0,
    "price_history": [
     [
      "2026-09-15T15:07:03+00:00",
@@ -1195,6 +1204,10 @@
     [
      "2026-09-15T15:38:52+00:00",
      300.0
+    ],
+    [
+     "2026-09-15T15:49:40+00:00",
+     145.0
     ]
    ],
    "score": 24,
@@ -1205,7 +1218,7 @@
   },
   "kupujemprodajem:192984723": {
    "first_seen": "2026-09-15T15:14:48+00:00",
-   "last_seen": "2026-09-15T15:45:03+00:00",
+   "last_seen": "2026-09-15T15:55:28+00:00",
    "price_eur": 1380.0,
    "price_history": [
     [
@@ -1221,7 +1234,7 @@
   },
   "kupujemprodajem:192984835": {
    "first_seen": "2026-09-15T15:15:30+00:00",
-   "last_seen": "2026-09-15T15:45:12+00:00",
+   "last_seen": "2026-09-15T15:55:36+00:00",
    "price_eur": 530.0,
    "price_history": [
     [
@@ -1237,7 +1250,7 @@
   },
   "kupujemprodajem:192984865": {
    "first_seen": "2026-09-15T15:12:41+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 1480.0,
    "price_history": [
     [
@@ -1253,7 +1266,7 @@
   },
   "kupujemprodajem:192996381": {
    "first_seen": "2026-09-15T15:05:20+00:00",
-   "last_seen": "2026-09-15T15:38:05+00:00",
+   "last_seen": "2026-09-15T15:48:59+00:00",
    "price_eur": 2900.0,
    "price_history": [
     [
@@ -1285,7 +1298,7 @@
   },
   "kupujemprodajem:193031129": {
    "first_seen": "2026-09-15T15:05:20+00:00",
-   "last_seen": "2026-09-15T15:38:05+00:00",
+   "last_seen": "2026-09-15T15:48:59+00:00",
    "price_eur": 900.0,
    "price_history": [
     [
@@ -1301,7 +1314,7 @@
   },
   "kupujemprodajem:193150446": {
    "first_seen": "2026-09-15T15:15:33+00:00",
-   "last_seen": "2026-09-15T15:45:15+00:00",
+   "last_seen": "2026-09-15T15:55:40+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -1317,7 +1330,7 @@
   },
   "kupujemprodajem:193224752": {
    "first_seen": "2026-09-15T15:14:22+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 630.0,
    "price_history": [
     [
@@ -1333,7 +1346,7 @@
   },
   "kupujemprodajem:193254719": {
    "first_seen": "2026-09-15T15:06:03+00:00",
-   "last_seen": "2026-09-15T15:38:28+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 1800.0,
    "price_history": [
     [
@@ -1349,7 +1362,7 @@
   },
   "kupujemprodajem:193352434": {
    "first_seen": "2026-09-15T15:05:22+00:00",
-   "last_seen": "2026-09-15T15:38:08+00:00",
+   "last_seen": "2026-09-15T15:49:02+00:00",
    "price_eur": 790.0,
    "price_history": [
     [
@@ -1365,7 +1378,7 @@
   },
   "kupujemprodajem:193358573": {
    "first_seen": "2026-09-15T15:13:35+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 920.0,
    "price_history": [
     [
@@ -1381,7 +1394,7 @@
   },
   "kupujemprodajem:193358585": {
    "first_seen": "2026-09-15T15:13:35+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 1000.0,
    "price_history": [
     [
@@ -1397,7 +1410,7 @@
   },
   "kupujemprodajem:193391117": {
    "first_seen": "2026-09-15T15:12:41+00:00",
-   "last_seen": "2026-09-15T15:43:41+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 380.0,
    "price_history": [
     [
@@ -1413,7 +1426,7 @@
   },
   "kupujemprodajem:193399092": {
    "first_seen": "2026-09-15T15:13:35+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 690.0,
    "price_history": [
     [
@@ -1429,7 +1442,7 @@
   },
   "kupujemprodajem:193417142": {
    "first_seen": "2026-09-15T15:14:51+00:00",
-   "last_seen": "2026-09-15T15:45:03+00:00",
+   "last_seen": "2026-09-15T15:55:28+00:00",
    "price_eur": 900.0,
    "price_history": [
     [
@@ -1445,7 +1458,7 @@
   },
   "kupujemprodajem:193429679": {
    "first_seen": "2026-09-15T15:15:21+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 550.0,
    "price_history": [
     [
@@ -1461,7 +1474,7 @@
   },
   "kupujemprodajem:193542607": {
    "first_seen": "2026-09-15T15:14:22+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 1480.0,
    "price_history": [
     [
@@ -1477,7 +1490,7 @@
   },
   "kupujemprodajem:193545419": {
    "first_seen": "2026-09-15T15:12:41+00:00",
-   "last_seen": "2026-09-15T15:43:41+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 530.0,
    "price_history": [
     [
@@ -1493,7 +1506,7 @@
   },
   "kupujemprodajem:193545794": {
    "first_seen": "2026-09-15T15:15:33+00:00",
-   "last_seen": "2026-09-15T15:45:15+00:00",
+   "last_seen": "2026-09-15T15:55:40+00:00",
    "price_eur": 630.0,
    "price_history": [
     [
@@ -1509,7 +1522,7 @@
   },
   "kupujemprodajem:193555659": {
    "first_seen": "2026-09-15T15:14:54+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 680.0,
    "price_history": [
     [
@@ -1525,7 +1538,7 @@
   },
   "kupujemprodajem:193570112": {
    "first_seen": "2026-09-15T15:14:22+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 1330.0,
    "price_history": [
     [
@@ -1541,7 +1554,7 @@
   },
   "kupujemprodajem:193572756": {
    "first_seen": "2026-09-15T15:13:38+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 850.0,
    "price_history": [
     [
@@ -1557,7 +1570,7 @@
   },
   "kupujemprodajem:193670780": {
    "first_seen": "2026-09-15T15:05:25+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 85.47,
    "price_history": [
     [
@@ -1573,7 +1586,7 @@
   },
   "kupujemprodajem:193715687": {
    "first_seen": "2026-09-15T15:12:44+00:00",
-   "last_seen": "2026-09-15T15:43:41+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 1050.0,
    "price_history": [
     [
@@ -1589,7 +1602,7 @@
   },
   "kupujemprodajem:193939088": {
    "first_seen": "2026-09-15T15:13:41+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 399.0,
    "price_history": [
     [
@@ -1605,7 +1618,7 @@
   },
   "kupujemprodajem:193970011": {
    "first_seen": "2026-09-15T15:14:57+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -1621,7 +1634,7 @@
   },
   "kupujemprodajem:194007742": {
    "first_seen": "2026-09-15T15:12:44+00:00",
-   "last_seen": "2026-09-15T15:43:41+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -1637,7 +1650,7 @@
   },
   "kupujemprodajem:194026075": {
    "first_seen": "2026-09-15T15:15:00+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -1653,7 +1666,7 @@
   },
   "kupujemprodajem:194029775": {
    "first_seen": "2026-09-15T15:13:43+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 890.0,
    "price_history": [
     [
@@ -1669,7 +1682,7 @@
   },
   "kupujemprodajem:194029813": {
    "first_seen": "2026-09-15T15:14:22+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 780.0,
    "price_history": [
     [
@@ -1685,7 +1698,7 @@
   },
   "kupujemprodajem:194093344": {
    "first_seen": "2026-09-15T15:06:06+00:00",
-   "last_seen": "2026-09-15T15:38:31+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -1693,15 +1706,15 @@
      500.0
     ]
    ],
-   "score": 39,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Specialized Sirrus 3.0 XL",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/specialized-sirrus-3-0-xl/oglas/194093344",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:194122277": {
    "first_seen": "2026-09-15T15:06:06+00:00",
-   "last_seen": "2026-09-15T15:38:31+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 450.0,
    "price_history": [
     [
@@ -1717,7 +1730,7 @@
   },
   "kupujemprodajem:194122377": {
    "first_seen": "2026-09-15T15:05:25+00:00",
-   "last_seen": "2026-09-15T15:38:31+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 740.0,
    "price_history": [
     [
@@ -1733,7 +1746,7 @@
   },
   "kupujemprodajem:194126028": {
    "first_seen": "2026-09-15T15:09:32+00:00",
-   "last_seen": "2026-09-15T15:40:56+00:00",
+   "last_seen": "2026-09-15T15:51:37+00:00",
    "price_eur": 70.0,
    "price_history": [
     [
@@ -1749,7 +1762,7 @@
   },
   "kupujemprodajem:194185342": {
    "first_seen": "2026-09-15T15:08:33+00:00",
-   "last_seen": "2026-09-15T15:39:59+00:00",
+   "last_seen": "2026-09-15T15:50:42+00:00",
    "price_eur": 59.83,
    "price_history": [
     [
@@ -1765,7 +1778,7 @@
   },
   "kupujemprodajem:194187038": {
    "first_seen": "2026-09-15T15:08:36+00:00",
-   "last_seen": "2026-09-15T15:40:02+00:00",
+   "last_seen": "2026-09-15T15:50:45+00:00",
    "price_eur": 35.0,
    "price_history": [
     [
@@ -1781,7 +1794,7 @@
   },
   "kupujemprodajem:194190173": {
    "first_seen": "2026-09-15T15:05:27+00:00",
-   "last_seen": "2026-09-15T15:38:31+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 720.0,
    "price_history": [
     [
@@ -1797,7 +1810,7 @@
   },
   "kupujemprodajem:194190192": {
    "first_seen": "2026-09-15T15:05:27+00:00",
-   "last_seen": "2026-09-15T15:38:31+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 660.0,
    "price_history": [
     [
@@ -1813,7 +1826,7 @@
   },
   "kupujemprodajem:194232322": {
    "first_seen": "2026-09-15T15:15:00+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 550.0,
    "price_history": [
     [
@@ -1829,7 +1842,7 @@
   },
   "kupujemprodajem:194239158": {
    "first_seen": "2026-09-15T15:14:25+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 630.0,
    "price_history": [
     [
@@ -1845,7 +1858,7 @@
   },
   "kupujemprodajem:194290957": {
    "first_seen": "2026-09-15T15:05:32+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 880.0,
    "price_history": [
     [
@@ -1861,7 +1874,7 @@
   },
   "kupujemprodajem:194291064": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -1877,7 +1890,7 @@
   },
   "kupujemprodajem:194367228": {
    "first_seen": "2026-09-15T15:15:03+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 520.0,
    "price_history": [
     [
@@ -1893,7 +1906,7 @@
   },
   "kupujemprodajem:194367307": {
    "first_seen": "2026-09-15T15:13:43+00:00",
-   "last_seen": "2026-09-15T15:44:22+00:00",
+   "last_seen": "2026-09-15T15:54:49+00:00",
    "price_eur": 560.0,
    "price_history": [
     [
@@ -1909,7 +1922,7 @@
   },
   "kupujemprodajem:194412553": {
    "first_seen": "2026-09-15T15:13:46+00:00",
-   "last_seen": "2026-09-15T15:44:25+00:00",
+   "last_seen": "2026-09-15T15:54:52+00:00",
    "price_eur": 980.0,
    "price_history": [
     [
@@ -1925,7 +1938,7 @@
   },
   "kupujemprodajem:194454464": {
    "first_seen": "2026-09-15T15:14:25+00:00",
-   "last_seen": "2026-09-15T15:44:52+00:00",
+   "last_seen": "2026-09-15T15:55:16+00:00",
    "price_eur": 870.0,
    "price_history": [
     [
@@ -1941,7 +1954,7 @@
   },
   "kupujemprodajem:194506153": {
    "first_seen": "2026-09-15T15:14:28+00:00",
-   "last_seen": "2026-09-15T15:44:54+00:00",
+   "last_seen": "2026-09-15T15:55:19+00:00",
    "price_eur": 1350.0,
    "price_history": [
     [
@@ -1957,7 +1970,7 @@
   },
   "kupujemprodajem:194538902": {
    "first_seen": "2026-09-15T15:11:29+00:00",
-   "last_seen": "2026-09-15T15:42:41+00:00",
+   "last_seen": "2026-09-15T15:53:21+00:00",
    "price_eur": 265.0,
    "price_history": [
     [
@@ -1973,7 +1986,7 @@
   },
   "kupujemprodajem:194546671": {
    "first_seen": "2026-09-15T15:15:07+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -2005,7 +2018,7 @@
   },
   "kupujemprodajem:194587407": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 720.0,
    "price_history": [
     [
@@ -2021,7 +2034,7 @@
   },
   "kupujemprodajem:194587732": {
    "first_seen": "2026-09-15T15:13:49+00:00",
-   "last_seen": "2026-09-15T15:44:28+00:00",
+   "last_seen": "2026-09-15T15:54:52+00:00",
    "price_eur": 1300.0,
    "price_history": [
     [
@@ -2029,15 +2042,15 @@
      1300.0
     ]
    ],
-   "score": 44,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "SPECIALIZED Diverge L Karbon (Gravel)",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/specialized-diverge-l-karbon-gravel/oglas/194587732",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:194591969": {
    "first_seen": "2026-09-15T15:06:06+00:00",
-   "last_seen": "2026-09-15T15:38:31+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -2053,7 +2066,7 @@
   },
   "kupujemprodajem:194596397": {
    "first_seen": "2026-09-15T15:08:39+00:00",
-   "last_seen": "2026-09-15T15:40:05+00:00",
+   "last_seen": "2026-09-15T15:50:48+00:00",
    "price_eur": 1.61,
    "price_history": [
     [
@@ -2069,7 +2082,7 @@
   },
   "kupujemprodajem:194597257": {
    "first_seen": "2026-09-15T15:07:06+00:00",
-   "last_seen": "2026-09-15T15:38:55+00:00",
+   "last_seen": "2026-09-15T15:49:43+00:00",
    "price_eur": 4800.0,
    "price_history": [
     [
@@ -2085,7 +2098,7 @@
   },
   "kupujemprodajem:194597700": {
    "first_seen": "2026-09-15T15:07:09+00:00",
-   "last_seen": "2026-09-15T15:38:58+00:00",
+   "last_seen": "2026-09-15T15:49:46+00:00",
    "price_eur": 589.0,
    "price_history": [
     [
@@ -2101,7 +2114,7 @@
   },
   "kupujemprodajem:194605798": {
    "first_seen": "2026-09-15T15:06:06+00:00",
-   "last_seen": "2026-09-15T15:38:58+00:00",
+   "last_seen": "2026-09-15T15:49:46+00:00",
    "price_eur": 7400.0,
    "price_history": [
     [
@@ -2117,7 +2130,7 @@
   },
   "kupujemprodajem:194605833": {
    "first_seen": "2026-09-15T15:06:08+00:00",
-   "last_seen": "2026-09-15T15:39:01+00:00",
+   "last_seen": "2026-09-15T15:49:49+00:00",
    "price_eur": 6500.0,
    "price_history": [
     [
@@ -2133,7 +2146,7 @@
   },
   "kupujemprodajem:194609179": {
    "first_seen": "2026-09-15T15:06:11+00:00",
-   "last_seen": "2026-09-15T15:39:04+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 300.0,
    "price_history": [
     [
@@ -2149,7 +2162,7 @@
   },
   "kupujemprodajem:194688418": {
    "first_seen": "2026-09-15T15:12:44+00:00",
-   "last_seen": "2026-09-15T15:43:41+00:00",
+   "last_seen": "2026-09-15T15:54:20+00:00",
    "price_eur": 950.0,
    "price_history": [
     [
@@ -2165,7 +2178,7 @@
   },
   "kupujemprodajem:194699807": {
    "first_seen": "2026-09-15T15:13:49+00:00",
-   "last_seen": "2026-09-15T15:44:28+00:00",
+   "last_seen": "2026-09-15T15:54:52+00:00",
    "price_eur": 520.0,
    "price_history": [
     [
@@ -2181,7 +2194,7 @@
   },
   "kupujemprodajem:194718679": {
    "first_seen": "2026-09-15T15:06:14+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 145.0,
    "price_history": [
     [
@@ -2197,7 +2210,7 @@
   },
   "kupujemprodajem:194730479": {
    "first_seen": "2026-09-15T15:15:09+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -2213,7 +2226,7 @@
   },
   "kupujemprodajem:194730552": {
    "first_seen": "2026-09-15T15:15:09+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -2229,7 +2242,7 @@
   },
   "kupujemprodajem:194730720": {
    "first_seen": "2026-09-15T15:15:09+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -2245,7 +2258,7 @@
   },
   "kupujemprodajem:194758167": {
    "first_seen": "2026-09-15T15:12:47+00:00",
-   "last_seen": "2026-09-15T15:43:44+00:00",
+   "last_seen": "2026-09-15T15:54:23+00:00",
    "price_eur": 2100.0,
    "price_history": [
     [
@@ -2261,7 +2274,7 @@
   },
   "kupujemprodajem:194783168": {
    "first_seen": "2026-09-15T15:12:50+00:00",
-   "last_seen": "2026-09-15T15:43:47+00:00",
+   "last_seen": "2026-09-15T15:54:26+00:00",
    "price_eur": 730.0,
    "price_history": [
     [
@@ -2277,7 +2290,7 @@
   },
   "kupujemprodajem:194808329": {
    "first_seen": "2026-09-15T15:12:53+00:00",
-   "last_seen": "2026-09-15T15:43:50+00:00",
+   "last_seen": "2026-09-15T15:54:29+00:00",
    "price_eur": 300.0,
    "price_history": [
     [
@@ -2293,7 +2306,7 @@
   },
   "kupujemprodajem:194815424": {
    "first_seen": "2026-09-15T15:13:52+00:00",
-   "last_seen": "2026-09-15T15:44:31+00:00",
+   "last_seen": "2026-09-15T15:54:55+00:00",
    "price_eur": 1100.0,
    "price_history": [
     [
@@ -2309,7 +2322,7 @@
   },
   "kupujemprodajem:194817948": {
    "first_seen": "2026-09-15T15:15:36+00:00",
-   "last_seen": "2026-09-15T15:45:18+00:00",
+   "last_seen": "2026-09-15T15:55:43+00:00",
    "price_eur": 530.0,
    "price_history": [
     [
@@ -2325,7 +2338,7 @@
   },
   "kupujemprodajem:194836988": {
    "first_seen": "2026-09-15T15:15:36+00:00",
-   "last_seen": "2026-09-15T15:45:18+00:00",
+   "last_seen": "2026-09-15T15:55:43+00:00",
    "price_eur": 289.0,
    "price_history": [
     [
@@ -2341,7 +2354,7 @@
   },
   "kupujemprodajem:194875908": {
    "first_seen": "2026-09-15T15:15:39+00:00",
-   "last_seen": "2026-09-15T15:45:21+00:00",
+   "last_seen": "2026-09-15T15:55:43+00:00",
    "price_eur": 370.0,
    "price_history": [
     [
@@ -2349,15 +2362,15 @@
      370.0
     ]
    ],
-   "score": 58,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Scott cpeedster 40 xl Tiagra",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/scott-cpeedster-40-xl-tiagra/oglas/194875908",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:194893313": {
    "first_seen": "2026-09-15T15:15:42+00:00",
-   "last_seen": "2026-09-15T15:45:21+00:00",
+   "last_seen": "2026-09-15T15:55:43+00:00",
    "price_eur": 999.0,
    "price_history": [
     [
@@ -2373,7 +2386,7 @@
   },
   "kupujemprodajem:194893814": {
    "first_seen": "2026-09-15T15:12:56+00:00",
-   "last_seen": "2026-09-15T15:43:52+00:00",
+   "last_seen": "2026-09-15T15:54:32+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -2389,7 +2402,7 @@
   },
   "kupujemprodajem:194904879": {
    "first_seen": "2026-09-15T15:12:59+00:00",
-   "last_seen": "2026-09-15T15:43:56+00:00",
+   "last_seen": "2026-09-15T15:54:35+00:00",
    "price_eur": 2450.0,
    "price_history": [
     [
@@ -2405,7 +2418,7 @@
   },
   "kupujemprodajem:194914921": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -2421,7 +2434,7 @@
   },
   "kupujemprodajem:194969672": {
    "first_seen": "2026-09-15T15:13:52+00:00",
-   "last_seen": "2026-09-15T15:44:31+00:00",
+   "last_seen": "2026-09-15T15:54:55+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -2437,8 +2450,9 @@
   },
   "kupujemprodajem:194994303": {
    "first_seen": "2026-09-15T15:13:55+00:00",
-   "last_seen": "2026-09-15T15:44:34+00:00",
-   "price_eur": 1480.0,
+   "last_seen": "2026-09-15T15:54:58+00:00",
+   "previous_price_eur": 1480.0,
+   "price_eur": 320.0,
    "price_history": [
     [
      "2026-09-15T15:13:55+00:00",
@@ -2447,9 +2461,13 @@
     [
      "2026-09-15T15:44:34+00:00",
      1480.0
+    ],
+    [
+     "2026-09-15T15:54:58+00:00",
+     320.0
     ]
    ],
-   "score": 30,
+   "score": 36,
    "source": "kupujemprodajem",
    "title": "kupujem Touring Gravel",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/kupujem-touring-gravel/oglas/194994303",
@@ -2457,7 +2475,7 @@
   },
   "kupujemprodajem:194995372": {
    "first_seen": "2026-09-15T15:08:42+00:00",
-   "last_seen": "2026-09-15T15:40:05+00:00",
+   "last_seen": "2026-09-15T15:50:48+00:00",
    "price_eur": 1.9,
    "price_history": [
     [
@@ -2473,7 +2491,7 @@
   },
   "kupujemprodajem:195008657": {
    "first_seen": "2026-09-15T15:07:12+00:00",
-   "last_seen": "2026-09-15T15:39:04+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -2489,7 +2507,7 @@
   },
   "kupujemprodajem:195011415": {
    "first_seen": "2026-09-15T15:07:12+00:00",
-   "last_seen": "2026-09-15T15:39:04+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -2505,7 +2523,7 @@
   },
   "kupujemprodajem:195011681": {
    "first_seen": "2026-09-15T15:07:12+00:00",
-   "last_seen": "2026-09-15T15:39:04+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 300.0,
    "price_history": [
     [
@@ -2521,7 +2539,7 @@
   },
   "kupujemprodajem:195011863": {
    "first_seen": "2026-09-15T15:07:12+00:00",
-   "last_seen": "2026-09-15T15:39:04+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -2537,7 +2555,7 @@
   },
   "kupujemprodajem:195019126": {
    "first_seen": "2026-09-15T15:06:14+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -2553,7 +2571,7 @@
   },
   "kupujemprodajem:195019287": {
    "first_seen": "2026-09-15T15:06:14+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 780.0,
    "price_history": [
     [
@@ -2569,7 +2587,7 @@
   },
   "kupujemprodajem:195019371": {
    "first_seen": "2026-09-15T15:06:16+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 880.0,
    "price_history": [
     [
@@ -2585,7 +2603,7 @@
   },
   "kupujemprodajem:195019700": {
    "first_seen": "2026-09-15T15:06:19+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 550.0,
    "price_history": [
     [
@@ -2601,7 +2619,7 @@
   },
   "kupujemprodajem:195020085": {
    "first_seen": "2026-09-15T15:06:21+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -2617,7 +2635,7 @@
   },
   "kupujemprodajem:195020098": {
    "first_seen": "2026-09-15T15:06:21+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -2633,7 +2651,7 @@
   },
   "kupujemprodajem:195020135": {
    "first_seen": "2026-09-15T15:06:24+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 1400.0,
    "price_history": [
     [
@@ -2649,7 +2667,7 @@
   },
   "kupujemprodajem:195020285": {
    "first_seen": "2026-09-15T15:06:26+00:00",
-   "last_seen": "2026-09-15T15:38:34+00:00",
+   "last_seen": "2026-09-15T15:49:25+00:00",
    "price_eur": 450.0,
    "price_history": [
     [
@@ -2665,7 +2683,7 @@
   },
   "kupujemprodajem:195021627": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 550.0,
    "price_history": [
     [
@@ -2681,7 +2699,7 @@
   },
   "kupujemprodajem:195021830": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -2697,7 +2715,7 @@
   },
   "kupujemprodajem:195025989": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 1500.0,
    "price_history": [
     [
@@ -2713,7 +2731,7 @@
   },
   "kupujemprodajem:195029054": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 1000.0,
    "price_history": [
     [
@@ -2729,7 +2747,7 @@
   },
   "kupujemprodajem:195030198": {
    "first_seen": "2026-09-15T15:15:42+00:00",
-   "last_seen": "2026-09-15T15:45:21+00:00",
+   "last_seen": "2026-09-15T15:55:43+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -2745,7 +2763,7 @@
   },
   "kupujemprodajem:195030800": {
    "first_seen": "2026-09-15T15:05:34+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 1800.0,
    "price_history": [
     [
@@ -2761,7 +2779,7 @@
   },
   "kupujemprodajem:195030967": {
    "first_seen": "2026-09-15T15:14:28+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 1200.0,
    "price_history": [
     [
@@ -2777,7 +2795,7 @@
   },
   "kupujemprodajem:195031394": {
    "first_seen": "2026-09-15T15:38:11+00:00",
-   "last_seen": "2026-09-15T15:38:11+00:00",
+   "last_seen": "2026-09-15T15:49:04+00:00",
    "price_eur": 1300.0,
    "price_history": [
     [
@@ -2793,7 +2811,7 @@
   },
   "kupujemprodajem:195036440": {
    "first_seen": "2026-09-15T15:14:31+00:00",
-   "last_seen": "2026-09-15T15:44:54+00:00",
+   "last_seen": "2026-09-15T15:55:19+00:00",
    "price_eur": 720.0,
    "price_history": [
     [
@@ -2809,7 +2827,7 @@
   },
   "kupujemprodajem:195069016": {
    "first_seen": "2026-09-15T15:14:34+00:00",
-   "last_seen": "2026-09-15T15:44:54+00:00",
+   "last_seen": "2026-09-15T15:55:19+00:00",
    "price_eur": 1200.0,
    "price_history": [
     [
@@ -2825,7 +2843,7 @@
   },
   "kupujemprodajem:195074063": {
    "first_seen": "2026-09-15T15:13:58+00:00",
-   "last_seen": "2026-09-15T15:44:37+00:00",
+   "last_seen": "2026-09-15T15:55:01+00:00",
    "price_eur": 280.0,
    "price_history": [
     [
@@ -2841,7 +2859,7 @@
   },
   "kupujemprodajem:195077814": {
    "first_seen": "2026-09-15T15:13:02+00:00",
-   "last_seen": "2026-09-15T15:43:56+00:00",
+   "last_seen": "2026-09-15T15:54:35+00:00",
    "price_eur": 2800.0,
    "price_history": [
     [
@@ -2857,7 +2875,7 @@
   },
   "kupujemprodajem:195077906": {
    "first_seen": "2026-09-15T15:13:02+00:00",
-   "last_seen": "2026-09-15T15:43:56+00:00",
+   "last_seen": "2026-09-15T15:54:35+00:00",
    "price_eur": 6000.0,
    "price_history": [
     [
@@ -2873,7 +2891,7 @@
   },
   "kupujemprodajem:195089337": {
    "first_seen": "2026-09-15T15:15:09+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 850.0,
    "price_history": [
     [
@@ -2889,7 +2907,7 @@
   },
   "kupujemprodajem:195099606": {
    "first_seen": "2026-09-15T15:15:45+00:00",
-   "last_seen": "2026-09-15T15:45:24+00:00",
+   "last_seen": "2026-09-15T15:55:45+00:00",
    "price_eur": 200.0,
    "price_history": [
     [
@@ -2905,7 +2923,7 @@
   },
   "kupujemprodajem:195129000": {
    "first_seen": "2026-09-15T15:14:01+00:00",
-   "last_seen": "2026-09-15T15:44:40+00:00",
+   "last_seen": "2026-09-15T15:55:04+00:00",
    "price_eur": 1070.0,
    "price_history": [
     [
@@ -2921,7 +2939,7 @@
   },
   "kupujemprodajem:195130054": {
    "first_seen": "2026-09-15T15:14:34+00:00",
-   "last_seen": "2026-09-15T15:44:54+00:00",
+   "last_seen": "2026-09-15T15:55:19+00:00",
    "price_eur": 850.0,
    "price_history": [
     [
@@ -2937,7 +2955,7 @@
   },
   "kupujemprodajem:195131154": {
    "first_seen": "2026-09-15T15:13:05+00:00",
-   "last_seen": "2026-09-15T15:43:59+00:00",
+   "last_seen": "2026-09-15T15:54:35+00:00",
    "price_eur": 460.0,
    "price_history": [
     [
@@ -2945,15 +2963,15 @@
      460.0
     ]
    ],
-   "score": 36,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Gravel bicikl Welt G90 navy blue XL",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/gravel-bicikl-welt-g90-navy-blue-xl/oglas/195131154",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:195138591": {
    "first_seen": "2026-09-15T15:14:04+00:00",
-   "last_seen": "2026-09-15T15:44:43+00:00",
+   "last_seen": "2026-09-15T15:55:07+00:00",
    "price_eur": 799.0,
    "price_history": [
     [
@@ -2969,7 +2987,7 @@
   },
   "kupujemprodajem:195144844": {
    "first_seen": "2026-09-15T15:15:12+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 880.0,
    "price_history": [
     [
@@ -2985,7 +3003,7 @@
   },
   "kupujemprodajem:195165494": {
    "first_seen": "2026-09-15T15:14:07+00:00",
-   "last_seen": "2026-09-15T15:44:46+00:00",
+   "last_seen": "2026-09-15T15:55:10+00:00",
    "price_eur": 7.67,
    "price_history": [
     [
@@ -3001,7 +3019,7 @@
   },
   "kupujemprodajem:195187598": {
    "first_seen": "2026-09-15T15:15:15+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -3017,7 +3035,7 @@
   },
   "kupujemprodajem:195204862": {
    "first_seen": "2026-09-15T15:38:13+00:00",
-   "last_seen": "2026-09-15T15:38:13+00:00",
+   "last_seen": "2026-09-15T15:49:07+00:00",
    "price_eur": 21.37,
    "price_history": [
     [
@@ -3033,7 +3051,7 @@
   },
   "kupujemprodajem:195213199": {
    "first_seen": "2026-09-15T15:14:07+00:00",
-   "last_seen": "2026-09-15T15:44:46+00:00",
+   "last_seen": "2026-09-15T15:55:10+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -3049,7 +3067,7 @@
   },
   "kupujemprodajem:195223189": {
    "first_seen": "2026-09-15T15:15:15+00:00",
-   "last_seen": "2026-09-15T15:45:06+00:00",
+   "last_seen": "2026-09-15T15:55:31+00:00",
    "price_eur": 1400.0,
    "price_history": [
     [
@@ -3065,7 +3083,7 @@
   },
   "kupujemprodajem:195231959": {
    "first_seen": "2026-09-15T15:13:08+00:00",
-   "last_seen": "2026-09-15T15:44:02+00:00",
+   "last_seen": "2026-09-15T15:54:37+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -3081,7 +3099,7 @@
   },
   "kupujemprodajem:195244628": {
    "first_seen": "2026-09-15T15:09:35+00:00",
-   "last_seen": "2026-09-15T15:40:59+00:00",
+   "last_seen": "2026-09-15T15:51:40+00:00",
    "price_eur": 280.0,
    "price_history": [
     [
@@ -3097,7 +3115,7 @@
   },
   "kupujemprodajem:195248168": {
    "first_seen": "2026-09-15T15:14:34+00:00",
-   "last_seen": "2026-09-15T15:44:54+00:00",
+   "last_seen": "2026-09-15T15:55:19+00:00",
    "price_eur": 620.0,
    "price_history": [
     [
@@ -3113,7 +3131,7 @@
   },
   "kupujemprodajem:195255068": {
    "first_seen": "2026-09-15T15:14:37+00:00",
-   "last_seen": "2026-09-15T15:44:54+00:00",
+   "last_seen": "2026-09-15T15:55:19+00:00",
    "price_eur": 1100.0,
    "price_history": [
     [
@@ -3129,7 +3147,7 @@
   },
   "kupujemprodajem:195255188": {
    "first_seen": "2026-09-15T15:14:10+00:00",
-   "last_seen": "2026-09-15T15:44:49+00:00",
+   "last_seen": "2026-09-15T15:55:10+00:00",
    "price_eur": 1290.0,
    "price_history": [
     [
@@ -3137,15 +3155,15 @@
      1290.0
     ]
    ],
-   "score": 49,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Canondale Gravel Topstone 2x11 Karbon XL 190-204cm",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/canondale-gravel-topstone-2x11-karbon-xl-190-204cm/oglas/195255188",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:195255584": {
    "first_seen": "2026-09-15T15:14:40+00:00",
-   "last_seen": "2026-09-15T15:44:57+00:00",
+   "last_seen": "2026-09-15T15:55:22+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -3161,7 +3179,7 @@
   },
   "kupujemprodajem:195257134": {
    "first_seen": "2026-09-15T15:05:37+00:00",
-   "last_seen": "2026-09-15T15:38:13+00:00",
+   "last_seen": "2026-09-15T15:49:07+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -3177,7 +3195,7 @@
   },
   "kupujemprodajem:195266565": {
    "first_seen": "2026-09-15T15:15:45+00:00",
-   "last_seen": "2026-09-15T15:45:24+00:00",
+   "last_seen": "2026-09-15T15:55:45+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -3193,7 +3211,7 @@
   },
   "kupujemprodajem:195272054": {
    "first_seen": "2026-09-15T15:13:11+00:00",
-   "last_seen": "2026-09-15T15:44:05+00:00",
+   "last_seen": "2026-09-15T15:54:40+00:00",
    "price_eur": 250.0,
    "price_history": [
     [
@@ -3209,7 +3227,7 @@
   },
   "kupujemprodajem:195300147": {
    "first_seen": "2026-09-15T15:13:14+00:00",
-   "last_seen": "2026-09-15T15:44:05+00:00",
+   "last_seen": "2026-09-15T15:54:40+00:00",
    "price_eur": 250.0,
    "price_history": [
     [
@@ -3225,7 +3243,7 @@
   },
   "kupujemprodajem:195311926": {
    "first_seen": "2026-09-15T15:13:17+00:00",
-   "last_seen": "2026-09-15T15:44:08+00:00",
+   "last_seen": "2026-09-15T15:54:40+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -3233,15 +3251,15 @@
      500.0
     ]
    ],
-   "score": 83,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Gravel BOMBTRACK L sa GRX opremom",
    "url": "https://www.kupujemprodajem.com/bicikli/touring-i-trekking/gravel-bombtrack-l-sa-grx-opremom/oglas/195311926",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:195315359": {
    "first_seen": "2026-09-15T15:08:45+00:00",
-   "last_seen": "2026-09-15T15:40:08+00:00",
+   "last_seen": "2026-09-15T15:50:50+00:00",
    "price_eur": 34.19,
    "price_history": [
     [
@@ -3257,7 +3275,7 @@
   },
   "kupujemprodajem:195336005": {
    "first_seen": "2026-09-15T15:11:35+00:00",
-   "last_seen": "2026-09-15T15:42:44+00:00",
+   "last_seen": "2026-09-15T15:53:24+00:00",
    "price_eur": 200.0,
    "price_history": [
     [
@@ -3273,7 +3291,7 @@
   },
   "kupujemprodajem:195336169": {
    "first_seen": "2026-09-15T15:11:38+00:00",
-   "last_seen": "2026-09-15T15:42:47+00:00",
+   "last_seen": "2026-09-15T15:53:27+00:00",
    "price_eur": 40.0,
    "price_history": [
     [
@@ -3289,7 +3307,7 @@
   },
   "kupujemprodajem:195337286": {
    "first_seen": "2026-09-15T15:11:41+00:00",
-   "last_seen": "2026-09-15T15:42:50+00:00",
+   "last_seen": "2026-09-15T15:53:30+00:00",
    "price_eur": 200.0,
    "price_history": [
     [
@@ -3305,7 +3323,7 @@
   },
   "kupujemprodajem:195338590": {
    "first_seen": "2026-09-15T15:11:44+00:00",
-   "last_seen": "2026-09-15T15:42:53+00:00",
+   "last_seen": "2026-09-15T15:53:33+00:00",
    "price_eur": 50.0,
    "price_history": [
     [
@@ -3321,7 +3339,7 @@
   },
   "kupujemprodajem:195343071": {
    "first_seen": "2026-09-15T15:11:44+00:00",
-   "last_seen": "2026-09-15T15:42:53+00:00",
+   "last_seen": "2026-09-15T15:53:33+00:00",
    "price_eur": 450.0,
    "price_history": [
     [
@@ -3337,7 +3355,7 @@
   },
   "kupujemprodajem:195349913": {
    "first_seen": "2026-09-15T15:11:47+00:00",
-   "last_seen": "2026-09-15T15:42:56+00:00",
+   "last_seen": "2026-09-15T15:53:36+00:00",
    "price_eur": 85.0,
    "price_history": [
     [
@@ -3353,7 +3371,7 @@
   },
   "kupujemprodajem:195350372": {
    "first_seen": "2026-09-15T15:11:50+00:00",
-   "last_seen": "2026-09-15T15:43:23+00:00",
+   "last_seen": "2026-09-15T15:54:02+00:00",
    "price_eur": 106.84,
    "price_history": [
     [
@@ -3371,6 +3389,14 @@
     [
      "2026-09-15T15:43:23+00:00",
      106.84
+    ],
+    [
+     "2026-09-15T15:53:39+00:00",
+     0.91
+    ],
+    [
+     "2026-09-15T15:54:02+00:00",
+     106.84
     ]
    ],
    "score": 23,
@@ -3381,7 +3407,7 @@
   },
   "kupujemprodajem:195350722": {
    "first_seen": "2026-09-15T15:11:53+00:00",
-   "last_seen": "2026-09-15T15:43:02+00:00",
+   "last_seen": "2026-09-15T15:53:42+00:00",
    "price_eur": 100.0,
    "price_history": [
     [
@@ -3397,7 +3423,7 @@
   },
   "kupujemprodajem:195351134": {
    "first_seen": "2026-09-15T15:11:56+00:00",
-   "last_seen": "2026-09-15T15:43:05+00:00",
+   "last_seen": "2026-09-15T15:53:45+00:00",
    "price_eur": 34.19,
    "price_history": [
     [
@@ -3413,7 +3439,7 @@
   },
   "kupujemprodajem:195352451": {
    "first_seen": "2026-09-15T15:11:59+00:00",
-   "last_seen": "2026-09-15T15:43:08+00:00",
+   "last_seen": "2026-09-15T15:53:48+00:00",
    "price_eur": 50.0,
    "price_history": [
     [
@@ -3429,7 +3455,7 @@
   },
   "kupujemprodajem:195353203": {
    "first_seen": "2026-09-15T15:12:02+00:00",
-   "last_seen": "2026-09-15T15:43:11+00:00",
+   "last_seen": "2026-09-15T15:53:50+00:00",
    "price_eur": 690.0,
    "price_history": [
     [
@@ -3445,7 +3471,7 @@
   },
   "kupujemprodajem:195354552": {
    "first_seen": "2026-09-15T15:12:06+00:00",
-   "last_seen": "2026-09-15T15:43:14+00:00",
+   "last_seen": "2026-09-15T15:53:53+00:00",
    "price_eur": 1.0,
    "price_history": [
     [
@@ -3461,7 +3487,7 @@
   },
   "kupujemprodajem:195354896": {
    "first_seen": "2026-09-15T15:12:08+00:00",
-   "last_seen": "2026-09-15T15:43:17+00:00",
+   "last_seen": "2026-09-15T15:53:56+00:00",
    "price_eur": 38.46,
    "price_history": [
     [
@@ -3477,7 +3503,7 @@
   },
   "kupujemprodajem:195359554": {
    "first_seen": "2026-09-15T15:12:11+00:00",
-   "last_seen": "2026-09-15T15:43:17+00:00",
+   "last_seen": "2026-09-15T15:53:56+00:00",
    "price_eur": 42.74,
    "price_history": [
     [
@@ -3493,7 +3519,7 @@
   },
   "kupujemprodajem:195371173": {
    "first_seen": "2026-09-15T15:09:38+00:00",
-   "last_seen": "2026-09-15T15:43:20+00:00",
+   "last_seen": "2026-09-15T15:53:59+00:00",
    "price_eur": 190.0,
    "price_history": [
     [
@@ -3509,7 +3535,7 @@
   },
   "kupujemprodajem:195371384": {
    "first_seen": "2026-09-15T15:09:41+00:00",
-   "last_seen": "2026-09-15T15:41:02+00:00",
+   "last_seen": "2026-09-15T15:51:43+00:00",
    "price_eur": 180.0,
    "price_history": [
     [
@@ -3525,7 +3551,7 @@
   },
   "kupujemprodajem:195373257": {
    "first_seen": "2026-09-15T15:09:44+00:00",
-   "last_seen": "2026-09-15T15:41:05+00:00",
+   "last_seen": "2026-09-15T15:51:46+00:00",
    "price_eur": 85.0,
    "price_history": [
     [
@@ -3541,7 +3567,7 @@
   },
   "kupujemprodajem:195374220": {
    "first_seen": "2026-09-15T15:09:44+00:00",
-   "last_seen": "2026-09-15T15:41:05+00:00",
+   "last_seen": "2026-09-15T15:51:46+00:00",
    "price_eur": 1199.0,
    "price_history": [
     [
@@ -3557,7 +3583,7 @@
   },
   "kupujemprodajem:195374693": {
    "first_seen": "2026-09-15T15:09:47+00:00",
-   "last_seen": "2026-09-15T15:41:08+00:00",
+   "last_seen": "2026-09-15T15:51:49+00:00",
    "price_eur": 110.0,
    "price_history": [
     [
@@ -3573,7 +3599,7 @@
   },
   "kupujemprodajem:195375882": {
    "first_seen": "2026-09-15T15:09:49+00:00",
-   "last_seen": "2026-09-15T15:41:10+00:00",
+   "last_seen": "2026-09-15T15:51:52+00:00",
    "price_eur": 51.28,
    "price_history": [
     [
@@ -3589,7 +3615,7 @@
   },
   "kupujemprodajem:195377075": {
    "first_seen": "2026-09-15T15:09:52+00:00",
-   "last_seen": "2026-09-15T15:41:13+00:00",
+   "last_seen": "2026-09-15T15:51:55+00:00",
    "price_eur": 1.0,
    "price_history": [
     [
@@ -3605,7 +3631,7 @@
   },
   "kupujemprodajem:195377325": {
    "first_seen": "2026-09-15T15:09:55+00:00",
-   "last_seen": "2026-09-15T15:41:16+00:00",
+   "last_seen": "2026-09-15T15:51:58+00:00",
    "price_eur": 8.55,
    "price_history": [
     [
@@ -3621,7 +3647,7 @@
   },
   "kupujemprodajem:195378090": {
    "first_seen": "2026-09-15T15:09:58+00:00",
-   "last_seen": "2026-09-15T15:41:20+00:00",
+   "last_seen": "2026-09-15T15:52:01+00:00",
    "price_eur": 85.47,
    "price_history": [
     [
@@ -3637,7 +3663,7 @@
   },
   "kupujemprodajem:195380525": {
    "first_seen": "2026-09-15T15:10:01+00:00",
-   "last_seen": "2026-09-15T15:41:23+00:00",
+   "last_seen": "2026-09-15T15:52:04+00:00",
    "price_eur": 70.0,
    "price_history": [
     [
@@ -3653,7 +3679,7 @@
   },
   "kupujemprodajem:195381550": {
    "first_seen": "2026-09-15T15:10:05+00:00",
-   "last_seen": "2026-09-15T15:41:26+00:00",
+   "last_seen": "2026-09-15T15:52:07+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -3669,7 +3695,7 @@
   },
   "kupujemprodajem:195381882": {
    "first_seen": "2026-09-15T15:10:08+00:00",
-   "last_seen": "2026-09-15T15:41:29+00:00",
+   "last_seen": "2026-09-15T15:52:10+00:00",
    "price_eur": 50.0,
    "price_history": [
     [
@@ -3685,7 +3711,7 @@
   },
   "kupujemprodajem:195382092": {
    "first_seen": "2026-09-15T15:10:11+00:00",
-   "last_seen": "2026-09-15T15:41:32+00:00",
+   "last_seen": "2026-09-15T15:52:13+00:00",
    "price_eur": 100.0,
    "price_history": [
     [
@@ -3701,7 +3727,7 @@
   },
   "kupujemprodajem:195382299": {
    "first_seen": "2026-09-15T15:10:14+00:00",
-   "last_seen": "2026-09-15T15:41:32+00:00",
+   "last_seen": "2026-09-15T15:52:13+00:00",
    "price_eur": 110.0,
    "price_history": [
     [
@@ -3717,7 +3743,7 @@
   },
   "kupujemprodajem:195386539": {
    "first_seen": "2026-09-15T15:10:17+00:00",
-   "last_seen": "2026-09-15T15:41:35+00:00",
+   "last_seen": "2026-09-15T15:52:16+00:00",
    "price_eur": 1000.0,
    "price_history": [
     [
@@ -3733,7 +3759,7 @@
   },
   "kupujemprodajem:195388472": {
    "first_seen": "2026-09-15T15:10:20+00:00",
-   "last_seen": "2026-09-15T15:41:38+00:00",
+   "last_seen": "2026-09-15T15:52:19+00:00",
    "price_eur": 25.64,
    "price_history": [
     [
@@ -3749,7 +3775,7 @@
   },
   "kupujemprodajem:195390582": {
    "first_seen": "2026-09-15T15:10:24+00:00",
-   "last_seen": "2026-09-15T15:41:40+00:00",
+   "last_seen": "2026-09-15T15:52:22+00:00",
    "price_eur": 99.0,
    "price_history": [
     [
@@ -3765,7 +3791,7 @@
   },
   "kupujemprodajem:195392427": {
    "first_seen": "2026-09-15T15:10:27+00:00",
-   "last_seen": "2026-09-15T15:41:43+00:00",
+   "last_seen": "2026-09-15T15:52:25+00:00",
    "price_eur": 30.0,
    "price_history": [
     [
@@ -3781,7 +3807,7 @@
   },
   "kupujemprodajem:195392717": {
    "first_seen": "2026-09-15T15:10:30+00:00",
-   "last_seen": "2026-09-15T15:41:46+00:00",
+   "last_seen": "2026-09-15T15:52:28+00:00",
    "price_eur": 25.0,
    "price_history": [
     [
@@ -3797,7 +3823,7 @@
   },
   "kupujemprodajem:195392729": {
    "first_seen": "2026-09-15T15:10:33+00:00",
-   "last_seen": "2026-09-15T15:41:49+00:00",
+   "last_seen": "2026-09-15T15:52:31+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -3813,7 +3839,7 @@
   },
   "kupujemprodajem:195392741": {
    "first_seen": "2026-09-15T15:10:35+00:00",
-   "last_seen": "2026-09-15T15:41:49+00:00",
+   "last_seen": "2026-09-15T15:52:31+00:00",
    "price_eur": 100.0,
    "price_history": [
     [
@@ -3829,7 +3855,7 @@
   },
   "kupujemprodajem:195392751": {
    "first_seen": "2026-09-15T15:10:39+00:00",
-   "last_seen": "2026-09-15T15:41:52+00:00",
+   "last_seen": "2026-09-15T15:52:34+00:00",
    "price_eur": 130.0,
    "price_history": [
     [
@@ -3845,7 +3871,7 @@
   },
   "kupujemprodajem:195392779": {
    "first_seen": "2026-09-15T15:14:13+00:00",
-   "last_seen": "2026-09-15T15:44:49+00:00",
+   "last_seen": "2026-09-15T15:55:10+00:00",
    "price_eur": 320.0,
    "price_history": [
     [
@@ -3861,7 +3887,7 @@
   },
   "kupujemprodajem:195393167": {
    "first_seen": "2026-09-15T15:15:45+00:00",
-   "last_seen": "2026-09-15T15:45:24+00:00",
+   "last_seen": "2026-09-15T15:55:45+00:00",
    "price_eur": 950.0,
    "price_history": [
     [
@@ -3877,7 +3903,7 @@
   },
   "kupujemprodajem:195394078": {
    "first_seen": "2026-09-15T15:10:41+00:00",
-   "last_seen": "2026-09-15T15:42:01+00:00",
+   "last_seen": "2026-09-15T15:52:43+00:00",
    "price_eur": 50.0,
    "price_history": [
     [
@@ -3886,6 +3912,10 @@
     ],
     [
      "2026-09-15T15:42:01+00:00",
+     50.0
+    ],
+    [
+     "2026-09-15T15:52:43+00:00",
      50.0
     ]
    ],
@@ -3897,7 +3927,7 @@
   },
   "kupujemprodajem:195394120": {
    "first_seen": "2026-09-15T15:08:48+00:00",
-   "last_seen": "2026-09-15T15:41:58+00:00",
+   "last_seen": "2026-09-15T15:52:40+00:00",
    "price_eur": 25.64,
    "price_history": [
     [
@@ -3913,7 +3943,7 @@
   },
   "kupujemprodajem:195399048": {
    "first_seen": "2026-09-15T15:08:51+00:00",
-   "last_seen": "2026-09-15T15:40:11+00:00",
+   "last_seen": "2026-09-15T15:50:54+00:00",
    "price_eur": 100.0,
    "price_history": [
     [
@@ -3929,7 +3959,7 @@
   },
   "kupujemprodajem:195399114": {
    "first_seen": "2026-09-15T15:08:53+00:00",
-   "last_seen": "2026-09-15T15:40:14+00:00",
+   "last_seen": "2026-09-15T15:50:56+00:00",
    "price_eur": 150.0,
    "price_history": [
     [
@@ -3945,7 +3975,7 @@
   },
   "kupujemprodajem:195399648": {
    "first_seen": "2026-09-15T15:14:16+00:00",
-   "last_seen": "2026-09-15T15:44:10+00:00",
+   "last_seen": "2026-09-15T15:55:13+00:00",
    "price_eur": 1650.0,
    "price_history": [
     [
@@ -3961,7 +3991,7 @@
   },
   "kupujemprodajem:195401187": {
    "first_seen": "2026-09-15T15:07:15+00:00",
-   "last_seen": "2026-09-15T15:45:24+00:00",
+   "last_seen": "2026-09-15T15:55:45+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -3977,7 +4007,7 @@
   },
   "kupujemprodajem:195401244": {
    "first_seen": "2026-09-15T15:07:18+00:00",
-   "last_seen": "2026-09-15T15:44:57+00:00",
+   "last_seen": "2026-09-15T15:55:22+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -3993,7 +4023,7 @@
   },
   "kupujemprodajem:195401275": {
    "first_seen": "2026-09-15T15:07:21+00:00",
-   "last_seen": "2026-09-15T15:44:57+00:00",
+   "last_seen": "2026-09-15T15:55:22+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -4009,7 +4039,7 @@
   },
   "kupujemprodajem:195401300": {
    "first_seen": "2026-09-15T15:07:24+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:55:48+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -4025,7 +4055,7 @@
   },
   "kupujemprodajem:195401369": {
    "first_seen": "2026-09-15T15:07:27+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -4041,7 +4071,7 @@
   },
   "kupujemprodajem:195401392": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 1200.0,
    "price_history": [
     [
@@ -4057,7 +4087,7 @@
   },
   "kupujemprodajem:195401436": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 550.0,
    "price_history": [
     [
@@ -4073,7 +4103,7 @@
   },
   "kupujemprodajem:195401505": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -4089,7 +4119,7 @@
   },
   "kupujemprodajem:195401551": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -4105,7 +4135,7 @@
   },
   "kupujemprodajem:195401583": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 800.0,
    "price_history": [
     [
@@ -4121,7 +4151,7 @@
   },
   "kupujemprodajem:195403256": {
    "first_seen": "2026-09-15T15:08:56+00:00",
-   "last_seen": "2026-09-15T15:40:17+00:00",
+   "last_seen": "2026-09-15T15:50:59+00:00",
    "price_eur": 120.0,
    "price_history": [
     [
@@ -4137,7 +4167,7 @@
   },
   "kupujemprodajem:195403540": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -4153,7 +4183,7 @@
   },
   "kupujemprodajem:195403843": {
    "first_seen": "2026-09-15T15:08:59+00:00",
-   "last_seen": "2026-09-15T15:40:20+00:00",
+   "last_seen": "2026-09-15T15:51:02+00:00",
    "price_eur": 72.65,
    "price_history": [
     [
@@ -4169,7 +4199,7 @@
   },
   "kupujemprodajem:195404253": {
    "first_seen": "2026-09-15T15:07:30+00:00",
-   "last_seen": "2026-09-15T15:39:06+00:00",
+   "last_seen": "2026-09-15T15:49:52+00:00",
    "price_eur": 450.0,
    "price_history": [
     [
@@ -4185,7 +4215,7 @@
   },
   "kupujemprodajem:195405312": {
    "first_seen": "2026-09-15T15:07:33+00:00",
-   "last_seen": "2026-09-15T15:39:09+00:00",
+   "last_seen": "2026-09-15T15:49:54+00:00",
    "price_eur": 1850.0,
    "price_history": [
     [
@@ -4201,7 +4231,7 @@
   },
   "kupujemprodajem:195405390": {
    "first_seen": "2026-09-15T15:07:36+00:00",
-   "last_seen": "2026-09-15T15:39:11+00:00",
+   "last_seen": "2026-09-15T15:49:57+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -4217,7 +4247,7 @@
   },
   "kupujemprodajem:195406010": {
    "first_seen": "2026-09-15T15:07:39+00:00",
-   "last_seen": "2026-09-15T15:39:11+00:00",
+   "last_seen": "2026-09-15T15:49:57+00:00",
    "price_eur": 650.0,
    "price_history": [
     [
@@ -4233,7 +4263,7 @@
   },
   "kupujemprodajem:195411860": {
    "first_seen": "2026-09-15T15:07:42+00:00",
-   "last_seen": "2026-09-15T15:39:13+00:00",
+   "last_seen": "2026-09-15T15:49:59+00:00",
    "price_eur": 42.74,
    "price_history": [
     [
@@ -4249,7 +4279,7 @@
   },
   "kupujemprodajem:195411922": {
    "first_seen": "2026-09-15T15:07:45+00:00",
-   "last_seen": "2026-09-15T15:39:16+00:00",
+   "last_seen": "2026-09-15T15:50:02+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -4265,7 +4295,7 @@
   },
   "kupujemprodajem:195411963": {
    "first_seen": "2026-09-15T15:07:48+00:00",
-   "last_seen": "2026-09-15T15:39:16+00:00",
+   "last_seen": "2026-09-15T15:50:02+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -4281,7 +4311,7 @@
   },
   "kupujemprodajem:195412402": {
    "first_seen": "2026-09-15T15:07:48+00:00",
-   "last_seen": "2026-09-15T15:39:16+00:00",
+   "last_seen": "2026-09-15T15:50:02+00:00",
    "price_eur": 2199.0,
    "price_history": [
     [
@@ -4297,7 +4327,7 @@
   },
   "kupujemprodajem:195415540": {
    "first_seen": "2026-09-15T15:06:29+00:00",
-   "last_seen": "2026-09-15T15:38:36+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 500.0,
    "price_history": [
     [
@@ -4305,7 +4335,7 @@
      500.0
     ]
    ],
-   "score": 50,
+   "score": 83,
    "source": "kupujemprodajem",
    "title": "Bicikl Specialized Sirrus Karbon S ram",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/bicikl-specialized-sirrus-karbon-s-ram/oglas/195415540",
@@ -4313,7 +4343,7 @@
   },
   "kupujemprodajem:195415756": {
    "first_seen": "2026-09-15T15:06:29+00:00",
-   "last_seen": "2026-09-15T15:38:36+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 850.0,
    "price_history": [
     [
@@ -4329,7 +4359,7 @@
   },
   "kupujemprodajem:195415787": {
    "first_seen": "2026-09-15T15:06:31+00:00",
-   "last_seen": "2026-09-15T15:38:36+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 900.0,
    "price_history": [
     [
@@ -4345,7 +4375,7 @@
   },
   "kupujemprodajem:195415816": {
    "first_seen": "2026-09-15T15:06:31+00:00",
-   "last_seen": "2026-09-15T15:38:36+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -4361,7 +4391,7 @@
   },
   "kupujemprodajem:195415856": {
    "first_seen": "2026-09-15T15:06:34+00:00",
-   "last_seen": "2026-09-15T15:38:36+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 850.0,
    "price_history": [
     [
@@ -4377,7 +4407,7 @@
   },
   "kupujemprodajem:195415927": {
    "first_seen": "2026-09-15T15:06:36+00:00",
-   "last_seen": "2026-09-15T15:38:36+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 1450.0,
    "price_history": [
     [
@@ -4393,7 +4423,7 @@
   },
   "kupujemprodajem:195416044": {
    "first_seen": "2026-09-15T15:06:39+00:00",
-   "last_seen": "2026-09-15T15:38:39+00:00",
+   "last_seen": "2026-09-15T15:49:28+00:00",
    "price_eur": 1000.0,
    "price_history": [
     [
@@ -4401,15 +4431,15 @@
      1000.0
     ]
    ],
-   "score": 32,
+   "score": 0,
    "source": "kupujemprodajem",
    "title": "Scott Addict RC XL NOVO",
    "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/scott-addict-rc-xl-novo/oglas/195416044",
-   "verdict": "maybe"
+   "verdict": "reject"
   },
   "kupujemprodajem:195416216": {
    "first_seen": "2026-09-15T15:06:42+00:00",
-   "last_seen": "2026-09-15T15:38:41+00:00",
+   "last_seen": "2026-09-15T15:49:30+00:00",
    "price_eur": 380.0,
    "price_history": [
     [
@@ -4425,7 +4455,7 @@
   },
   "kupujemprodajem:195416285": {
    "first_seen": "2026-09-15T15:09:02+00:00",
-   "last_seen": "2026-09-15T15:40:23+00:00",
+   "last_seen": "2026-09-15T15:51:05+00:00",
    "price_eur": 250.0,
    "price_history": [
     [
@@ -4441,7 +4471,7 @@
   },
   "kupujemprodajem:195416407": {
    "first_seen": "2026-09-15T15:06:45+00:00",
-   "last_seen": "2026-09-15T15:38:44+00:00",
+   "last_seen": "2026-09-15T15:49:33+00:00",
    "price_eur": 250.0,
    "price_history": [
     [
@@ -4457,7 +4487,7 @@
   },
   "kupujemprodajem:195416784": {
    "first_seen": "2026-09-15T15:06:48+00:00",
-   "last_seen": "2026-09-15T15:38:44+00:00",
+   "last_seen": "2026-09-15T15:49:33+00:00",
    "price_eur": 600.0,
    "price_history": [
     [
@@ -4473,7 +4503,7 @@
   },
   "kupujemprodajem:195416830": {
    "first_seen": "2026-09-15T15:06:51+00:00",
-   "last_seen": "2026-09-15T15:38:44+00:00",
+   "last_seen": "2026-09-15T15:49:33+00:00",
    "price_eur": 700.0,
    "price_history": [
     [
@@ -4489,7 +4519,7 @@
   },
   "kupujemprodajem:195419440": {
    "first_seen": "2026-09-15T15:05:40+00:00",
-   "last_seen": "2026-09-15T15:38:16+00:00",
+   "last_seen": "2026-09-15T15:49:10+00:00",
    "price_eur": 750.0,
    "price_history": [
     [
@@ -4505,7 +4535,7 @@
   },
   "kupujemprodajem:195419831": {
    "first_seen": "2026-09-15T15:05:40+00:00",
-   "last_seen": "2026-09-15T15:38:16+00:00",
+   "last_seen": "2026-09-15T15:49:10+00:00",
    "price_eur": 280.0,
    "price_history": [
     [
@@ -4521,7 +4551,7 @@
   },
   "kupujemprodajem:195420640": {
    "first_seen": "2026-09-15T15:05:42+00:00",
-   "last_seen": "2026-09-15T15:38:18+00:00",
+   "last_seen": "2026-09-15T15:49:12+00:00",
    "price_eur": 499.0,
    "price_history": [
     [
@@ -4537,7 +4567,7 @@
   },
   "kupujemprodajem:195420671": {
    "first_seen": "2026-09-15T15:09:05+00:00",
-   "last_seen": "2026-09-15T15:40:26+00:00",
+   "last_seen": "2026-09-15T15:51:08+00:00",
    "price_eur": 29.83,
    "price_history": [
     [
@@ -4553,7 +4583,7 @@
   },
   "kupujemprodajem:195420935": {
    "first_seen": "2026-09-15T15:05:45+00:00",
-   "last_seen": "2026-09-15T15:38:21+00:00",
+   "last_seen": "2026-09-15T15:49:15+00:00",
    "price_eur": 1500.0,
    "price_history": [
     [
@@ -4569,7 +4599,7 @@
   },
   "kupujemprodajem:195422729": {
    "first_seen": "2026-09-15T15:05:45+00:00",
-   "last_seen": "2026-09-15T15:38:21+00:00",
+   "last_seen": "2026-09-15T15:49:15+00:00",
    "price_eur": 2400.0,
    "price_history": [
     [
@@ -4585,7 +4615,7 @@
   },
   "kupujemprodajem:195423150": {
    "first_seen": "2026-09-15T15:05:47+00:00",
-   "last_seen": "2026-09-15T15:38:23+00:00",
+   "last_seen": "2026-09-15T15:49:17+00:00",
    "price_eur": 150.0,
    "price_history": [
     [
@@ -4601,7 +4631,7 @@
   },
   "kupujemprodajem:195424383": {
    "first_seen": "2026-09-15T15:09:05+00:00",
-   "last_seen": "2026-09-15T15:40:26+00:00",
+   "last_seen": "2026-09-15T15:51:08+00:00",
    "price_eur": 85.47,
    "price_history": [
     [
@@ -4617,7 +4647,7 @@
   },
   "kupujemprodajem:195425170": {
    "first_seen": "2026-09-15T15:05:50+00:00",
-   "last_seen": "2026-09-15T15:38:23+00:00",
+   "last_seen": "2026-09-15T15:49:17+00:00",
    "price_eur": 200.0,
    "price_history": [
     [
@@ -4633,7 +4663,7 @@
   },
   "kupujemprodajem:195426125": {
    "first_seen": "2026-09-15T15:09:08+00:00",
-   "last_seen": "2026-09-15T15:40:29+00:00",
+   "last_seen": "2026-09-15T15:51:11+00:00",
    "price_eur": 40.0,
    "price_history": [
     [
@@ -4649,7 +4679,7 @@
   },
   "kupujemprodajem:195426539": {
    "first_seen": "2026-09-15T15:09:11+00:00",
-   "last_seen": "2026-09-15T15:40:32+00:00",
+   "last_seen": "2026-09-15T15:51:14+00:00",
    "price_eur": 55.56,
    "price_history": [
     [
@@ -4681,7 +4711,7 @@
   },
   "kupujemprodajem:195426921": {
    "first_seen": "2026-09-15T15:09:14+00:00",
-   "last_seen": "2026-09-15T15:40:35+00:00",
+   "last_seen": "2026-09-15T15:51:17+00:00",
    "price_eur": 100.0,
    "price_history": [
     [
@@ -4697,7 +4727,7 @@
   },
   "kupujemprodajem:195427274": {
    "first_seen": "2026-09-15T15:05:55+00:00",
-   "last_seen": "2026-09-15T15:38:23+00:00",
+   "last_seen": "2026-09-15T15:49:17+00:00",
    "price_eur": 400.0,
    "price_history": [
     [
@@ -4713,7 +4743,7 @@
   },
   "kupujemprodajem:195428177": {
    "first_seen": "2026-09-15T15:40:38+00:00",
-   "last_seen": "2026-09-15T15:40:38+00:00",
+   "last_seen": "2026-09-15T15:51:20+00:00",
    "price_eur": 21.37,
    "price_history": [
     [
@@ -4727,9 +4757,25 @@
    "url": "https://www.kupujemprodajem.com/bicikli/ostali-bicikli/bicikla/oglas/195428177",
    "verdict": "maybe"
   },
+  "kupujemprodajem:195428477": {
+   "first_seen": "2026-09-15T15:49:20+00:00",
+   "last_seen": "2026-09-15T15:49:20+00:00",
+   "price_eur": 280.0,
+   "price_history": [
+    [
+     "2026-09-15T15:49:20+00:00",
+     280.0
+    ]
+   ],
+   "score": 0,
+   "source": "kupujemprodajem",
+   "title": "Fixie Inc 1X1 58cm TOP",
+   "url": "https://www.kupujemprodajem.com/bicikli/drumski-trkacki/fixie-inc-1x1-58cm-top/oglas/195428477",
+   "verdict": "reject"
+  },
   "kupujemprodajem:41980663": {
    "first_seen": "2026-09-15T15:07:51+00:00",
-   "last_seen": "2026-09-15T15:39:19+00:00",
+   "last_seen": "2026-09-15T15:50:04+00:00",
    "price_eur": 3.8,
    "price_history": [
     [
@@ -4745,7 +4791,7 @@
   },
   "kupujemprodajem:99036970": {
    "first_seen": "2026-09-15T15:07:54+00:00",
-   "last_seen": "2026-09-15T15:39:21+00:00",
+   "last_seen": "2026-09-15T15:50:07+00:00",
    "price_eur": 1500.0,
    "price_history": [
     [
@@ -4760,5 +4806,5 @@
    "verdict": "maybe"
   }
  },
- "updated": "2026-09-15T15:45:24+00:00"
+ "updated": "2026-09-15T15:55:48+00:00"
 }
