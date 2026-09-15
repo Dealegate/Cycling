@@ -45,6 +45,17 @@ class TestSpecs(unittest.TestCase):
     def test_mtb_rejected(self):
         self.assertEqual(detect_type_with_model("Brdski MTB bicikl").value, "mtb")
 
+    def test_the_model_name_overrules_the_word_gravel(self):
+        """Every one of these turns up on the board labelled "gravel"."""
+        self.assertEqual(detect_type_with_model("ROSE BLEND 28 2x10 GRX").value, "allroad")
+        self.assertEqual(detect_type_with_model("Corratec Allroad C2 GRX").value, "allroad")
+        self.assertEqual(detect_type_with_model("Scott Metrix Tiagra gravel").value, "fitness")
+        self.assertEqual(detect_type_with_model("Specialized Sirrus Karbon").value, "fitness")
+        self.assertEqual(detect_type_with_model("Scott Plasma 10 Carbon").value, "road-race")
+        # ...and the promotion the other way still works.
+        self.assertEqual(detect_type_with_model("Scott Addict Gravel 20").value, "gravel")
+        self.assertEqual(detect_type_with_model("Trek Checkpoint AL 4").value, "gravel")
+
     def test_grx_codes(self):
         g = detect_groupset("Shimano GRX RX810 2x11")
         self.assertEqual((g.family, g.model_code, g.speeds, g.chainrings), ("grx", "rx810", 11, 2))
@@ -157,6 +168,19 @@ class TestAssess(unittest.TestCase):
 
     def test_mtb_rejected(self):
         self.assertEqual(self._a("MTB Scott", "Deore, hidraulicne disk").verdict, "reject")
+
+    def test_seller_fit_range_outranks_the_letter(self):
+        """An XS cut for 150-165 cm does not become a 168 cm bike."""
+        a = self._a("Scott Gravel 2x11 GRX Ram XS 150-165cm",
+                    "gravel, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "reject")
+        self.assertTrue(any("150-165" in b for b in a.blockers))
+
+    def test_seller_fit_range_that_covers_the_rider_is_a_reason(self):
+        a = self._a("Orbea Terra Gravel 2x10 GRX Velicina S 165-175cm",
+                    "gravel, hidraulicne disk kocnice")
+        self.assertNotEqual(a.verdict, "reject")
+        self.assertTrue(any("165-175" in r for r in a.reasons))
 
 
 class TestParsers(unittest.TestCase):

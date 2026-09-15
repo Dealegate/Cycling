@@ -16,7 +16,12 @@ from .normalize import norm, squeeze
 # Order matters: the first family whose pattern hits wins, so gravel/cx are
 # tested before the generic "drumski" road bucket that they are listed under.
 TYPE_PATTERNS: list[tuple[str, str]] = [
-    ("gravel", r"\bgravel\b|\bgravl\b|\bgrevel\b|\ball[\s-]?road\b|\badventure\s+bike\b|\bsljunk"),
+    # All-road and endurance frames sit next to gravel on a shop floor and
+    # nowhere near it on a gravel road: road clearances, road geometry, a tyre
+    # that tops out around 35 mm.  Tested first so "allroad" is never read as
+    # "gravel" on the strength of the second half of the word.
+    ("allroad", r"\ball[\s-]?road\b|\bendurance\b|\bgran\s*fondo\b|\bgranfondo\b"),
+    ("gravel", r"\bgravel\b|\bgravl\b|\bgrevel\b|\badventure\s+bike\b|\bsljunk"),
     ("cyclocross", r"\bciklo[\s-]?kros\b|\bcyclo[\s-]?cross\b|\bcyclocross\b|\bciklokros\b|\bcx\b"),
     ("ebike", r"\be-?bike\b|\belektri(c|cn)"),
     ("kids", r"\bdec(j|ij)i\b|\bdecak\b|\bdecji\b|\bza dete\b|\bdecije\b"),
@@ -30,15 +35,15 @@ TYPE_PATTERNS: list[tuple[str, str]] = [
 GRAVEL_MODELS = r"""
  revolt|devote|grail|grizl|inflite|topstone|checkpoint|diverge|crux|domane\s*\+?gravel|
  warbird|cutthroat|midnight\s*special|fargo|vaya|straggler|crosscheck|crust|
- gt\s*grade|grade\s*carbon|jari|superx|caadx|allroad|arkose|sequoia|
+ gt\s*grade|grade\s*carbon|jari|superx|caadx|arkose|
  addict\s*gravel|speedster\s*gravel|contessa\s*speedster\s*gravel|
  aspero|exploro|mr\.?\s*pink|nero|libre|mason|bombtrack|hook\s*ext|beyond|
- x-?night|kaius|dolce\s*gravel|roubaix\s*gravel|granfondo|
+ x-?night|kaius|
  x-?road|xroad|orbea\s*terra|terra\s*h30|terra\s*m30|
  cannondale\s*topstone|niner\s*rlt|rlt\s*9|salsa\s*journey|
  fuji\s*jari|marin\s*nicasio|marin\s*gestalt|gestalt|nicasio|
  kona\s*rove|rove\s*st|rove\s*nrb|lauf\s*seigla|seigla|
- ridley\s*kanzo|kanzo|bianchi\s*impulso|impulso\s*allroad|
+ ridley\s*kanzo|kanzo|
  ktm\s*x-?strada|x-?strada|scott\s*addict\s*gravel|
  bergamont\s*grandurance|grandurance|cube\s*nuroad|nuroad|
  focus\s*atlas|atlas\s*6|vitus\s*substance|substance|
@@ -48,6 +53,34 @@ GRAVEL_MODELS = r"""
  pinarello\s*grevil|grevil|colnago\s*g3x|g3x|wilier\s*jena|jena|jaroon|
  rondo\s*ruut|ruut|cinelli\s*king\s*zydeco|zydeco|genesis\s*croix|croix\s*de\s*fer
 """.replace("\n", "").replace(" ", r"\s*")
+
+
+# Models whose name settles what the bike is, in the three ways that matter
+# here - all of them turn up on the board wearing the word "gravel".
+#
+# All-road and endurance frames: road clearances, road geometry, a tyre that
+# tops out around 35 mm.  A Rose Blend is not a Rose Backroad, and the ad will
+# not say so.
+ALLROAD_MODELS = r"""
+ blend|impulso|roubaix|dolce|sequoia|synapse|defy|contend\s*ar|
+ domane(?!\s*\+?gravel)|endurace|paradigm|sensium
+""".replace("\n", "").replace(" ", r"\s*")
+
+# Flat-bar fitness bikes.  Road groupset, no drop bar - and the drop bar here is
+# usually inferred from the levers, so these would sail through unchallenged.
+FITNESS_MODELS = r"""
+ sirrus|metrix|crossfire|crossway|sl\s*road|fx\s*sport|escape|quick(?!\s*cx)
+""".replace("\n", "").replace(" ", r"\s*")
+
+# Race and time-trial frames: right groupset, wrong bike entirely.
+ROAD_RACE_MODELS = r"""
+ plasma|supersix|foil|emonda|madone|aeroad|ultimate|oltre|specialissima|
+ addict(?!\s*gravel)|speedster(?!\s*gravel)|tarmac|venge|shiv|trinity|
+ propel|tcr|aethos
+""".replace("\n", "").replace(" ", r"\s*")
+
+MODEL_FAMILIES = (("allroad", ALLROAD_MODELS), ("fitness", FITNESS_MODELS),
+                  ("road-race", ROAD_RACE_MODELS))
 
 
 @dataclass
@@ -74,14 +107,23 @@ def detect_type(text: str) -> Detection:
 
 
 def detect_type_with_model(text: str) -> Detection:
-    """``detect_type`` but a known gravel model name outranks a "road" label.
+    """``detect_type`` but the model name outranks the label on the ad.
 
     Serbian sellers list gravel bikes under "drumski/trkacki" all the time, so a
-    Diverge described as a road bike should still come through as gravel.
+    Diverge described as a road bike should still come through as gravel.  It
+    cuts the other way too, and more often: a Sirrus or a Roubaix sold as
+    "gravel" is a flat-bar fitness bike and an endurance road bike wearing the
+    word, and the model name is the only place the ad admits it.
     """
+    t = norm(text)
     d = detect_type(text)
+    for family, pattern in MODEL_FAMILIES:
+        m = re.search(pattern, t)
+        if m:
+            ev = m.group(0).strip()
+            return Detection(family, f"{ev} (listed as {d.value})" if d.value else ev)
     if d.value in ("road", "trekking", None):
-        m = re.search(GRAVEL_MODELS, norm(text))
+        m = re.search(GRAVEL_MODELS, t)
         if m:
             return Detection("gravel", f"{m.group(0)} (listed as {d.value})")
     return d

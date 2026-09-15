@@ -76,6 +76,7 @@ class Assessment:
     bar: str | None = None
     size_label: str | None = None
     size_verdict: str | None = None
+    rider_height_quoted: list[float] | None = None
     fit: dict | None = None           # geometry check, when the model is known
     model_guess: str | None = None
 

@@ -15,7 +15,7 @@ from __future__ import annotations
 from .config import Config
 from .geometry import GeometryDB, FitWindow, check_fit
 from .models import Assessment, Listing
-from .sizing import parse_size
+from .sizing import parse_size, rider_height_range
 from .specs import (
     detect_bar, detect_brakes, detect_brand, detect_groupset, detect_material,
     detect_type_with_model, detect_women,
@@ -126,6 +126,19 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         blockers.append(sreason)
     else:
         unknowns.append(sreason)
+
+    # -- the rider height the seller quotes --------------------------------
+    quoted = rider_height_range(text)
+    if quoted:
+        a.rider_height_quoted = list(quoted)
+        rider = cfg.get("rider", {}).get("height_cm", [167, 168])
+        lo, hi = float(min(rider)), float(max(rider))
+        if hi < quoted[0] or lo > quoted[1]:
+            blockers.append(
+                f"the seller sizes this for a rider of {quoted[0]:g}-{quoted[1]:g} cm, "
+                f"and {lo:g}-{hi:g} is outside that")
+        else:
+            reasons.append(f"seller's own fit range {quoted[0]:g}-{quoted[1]:g} cm covers the rider")
 
     # -- geometry / fit ---------------------------------------------------
     ident = db.identify(text)

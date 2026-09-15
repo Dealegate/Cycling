@@ -165,3 +165,26 @@ def saddle_height_range(inseam_cm_min: float, inseam_cm_max: float) -> tuple[flo
 def max_standover_mm(inseam_cm_min: float, clearance_mm: float = 20.0) -> float:
     """Barefoot inseam minus a gravel-appropriate clearance, in millimetres."""
     return inseam_cm_min * 10 - clearance_mm
+
+
+# --------------------------------------------------------------------------
+# The rider height a seller quotes
+# --------------------------------------------------------------------------
+# "XS 150-165cm", "Velicina SM 165-175cm", "za visinu 170 - 180 cm".  This is the
+# one place an ad states fit in the rider's own units, and it beats a letter:
+# an XS cut for 150-165 does not become a 168 cm bike because the letter is on
+# the wanted list.  Only ranges in human-height territory count.
+_HEIGHT_RANGE = re.compile(
+    r"(?:visin\w*\s*(?:od\s*)?)?\b(1[4-9]\d|2[01]\d)\s*(?:cm)?\s*[-–—/]\s*"
+    r"(1[4-9]\d|2[01]\d)\s*(?:cm|cm\w*)\b|"
+    r"\bvisin\w*\s*(?:od\s*)?(1[4-9]\d|2[01]\d)\s*[-–—/]\s*(2[01]\d|1[4-9]\d)\b"
+)
+
+
+def rider_height_range(text: str) -> tuple[float, float] | None:
+    """The rider height the ad says the bike is for, in centimetres."""
+    m = _HEIGHT_RANGE.search(norm(text))
+    if not m:
+        return None
+    lo, hi = [float(g) for g in m.groups() if g][:2]
+    return (lo, hi) if lo < hi else (hi, lo)
