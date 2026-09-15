@@ -32,6 +32,16 @@ from ..normalize import norm, parse_price
 
 DEBUG_DIR = Path("debug")
 
+# lxml is faster and more forgiving of the half-closed tags these boards ship,
+# but it needs a compiler, which is the one thing a phone does not have.  The
+# stdlib parser handles every fixture and every live page tried so far, so a
+# missing lxml costs some speed and nothing else.
+PARSER = "lxml"
+try:  # pragma: no cover - depends on what is installed, not on what runs
+    BeautifulSoup("", "lxml")
+except Exception:  # noqa: BLE001 - any failure here means "use the fallback"
+    PARSER = "html.parser"
+
 # Marks of a Cloudflare interstitial rather than a real 403.  The page is a
 # JavaScript challenge, so no amount of retrying or header polish gets past it;
 # only a real browser does.
@@ -404,7 +414,7 @@ class Source:
         raise NotImplementedError
 
     def parse_page(self, html: str, url: str) -> list[Listing]:
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, PARSER)
         from_json = []
         for d in ads_from_json(soup):
             l = listing_from_json(d, source=self.name, base_url=self.base_url,
@@ -432,7 +442,7 @@ class Source:
         html = self.http.get(listing.url, referer=self.base_url)
         if not html:
             return listing
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, PARSER)
         listing.detail_fetched = True
         for d in ads_from_json(soup):
             full = listing_from_json(d, source=self.name, base_url=self.base_url,

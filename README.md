@@ -118,6 +118,40 @@ python -m gravelscout run --all      # полный проход, отчёт в 
 git add data/seen.json && git commit -m "scout: local run" && git push
 ```
 
+### С телефона
+
+Телефон в Сербии — такой же «домашний» адрес, как ноутбук, поэтому 2bike и
+остальные четыре доски с него открываются. Компилятора на телефоне нет, поэтому
+ставить надо `requirements-minimal.txt` — там только чистый Python. Без `lxml`
+скаут берёт парсер из стандартной библиотеки; на фикстурах и на живой странице
+KupujemProdajem в 769 КБ оба парсера дают одинаковый список объявлений, так что
+теряется только скорость.
+
+**Android — Termux** (ставить с [F-Droid](https://f-droid.org/packages/com.termux/),
+версия из Play Store заброшена):
+
+```bash
+pkg install python git
+git clone https://github.com/Dealegate/Cycling.git
+cd Cycling
+pip install -r requirements-minimal.txt
+python -m gravelscout probe
+python -m gravelscout run --all
+```
+
+Termux умеет и по расписанию — `pkg install termux-services`, дальше обычный
+cron. С настроенным телеграм-ботом (см. ниже) телефон становится полноценным
+скаутом по тем доскам, которые Actions не видит.
+
+**iOS** — сложнее и не проверено отсюда. В
+[a-Shell](https://holzschu.github.io/a-Shell_iOS/) есть python3 и pip, ставятся
+чистопитоновские пакеты; альтернатива — iSH с `apk add python3 py3-yaml`.
+Если pip на чём-то споткнётся, скажите на чём, подберу замену.
+
+Читать результат с телефона удобнее не из `out/shortlist.md`, а через телеграм:
+экспортируйте `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID` перед `run`, и каждый
+новый кандидат придёт сообщением.
+
 ## Запуск
 
 ```bash

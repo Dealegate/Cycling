@@ -16,6 +16,7 @@ from gravelscout.models import Listing
 from gravelscout.normalize import norm, parse_price
 from gravelscout.scoring import assess
 from gravelscout.sizing import SizeWindow, parse_size
+import gravelscout.sources.base as base
 from gravelscout.sources.base import HttpClient, challenge_reason
 from gravelscout.sources.dvabike import DvaBike
 from gravelscout.sources.kupujemprodajem import KupujemProdajem
@@ -23,6 +24,7 @@ from gravelscout.specs import (detect_bar, detect_brakes, detect_brand,
                                detect_groupset, detect_type_with_model)
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures"
+_REAL_PARSER = base.PARSER
 
 
 class TestNormalize(unittest.TestCase):
@@ -264,6 +266,23 @@ class TestBrands(unittest.TestCase):
                     "gravel, GRX 600 2x11, hidraulicne disk kocnice")
         self.assertEqual(a.verdict, "maybe")
         self.assertTrue(any("brand" in u for u in a.unknowns))
+
+
+class TestParserFallback(unittest.TestCase):
+    """Without lxml the scout must still see the same ads, or a phone is useless."""
+
+    def test_both_parsers_agree_on_every_fixture(self):
+        http = HttpClient(user_agent="test", delay_seconds=0)
+        cases = [(DvaBike, "2bike_list.html"), (KupujemProdajem, "kupujemprodajem_list.html")]
+        for source, fixture in cases:
+            html = (FIXTURES / fixture).read_text(encoding="utf-8")
+            seen = {}
+            for parser in ("lxml", "html.parser"):
+                base.PARSER = parser
+                seen[parser] = sorted(l.url for l in source({}, http).parse_page(html, "u"))
+            base.PARSER = _REAL_PARSER
+            self.assertTrue(seen["lxml"], f"{fixture} parsed to nothing")
+            self.assertEqual(seen["lxml"], seen["html.parser"], fixture)
 
 
 class TestBotWall(unittest.TestCase):
