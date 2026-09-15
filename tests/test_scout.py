@@ -16,7 +16,7 @@ from gravelscout.models import Listing
 from gravelscout.normalize import norm, parse_price
 from gravelscout.scoring import assess
 from gravelscout.sizing import SizeWindow, parse_size
-from gravelscout.sources.base import HttpClient
+from gravelscout.sources.base import HttpClient, challenge_reason
 from gravelscout.sources.dvabike import DvaBike
 from gravelscout.sources.kupujemprodajem import KupujemProdajem
 from gravelscout.specs import (detect_bar, detect_brakes, detect_groupset,
@@ -174,6 +174,35 @@ class TestParsers(unittest.TestCase):
         verdicts = {l.title.split(",")[0]: assess(l, cfg, db).verdict for l in found}
         self.assertEqual(verdicts["Canyon Grizl 7 GRX RX810"], "match")
         self.assertEqual(verdicts["Bianchi Via Nirone 7 Sora"], "reject")
+
+
+class TestBotWall(unittest.TestCase):
+    """A 403 that is a JS challenge has to read differently from a broken parser."""
+
+    CHALLENGE = ('<!DOCTYPE html><html><head><title>Just a moment...</title></head>'
+                 '<body><noscript>Enable JavaScript and cookies to continue</noscript>'
+                 '</body></html>')
+
+    def test_challenge_page_is_named(self):
+        why = challenge_reason(403, {}, self.CHALLENGE)
+        self.assertIsNotNone(why)
+        self.assertIn("Cloudflare", why)
+
+    def test_cf_mitigated_header_alone_is_enough(self):
+        why = challenge_reason(403, {"cf-mitigated": "challenge"}, "")
+        self.assertIsNotNone(why)
+
+    def test_plain_rate_limit_is_not_a_challenge(self):
+        self.assertIsNone(challenge_reason(429, {}, "Too many requests"))
+
+    def test_blocked_host_is_skipped_not_retried(self):
+        http = HttpClient(user_agent="test", delay_seconds=0)
+        http.blocked["www.example.rs"] = "HTTP 403, Cloudflare challenge"
+        # No request is made at all, so a missing network cannot make this pass.
+        self.assertIsNone(http.get("https://www.example.rs/oglasi/1"))
+        self.assertEqual(http.last_reason, "HTTP 403, Cloudflare challenge")
+        self.assertTrue(http.is_blocked("https://www.example.rs/anything/else"))
+        self.assertIsNone(http.is_blocked("https://www.other.rs/oglasi/1"))
 
 
 if __name__ == "__main__":

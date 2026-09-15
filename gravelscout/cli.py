@@ -59,6 +59,8 @@ def cmd_run(args) -> int:
         except Exception as exc:  # noqa: BLE001 - one broken site must not stop the rest
             print(f"  ! {s.name} failed: {type(exc).__name__}: {exc}")
     print(f"Collected {len(listings)} listing(s).")
+    for host, why in sorted(http.blocked.items()):
+        print(f"  ! nothing from {host}: {why}")
 
     by_source = {s.name: s for s in sources}
     results = []
@@ -136,7 +138,7 @@ def cmd_probe(args) -> int:
         name, url = next(iter(s.page_urls()))
         html = http.get(url, referer=s.base_url)
         if not html:
-            print(f"{s.name:<20} NO RESPONSE  {url}")
+            print(f"{s.name:<20} {http.last_reason or 'NO RESPONSE'}  {url}")
             ok = False
             continue
         found = s.parse_page(html, url)
