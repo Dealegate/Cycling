@@ -1,20 +1,21 @@
 name: gravel scout
 
-# Every 8 hours.  GitHub's scheduler is best-effort and can run late under
-# load, which is fine: the state file means a delayed run just catches up.
+# No schedule: this runs when somebody presses the button, and not otherwise.
 #
-# Half-hourly was noise.  A classifieds board does not turn over in thirty
-# minutes, and each run that finds something opens an issue, so the cost of
-# checking too often is paid in a cluttered issue list rather than in speed.
+# A scheduled run here only ever sees KupujemProdajem - the other four boards
+# turn down a datacentre address - so it was doing a fraction of the work of a
+# run from a phone on a Serbian network, while filling the issue list on its
+# own initiative.  The button stays, because a run from here needs no laptop
+# and no phone, and it runs the tests on the way past.
 on:
-  schedule:
-    - cron: "0 */8 * * *"
   workflow_dispatch:
     inputs:
       notify:
-        description: "Send Telegram/GitHub notifications for new hits"
+        description: "Open an issue / ping Telegram for each new hit"
         type: boolean
-        default: true
+        # Off by default now that nothing here runs unattended: a run from this
+        # button should report into its own log, not into the issue list.
+        default: false
 
 permissions:
   contents: write   # to commit the updated state file
