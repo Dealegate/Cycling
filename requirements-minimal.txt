@@ -1,0 +1,8 @@
+# For a phone, or anywhere else without a compiler.  Everything here is pure
+# Python, so `pip install -r requirements-minimal.txt` never builds anything.
+# The scout falls back to the standard library's HTML parser when lxml is
+# missing; both parsers were checked against the fixtures and against a live
+# 769 KB KupujemProdajem page and returned identical listings.
+requests>=2.31
+beautifulsoup4>=4.12
+PyYAML>=6.0

@@ -16,10 +16,25 @@ from .normalize import norm, squeeze
 # Order matters: the first family whose pattern hits wins, so gravel/cx are
 # tested before the generic "drumski" road bucket that they are listed under.
 TYPE_PATTERNS: list[tuple[str, str]] = [
-    ("gravel", r"\bgravel\b|\bgravl\b|\bgrevel\b|\ball[\s-]?road\b|\badventure\s+bike\b|\bsljunk"),
+    # All-road and endurance frames sit next to gravel on a shop floor and
+    # nowhere near it on a gravel road: road clearances, road geometry, a tyre
+    # that tops out around 35 mm.  Tested first so "allroad" is never read as
+    # "gravel" on the strength of the second half of the word.
+    ("allroad", r"\ball[\s-]?road\b|\bendurance\b|\bgran\s*fondo\b|\bgranfondo\b"),
+    ("gravel", r"\bgravel\b|\bgravl\b|\bgrevel\b|\badventure\s+bike\b|\bsljunk"),
     ("cyclocross", r"\bciklo[\s-]?kros\b|\bcyclo[\s-]?cross\b|\bcyclocross\b|\bciklokros\b|\bcx\b"),
     ("ebike", r"\be-?bike\b|\belektri(c|cn)"),
-    ("kids", r"\bdec(j|ij)i\b|\bdecak\b|\bdecji\b|\bza dete\b|\bdecije\b"),
+    # Not a bicycle at all.  Accessories, spares and the odd kitchen appliance
+    # get filed under "Bicikli" because that is where the buyers are, and they
+    # carry no disqualifying word, so without this they land in the shortlist as
+    # "nothing rules it out".  Each phrase is one a whole-bike ad does not use:
+    # a bike ad may mention a pump, it is not titled "pumpa za".
+    ("accessory", r"\bcerada\b|\bkaciga\b|\bdres\b|\btrenazer\b|\bprikolica\b|"
+                  r"\bblatobran\b|\bbidon\b|\bgepek\b|\baparat\s+za\b|"
+                  r"\b(?:pumpa|brava|korpa|torba|drzac|nosac|svetlo|sedalo)\s+za\b|"
+                  r"\bdelovi\s+za\b|\brezervni\s+deo\b"),
+    ("kids", r"\bdec(j|ij)i\b|\bdecak\b|\bdecji\b|\bza dete\b|\bza decu\b|"
+             r"\bdecije\b|\btricikl\b"),
     ("mtb", r"\bmtb\b|\bbrdski\b|\bplaninski\b|\bmountain\s*bike\b|\bhardtail\b|\bfull\s*suspension\b|\bdownhill\b|\benduro\b"),
     ("trekking", r"\btrek(k)?ing\b|\btreking\b|\bturing\b|\btouring\b|\bhibrid\b|\bhybrid\b|\bkrosover\b"),
     ("city", r"\bgradski\b|\bcity\s*bike\b|\bholandski\b|\bsklopiv\b|\bfolding\b"),
@@ -29,16 +44,17 @@ TYPE_PATTERNS: list[tuple[str, str]] = [
 # Model names that are unambiguously gravel, in case the ad text never says so.
 GRAVEL_MODELS = r"""
  revolt|devote|grail|grizl|inflite|topstone|checkpoint|diverge|crux|domane\s*\+?gravel|
+ backroad|
  warbird|cutthroat|midnight\s*special|fargo|vaya|straggler|crosscheck|crust|
- gt\s*grade|grade\s*carbon|jari|superx|caadx|allroad|arkose|sequoia|
+ gt\s*grade|grade\s*carbon|jari|superx|caadx|arkose|
  addict\s*gravel|speedster\s*gravel|contessa\s*speedster\s*gravel|
  aspero|exploro|mr\.?\s*pink|nero|libre|mason|bombtrack|hook\s*ext|beyond|
- x-?night|kaius|dolce\s*gravel|roubaix\s*gravel|granfondo|
+ x-?night|kaius|
  x-?road|xroad|orbea\s*terra|terra\s*h30|terra\s*m30|
  cannondale\s*topstone|niner\s*rlt|rlt\s*9|salsa\s*journey|
  fuji\s*jari|marin\s*nicasio|marin\s*gestalt|gestalt|nicasio|
  kona\s*rove|rove\s*st|rove\s*nrb|lauf\s*seigla|seigla|
- ridley\s*kanzo|kanzo|bianchi\s*impulso|impulso\s*allroad|
+ ridley\s*kanzo|kanzo|
  ktm\s*x-?strada|x-?strada|scott\s*addict\s*gravel|
  bergamont\s*grandurance|grandurance|cube\s*nuroad|nuroad|
  focus\s*atlas|atlas\s*6|vitus\s*substance|substance|
@@ -48,6 +64,34 @@ GRAVEL_MODELS = r"""
  pinarello\s*grevil|grevil|colnago\s*g3x|g3x|wilier\s*jena|jena|jaroon|
  rondo\s*ruut|ruut|cinelli\s*king\s*zydeco|zydeco|genesis\s*croix|croix\s*de\s*fer
 """.replace("\n", "").replace(" ", r"\s*")
+
+
+# Models whose name settles what the bike is, in the three ways that matter
+# here - all of them turn up on the board wearing the word "gravel".
+#
+# All-road and endurance frames: road clearances, road geometry, a tyre that
+# tops out around 35 mm.  A Rose Blend is not a Rose Backroad, and the ad will
+# not say so.
+ALLROAD_MODELS = r"""
+ blend|impulso|roubaix|dolce|sequoia|synapse|defy|contend\s*ar|
+ domane(?!\s*\+?gravel)|endurace|paradigm|sensium
+""".replace("\n", "").replace(" ", r"\s*")
+
+# Flat-bar fitness bikes.  Road groupset, no drop bar - and the drop bar here is
+# usually inferred from the levers, so these would sail through unchallenged.
+FITNESS_MODELS = r"""
+ sirrus|metrix|crossfire|crossway|sl\s*road|fx\s*sport|escape|quick(?!\s*cx)
+""".replace("\n", "").replace(" ", r"\s*")
+
+# Race and time-trial frames: right groupset, wrong bike entirely.
+ROAD_RACE_MODELS = r"""
+ plasma|supersix|foil|emonda|madone|aeroad|ultimate|oltre|specialissima|
+ addict(?!\s*gravel)|speedster(?!\s*gravel)|tarmac|venge|shiv|trinity|
+ propel|tcr|aethos|xlite
+""".replace("\n", "").replace(" ", r"\s*")
+
+MODEL_FAMILIES = (("allroad", ALLROAD_MODELS), ("fitness", FITNESS_MODELS),
+                  ("road-race", ROAD_RACE_MODELS))
 
 
 @dataclass
@@ -74,14 +118,23 @@ def detect_type(text: str) -> Detection:
 
 
 def detect_type_with_model(text: str) -> Detection:
-    """``detect_type`` but a known gravel model name outranks a "road" label.
+    """``detect_type`` but the model name outranks the label on the ad.
 
     Serbian sellers list gravel bikes under "drumski/trkacki" all the time, so a
-    Diverge described as a road bike should still come through as gravel.
+    Diverge described as a road bike should still come through as gravel.  It
+    cuts the other way too, and more often: a Sirrus or a Roubaix sold as
+    "gravel" is a flat-bar fitness bike and an endurance road bike wearing the
+    word, and the model name is the only place the ad admits it.
     """
+    t = norm(text)
     d = detect_type(text)
+    for family, pattern in MODEL_FAMILIES:
+        m = re.search(pattern, t)
+        if m:
+            ev = m.group(0).strip()
+            return Detection(family, f"{ev} (listed as {d.value})" if d.value else ev)
     if d.value in ("road", "trekking", None):
-        m = re.search(GRAVEL_MODELS, norm(text))
+        m = re.search(GRAVEL_MODELS, t)
         if m:
             return Detection("gravel", f"{m.group(0)} (listed as {d.value})")
     return d
@@ -313,3 +366,97 @@ def detect_material(text: str) -> Detection:
         if m:
             return Detection(name, m.group(0))
     return Detection(None, None)
+
+
+# --------------------------------------------------------------------------
+# Bike brands
+# --------------------------------------------------------------------------
+# How each brand actually turns up in a Serbian ad, after ``norm`` has folded
+# the Cyrillic and the diacritics.  Only brands that can be matched without
+# catching something else are listed: "force" would collide with SRAM Force,
+# "max" and "ultra" with ordinary adjectives, so those stay out rather than
+# rejecting a good bike over a word in the description.
+BIKE_BRANDS = {
+    # wanted tier
+    "rose": r"\brose\b(?!\s*(?:boja|zlat))",
+    "giant": r"\bgiant\b",
+    "liv": r"\bliv\b",
+    "specialized": r"\bspecializ?ed\b|\bspesh\b",
+    "scott": r"\bscott\b",
+    "cannondale": r"\bcannondale\b|\bcanondale\b",
+    "trek": r"\btrek\b",
+    "bianchi": r"\bbianchi\b",
+    "cervelo": r"\bcervelo\b",
+    "bmc": r"\bbmc\b",
+    "ridley": r"\bridley\b",
+    "orbea": r"\borbea\b",
+    "wilier": r"\bwilier\b",
+    "pinarello": r"\bpinarello\b",
+    "colnago": r"\bcolnago\b",
+    "santa cruz": r"\bsanta\s*cruz\b",
+    "niner": r"\bniner\b",
+    "salsa": r"\bsalsa\b",
+    "surly": r"\bsurly\b",
+    "kona": r"\bkona\b",
+    "marin": r"\bmarin\b",
+    "fuji": r"\bfuji\b",
+    "lauf": r"\blauf\b",
+    "3t": r"\b3t\b",
+    "open": r"\bopen\s*(?:u\.?p\.?|wi\.?de)\b",
+    "ibis": r"\bibis\b",
+    "rondo": r"\brondo\b",
+    "cinelli": r"\bcinelli\b",
+    "mason": r"\bmason\b",
+    "bombtrack": r"\bbombtrack\b",
+    "vitus": r"\bvitus\b",
+    "basso": r"\bbasso\b",
+    "look": r"\blook\s*7\d\d\b|\blook\s*(?:huez|765|785|795)\b",
+    "felt": r"\bfelt\b",
+    "gt": r"\bgt\s*(?:grade|avalanche|zaskar)\b",
+    "norco": r"\bnorco\b",
+
+    # neither wanted nor ruled out: detected so the ad can say so out loud
+    "genesis": r"\bgenesis\b",
+
+    # ruled out on build quality - the shop-brand tier and below
+    "merida": r"\bmerida\b",
+    "focus": r"\bfocus\b",
+    "ghost": r"\bghost\b",
+    "bergamont": r"\bbergamont\b",
+    "ktm": r"\bktm\b",
+    "kross": r"\bkross\b",
+    "stevens": r"\bstevens\b",
+    "lapierre": r"\blapierre\b",
+    "cube": r"\bcube\b",
+    "canyon": r"\bcanyon\b|\bkanjon\b",
+    "axess": r"\baxess\b",
+    "capriolo": r"\bcapriolo\b|\bkapriolo\b",
+    "visitor": r"\bvisitor\b",
+    "venssini": r"\bvenssini\b|\bvensini\b",
+    "explorer": r"\bx?explorer\b|\bxplorer\b",
+    "galaxy": r"\bgalaxy\b",
+    "favorit": r"\bfavorit\b",
+    "adria": r"\badria\b",
+    "btwin": r"\bb\s*twin\b|\bbtwin\b",
+    "rockrider": r"\brockrider\b",
+    "triban": r"\btriban\b",
+    "alpina": r"\balpina\b",
+    "mercury": r"\bmercury\b",
+    "crosswind": r"\bcrosswind\b",
+}
+
+
+def detect_brand(text: str) -> Detection:
+    """Name the bike's maker, or return nothing rather than guess.
+
+    The longest match wins, so "Santa Cruz" is not read as a stray "cruz" and a
+    title that names both a brand and a component maker still resolves to the
+    bike.
+    """
+    t = norm(text)
+    best: tuple[int, str, str] | None = None
+    for brand, pat in BIKE_BRANDS.items():
+        m = re.search(pat, t)
+        if m and (best is None or len(m.group(0)) > best[0]):
+            best = (len(m.group(0)), brand, m.group(0))
+    return Detection(best[1], best[2]) if best else Detection(None, None)

@@ -22,7 +22,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Iterator
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 import requests
 from bs4 import BeautifulSoup
@@ -31,6 +31,22 @@ from ..models import Listing
 from ..normalize import norm, parse_price
 
 DEBUG_DIR = Path("debug")
+
+# lxml is faster and more forgiving of the half-closed tags these boards ship,
+# but it needs a compiler, which is the one thing a phone does not have.  The
+# stdlib parser handles every fixture and every live page tried so far, so a
+# missing lxml costs some speed and nothing else.
+PARSER = "lxml"
+try:  # pragma: no cover - depends on what is installed, not on what runs
+    BeautifulSoup("", "lxml")
+except Exception:  # noqa: BLE001 - any failure here means "use the fallback"
+    PARSER = "html.parser"
+
+# Marks of a Cloudflare interstitial rather than a real 403.  The page is a
+# JavaScript challenge, so no amount of retrying or header polish gets past it;
+# only a real browser does.
+CHALLENGE_MARKERS = ("just a moment", "_cf_chl_opt", "cdn-cgi/challenge-platform",
+                     "__cf_chl_tk", "enable javascript and cookies to continue")
 
 
 @dataclass
@@ -50,8 +66,21 @@ class HttpClient:
             "Cache-Control": "no-cache",
         })
         self._last_call = 0.0
+        # Hosts that answered with a challenge page, and why.  A blocked host is
+        # skipped for the rest of the run instead of being retried page by page.
+        self.blocked: dict[str, str] = {}
+        self.last_reason: str | None = None
+
+    def is_blocked(self, url: str) -> str | None:
+        """Return why *url*'s host is being skipped, or None if it is fine."""
+        return self.blocked.get(urlsplit(url).netloc)
 
     def get(self, url: str, *, referer: str | None = None) -> str | None:
+        host = urlsplit(url).netloc
+        if host in self.blocked:
+            self.last_reason = self.blocked[host]
+            return None
+        self.last_reason = None
         wait = self.delay_seconds - (time.monotonic() - self._last_call)
         if wait > 0:
             time.sleep(wait)
@@ -62,8 +91,18 @@ class HttpClient:
                 r = self.session.get(url, timeout=self.timeout, headers=headers)
                 self._last_call = time.monotonic()
                 if r.status_code == 404:
+                    self.last_reason = "HTTP 404"
                     return None
                 if r.status_code in (403, 429, 503):
+                    challenge = challenge_reason(r.status_code, r.headers, r.text)
+                    if challenge:
+                        # Retrying only wastes the crawl: remember the host and move on.
+                        self.blocked[host] = challenge
+                        self.last_reason = challenge
+                        if self.dump:
+                            self._dump(url, r.text)
+                        return None
+                    self.last_reason = f"HTTP {r.status_code}"
                     # Back off hard: these are "slow down" or "you look like a bot".
                     time.sleep(3 * (attempt + 1) ** 2)
                     continue
@@ -73,6 +112,7 @@ class HttpClient:
                 return r.text
             except requests.RequestException as exc:  # network hiccup, retry
                 last_error = exc
+                self.last_reason = f"{type(exc).__name__}: {exc}"
                 self._last_call = time.monotonic()
                 time.sleep(2 ** attempt)
         if last_error:
@@ -84,6 +124,22 @@ class HttpClient:
         DEBUG_DIR.mkdir(exist_ok=True)
         name = re.sub(r"[^a-z0-9]+", "_", url.lower())[-120:] + ".html"
         (DEBUG_DIR / name).write_text(html, encoding="utf-8")
+
+
+def challenge_reason(status: int, headers, body: str) -> str | None:
+    """Describe a bot-wall response, or return None for an ordinary error.
+
+    A 403 that carries a Cloudflare challenge is not the same problem as a 403
+    that says "too many requests": the first one never clears on its own, and a
+    scout that keeps retrying it just makes every run three minutes longer while
+    reporting nothing.  Saying so out loud also saves the reader from hunting for
+    a parser bug that is not there - the parser never got a page to parse.
+    """
+    if headers.get("cf-mitigated") == "challenge" or any(
+            m in body[:20000].lower() for m in CHALLENGE_MARKERS):
+        return (f"HTTP {status}, Cloudflare challenge - the site wants a real "
+                "browser, and turns down this network")
+    return None
 
 
 # --------------------------------------------------------------------------
@@ -358,7 +414,7 @@ class Source:
         raise NotImplementedError
 
     def parse_page(self, html: str, url: str) -> list[Listing]:
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, PARSER)
         from_json = []
         for d in ads_from_json(soup):
             l = listing_from_json(d, source=self.name, base_url=self.base_url,
@@ -386,7 +442,7 @@ class Source:
         html = self.http.get(listing.url, referer=self.base_url)
         if not html:
             return listing
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, PARSER)
         listing.detail_fetched = True
         for d in ads_from_json(soup):
             full = listing_from_json(d, source=self.name, base_url=self.base_url,
@@ -405,7 +461,9 @@ class Source:
         for category, url in self.page_urls():
             html = self.http.get(url, referer=self.base_url)
             if not html:
-                print(f"  - {self.name}: no response for {url}")
+                print(f"  - {self.name}: {self.http.last_reason or 'no response'} <{url}>")
+                if self.http.is_blocked(url):
+                    break  # the rest of this site's pages will say the same thing
                 continue
             found = self.parse_page(html, url)
             print(f"  - {self.name}: {len(found):>3} listings from {category} <{url}>")

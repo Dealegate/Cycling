@@ -94,10 +94,12 @@ def cmd_scrape(args) -> int:
     import requests
     from bs4 import BeautifulSoup
 
+    from gravelscout.sources.base import PARSER
+
     r = requests.get(args.url, timeout=30, headers={
         "User-Agent": "Mozilla/5.0 (compatible; gravelscout/1.0; geometry lookup)"})
     r.raise_for_status()
-    soup = BeautifulSoup(r.text, "lxml")
+    soup = BeautifulSoup(r.text, PARSER)
 
     sizes: dict[str, dict] = {}
     for table in soup.find_all("table"):

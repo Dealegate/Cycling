@@ -10,10 +10,25 @@
 | Трансмиссия | Shimano GRX (любой), Tiagra 2x10, 105, Ultegra, SRAM Apex/Rival/Force, Campagnolo Ekar |
 | Тормоза | только гидравлические дисковые |
 | Руль | дропбар |
-| Размер | 47–55 см, буквенные XXS/XS/S/ML/M |
+| Размер | 47–52 см, буквенные XXS/XS/S. 52 — потолок, 54 и 55 не рассматриваем |
 | Ростовка | якорь — Liv Devote Advanced S (stack 558, reach 376), допуск ±28 мм по stack и ±18 мм по reach |
+| Бренд | берём Rose, Giant, Liv, Specialized, Scott, Cannondale, Trek, Bianchi и равных им. Cube, Canyon, Axess, Focus, Ghost, Bergamont, KTM, Merida, Kross — нет |
+| Рост райдера | если продавец сам пишет вилку («XS 150–165cm»), она решает: 167.5 вне неё — отказ |
 
 Всё это лежит в `config.yaml` — правится без захода в код.
+
+All-road — не gravel. Rose Blend, Bianchi Impulso, Specialized Roubaix, Trek
+Domane и прочие эндуранс-рамы уезжают в `reject` по имени модели, даже если в
+объявлении написано «gravel»: дорожные зазоры, дорожная геометрия, покрышка до
+35 мм. Туда же фитнесы на прямом руле (Sirrus, Metrix) и гоночные шоссеры
+(Plasma, SuperSix, TCR) — у них правильная навеска и совершенно не тот
+велосипед, а дропбар скаут выводит из манеток и на них ошибался бы.
+
+Бренд — жёсткий фильтр, но только в одну сторону. Имя из `brands.reject` рубит
+объявление, даже если всё остальное идеально: рама из «не вау» сегмента не
+становится лучше от навешенного на неё GRX. А вот незнакомое имя — не отказ:
+оно уходит в `unknowns` с пометкой «посмотри, что это за марка», потому что на
+сербской доске регулярно всплывает что-то, чего нет ни в одном списке.
 
 Райдер: рост 167–168, инсим 80–82. Отсюда считается посадочная высота седла
 706–724 мм от каретки и предельный standover 780 мм.
@@ -42,8 +57,8 @@
 | `2bike` | [2bike.rs / Cikloberza](https://www.2bike.rs/cikloberza/mali-oglasi/bicikli-6/gravel-ciklokros-189) | Есть отдельная категория Gravel/Ciklokros, продавцы честно пишут навеску |
 | `kupujemprodajem` | [KupujemProdajem](https://www.kupujemprodajem.com/bicikli/drumski-trkacki/grupa/912/919/1) | Самый большой объём, гравийники лежат в «Drumski, trkački» |
 | `polovniautomobili` | [Polovni Automobili](https://www.polovniautomobili.com/bicikli) | Большой раздел велосипедов |
-| `lalafo` | [Lalafo.rs](https://lalafo.rs/serbia/bicikli) | Выключен по умолчанию, описания скудные |
-| `halooglasi` | [Halo oglasi](https://www.halooglasi.com/sport-i-rekreacija/gradski-bicikli) | Выключен по умолчанию |
+| `lalafo` | [Lalafo.rs](https://lalafo.rs/serbia/bicikli) | Описания скудные, но объём есть |
+| `halooglasi` | [Halo oglasi](https://www.halooglasi.com/sport-i-rekreacija/drumski-bicikli) | Разделы «Друмски» и «Остали» |
 
 Ни у одного из них нет API, и разметку они время от времени меняют. Поэтому
 парсер пробует три стратегии и берёт ту, что нашла больше:
@@ -55,6 +70,102 @@
 
 Третья стратегия продолжает работать даже после редизайна — в этом весь смысл.
 
+### Когда источник отвечает 403
+
+`2bike.rs` и `polovniautomobili.com` стоят за Cloudflare и с серверных адресов
+(облако, GitHub Actions, VPN) отдают JS-челлендж вместо страницы. Парсер тут ни
+при чём — страницы просто не было. Скаут различает эти два случая: челлендж он
+называет вслух (`HTTP 403, Cloudflare challenge`) и до конца прохода больше в
+этот домен не стучится, вместо того чтобы полторы минуты перебирать страницы,
+которые все ответят одинаково.
+
+Это касается не только 2bike: из облака закрыты четыре источника из пяти —
+`2bike`, `polovniautomobili`, `lalafo`, `halooglasi`. Открыт только
+KupujemProdajem, он же самый крупный. То есть Actions видит примерно половину
+рынка, и именно ту половину, где нет отдельной категории Gravel/Ciklokros.
+
+С домашнего сербского провайдера все пятеро обычно открываются. Поэтому все
+источники включены в конфиге: в облаке заблокированные просто честно скажут
+`HTTP 403, Cloudflare challenge` и пропустятся, а локальный прогон соберёт всё.
+
+### Локальный прогон
+
+Один раз:
+
+```bash
+git clone -b claude/repository-context-ojbu7t https://github.com/Dealegate/Cycling.git
+cd Cycling
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+`-b` обязателен, пока эта ветка не влита: ветка по умолчанию — старая, в ней нет
+ни фильтра по брендам, ни потолка 52, ни `requirements-minimal.txt`.
+
+Дальше каждый раз:
+
+```bash
+git pull
+python -m gravelscout probe          # проверить, что доски открываются
+python -m gravelscout run --all      # полный проход, отчёт в out/shortlist.md
+```
+
+`probe` — первое, что стоит запустить: если напротив источника стоит число, он
+живой; если `Cloudflare challenge` — закрыт и с этой машины.
+
+Результат лежит в `out/shortlist.md` (всё) и `out/new.md` (появившееся с
+прошлого раза). Чтобы «новое» считалось правильно, состояние надо вернуть в
+репозиторий:
+
+```bash
+git add data/seen.json && git commit -m "scout: local run" && git push
+```
+
+### С телефона
+
+Телефон в Сербии — такой же «домашний» адрес, как ноутбук, поэтому 2bike и
+остальные четыре доски с него открываются. Компилятора на телефоне нет, поэтому
+ставить надо `requirements-minimal.txt` — там только чистый Python. Без `lxml`
+скаут берёт парсер из стандартной библиотеки; на фикстурах и на живой странице
+KupujemProdajem в 769 КБ оба парсера дают одинаковый список объявлений, так что
+теряется только скорость.
+
+**Android — Termux** (ставить с [F-Droid](https://f-droid.org/packages/com.termux/),
+версия из Play Store заброшена):
+
+```bash
+pkg install -y python git clang
+git clone -b claude/repository-context-ojbu7t https://github.com/Dealegate/Cycling.git
+cd Cycling
+pip install -r requirements-minimal.txt
+python -m gravelscout probe
+python -m gravelscout run --all
+```
+
+`clang` в списке не для красоты: Termux — это Android, а не glibc-линукс, и
+готовые колёса с PyPI ему не подходят. Проверено на живом телефоне: `requests` и
+`beautifulsoup4` приезжают готовыми, а PyYAML собирается на месте
+(`pyyaml-6.0.3-cp314-cp314-android_24_arm64_v8a.whl`) — без компилятора pip
+встанет именно на нём.
+
+Первый запуск Termux печатает две простыни, которые выглядят тревожно и таковыми
+не являются: перебор зеркал (репозиторий пакетов ещё не выбран, `bad` напротив
+части зеркал значит «недоступно отсюда») и генерацию SSH-ключей — это `openssh`,
+он приезжает прицепом к `git`. И то, и другое разово.
+
+Termux умеет и по расписанию — `pkg install termux-services`, дальше обычный
+cron. С настроенным телеграм-ботом (см. ниже) телефон становится полноценным
+скаутом по тем доскам, которые Actions не видит.
+
+**iOS** — сложнее и не проверено отсюда. В
+[a-Shell](https://holzschu.github.io/a-Shell_iOS/) есть python3 и pip, ставятся
+чистопитоновские пакеты; альтернатива — iSH с `apk add python3 py3-yaml`.
+Если pip на чём-то споткнётся, скажите на чём, подберу замену.
+
+Читать результат с телефона удобнее не из `out/shortlist.md`, а через телеграм:
+экспортируйте `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID` перед `run`, и каждый
+новый кандидат придёт сообщением.
+
 ## Запуск
 
 ```bash
@@ -64,9 +175,16 @@ python -m gravelscout probe          # проверить, что источни
 python -m gravelscout run            # один проход
 python -m gravelscout run --watch --interval 20
 python -m gravelscout check "Gravel bicikl, GRX 600 2x11, hidraulicne disk, vel 52"
+python -m gravelscout inspect https://www.2bike.rs/cikloberza/...   # разобрать одно объявление
 ```
 
 `probe` при неудаче складывает сырой HTML в `debug/` — оттуда чинятся ссылки.
+
+`inspect` берёт один URL объявления и печатает всё, что из него удалось вычитать:
+заголовок, цену, город, описание, атрибуты — и вердикт с разбором по пунктам.
+Нужен для досок, до которых не дотягивается машина разработчика: тот, кто до них
+дотягивается, запускает `inspect` на одной ссылке, и по выводу сразу видно, что
+парсер прочитал, а что потерял. Сырой HTML при этом тоже ложится в `debug/`.
 
 ### По расписанию
 
@@ -127,6 +245,6 @@ python scripts/fetch_geometry.py scrape --brand canyon --model grizl \
 python tests/test_scout.py
 ```
 
-24 теста, сеть не нужна. Фикстуры в `tests/fixtures/` синтетические —
+40 тестов, сеть не нужна. Фикстуры в `tests/fixtures/` синтетические —
 они проверяют, что JSON-стратегия и HTML-стратегия работают каждая сама по себе.
 Настоящие захваты страниц кладите туда же вместо них.

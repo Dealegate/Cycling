@@ -16,13 +16,15 @@ from gravelscout.models import Listing
 from gravelscout.normalize import norm, parse_price
 from gravelscout.scoring import assess
 from gravelscout.sizing import SizeWindow, parse_size
-from gravelscout.sources.base import HttpClient
+import gravelscout.sources.base as base
+from gravelscout.sources.base import HttpClient, challenge_reason
 from gravelscout.sources.dvabike import DvaBike
 from gravelscout.sources.kupujemprodajem import KupujemProdajem
-from gravelscout.specs import (detect_bar, detect_brakes, detect_groupset,
-                               detect_type_with_model)
+from gravelscout.specs import (detect_bar, detect_brakes, detect_brand,
+                               detect_groupset, detect_type_with_model)
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures"
+_REAL_PARSER = base.PARSER
 
 
 class TestNormalize(unittest.TestCase):
@@ -44,6 +46,36 @@ class TestSpecs(unittest.TestCase):
 
     def test_mtb_rejected(self):
         self.assertEqual(detect_type_with_model("Brdski MTB bicikl").value, "mtb")
+
+    def test_the_model_name_overrules_the_word_gravel(self):
+        """Every one of these turns up on the board labelled "gravel"."""
+        self.assertEqual(detect_type_with_model("ROSE BLEND 28 2x10 GRX").value, "allroad")
+        self.assertEqual(detect_type_with_model("Corratec Allroad C2 GRX").value, "allroad")
+        self.assertEqual(detect_type_with_model("Scott Metrix Tiagra gravel").value, "fitness")
+        self.assertEqual(detect_type_with_model("Specialized Sirrus Karbon").value, "fitness")
+        self.assertEqual(detect_type_with_model("Scott Plasma 10 Carbon").value, "road-race")
+        # ...and the promotion the other way still works.
+        self.assertEqual(detect_type_with_model("Scott Addict Gravel 20").value, "gravel")
+        self.assertEqual(detect_type_with_model("Trek Checkpoint AL 4").value, "gravel")
+
+    def test_a_popcorn_machine_is_not_a_bicycle(self):
+        """All of these were in the shortlist, filed by their sellers under Bicikli."""
+        for title in ("Aparat za kokice bicikli", "Bicikli: Cerada zastitna. 100x200.",
+                      "Atran Velo cycle lab gepek Slanje"):
+            self.assertEqual(detect_type_with_model(title).value, "accessory", title)
+        self.assertEqual(detect_type_with_model("Tricikl za Decu").value, "kids")
+        # ...while an ad that merely mentions a part is still a whole bike.
+        self.assertEqual(
+            detect_type_with_model("Kona gravel, Garmin pedale, Mavic tockovi").value, "gravel")
+
+    def test_the_board_s_own_category_counts(self):
+        """The seller picks it from a menu, so it lies less often than the title."""
+        l = Listing(source="kp", source_id="1", title="FISCHER SPORTS atb Terra",
+                    url="https://www.kupujemprodajem.com/bicikli/elektricni/fischer/oglas/1")
+        self.assertEqual(detect_type_with_model(l.text).value, "ebike")
+        l = Listing(source="kp", source_id="2", title='cross GRX 7 29" MDB 2021',
+                    url="https://www.kupujemprodajem.com/bicikli/mountainbike/cross/oglas/2")
+        self.assertEqual(detect_type_with_model(l.text).value, "mtb")
 
     def test_grx_codes(self):
         g = detect_groupset("Shimano GRX RX810 2x11")
@@ -78,6 +110,25 @@ class TestSizing(unittest.TestCase):
         self.assertEqual(w.check(parse_size("vel. 58"))[0], "out")
         self.assertEqual(w.check(parse_size("vel. 52"))[0], "ok")
         self.assertEqual(w.check(parse_size("bicikl povoljno"))[0], "unknown")
+
+    def test_bare_letter_counts_in_a_title_only(self):
+        self.assertEqual(parse_size("Gravel BOMBTRACK L sa GRX", bare_letters=True).letter, "l")
+        self.assertEqual(parse_size("Scott cpeedster 40 xl Tiagra", bare_letters=True).letter, "xl")
+        # "s" is also the Serbian word "with", so it never counts on its own.
+        self.assertIsNone(parse_size("Rose Backroad s GRX opremom", bare_letters=True).letter)
+        self.assertIsNone(parse_size("Gravel BOMBTRACK L sa GRX").letter)
+
+    def test_postfix_size_words(self):
+        self.assertEqual(parse_size("Cannondale Topstone GRX M-SIZE").letter, "m")
+        self.assertEqual(parse_size("Scott Gravel GRX Ram XS").letter, "xs")
+
+    def test_52_is_the_ceiling(self):
+        """54 and 55 are not near misses - the rider has ruled them out."""
+        w = Config.load().size_window
+        self.assertEqual(w.check(parse_size("vel. 53"))[0], "out")
+        self.assertEqual(w.check(parse_size("Canyon Grizl M/54"))[0], "out")
+        self.assertEqual(w.check(parse_size("vel. M"))[0], "out")
+        self.assertEqual(w.check(parse_size("vel. S"))[0], "ok")
 
 
 class TestFit(unittest.TestCase):
@@ -139,6 +190,19 @@ class TestAssess(unittest.TestCase):
     def test_mtb_rejected(self):
         self.assertEqual(self._a("MTB Scott", "Deore, hidraulicne disk").verdict, "reject")
 
+    def test_seller_fit_range_outranks_the_letter(self):
+        """An XS cut for 150-165 cm does not become a 168 cm bike."""
+        a = self._a("Scott Gravel 2x11 GRX Ram XS 150-165cm",
+                    "gravel, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "reject")
+        self.assertTrue(any("150-165" in b for b in a.blockers))
+
+    def test_seller_fit_range_that_covers_the_rider_is_a_reason(self):
+        a = self._a("Orbea Terra Gravel 2x10 GRX Velicina S 165-175cm",
+                    "gravel, hidraulicne disk kocnice")
+        self.assertNotEqual(a.verdict, "reject")
+        self.assertTrue(any("165-175" in r for r in a.reasons))
+
 
 class TestParsers(unittest.TestCase):
     def _http(self):
@@ -160,7 +224,7 @@ class TestParsers(unittest.TestCase):
         src = DvaBike({}, self._http())
         found = src.parse_page(html, "https://www.2bike.rs/cikloberza")
         titles = sorted(l.title for l in found)
-        self.assertEqual(len(found), 2, f"got {titles}")
+        self.assertEqual(len(found), 3, f"got {titles}")
         grizl = next(l for l in found if "Grizl" in l.title)
         self.assertEqual(grizl.price_eur, 1850.0)
         self.assertEqual(grizl.source_id, "44231")
@@ -172,8 +236,101 @@ class TestParsers(unittest.TestCase):
         html = (FIXTURES / "2bike_list.html").read_text(encoding="utf-8")
         found = DvaBike({}, self._http()).parse_page(html, "https://www.2bike.rs/cikloberza")
         verdicts = {l.title.split(",")[0]: assess(l, cfg, db).verdict for l in found}
-        self.assertEqual(verdicts["Canyon Grizl 7 GRX RX810"], "match")
+        self.assertEqual(verdicts["Giant Revolt 2 GRX RX600 2x11"], "match")
         self.assertEqual(verdicts["Bianchi Via Nirone 7 Sora"], "reject")
+        # Right bike, right size, right groupset - and still out, on the badge.
+        self.assertEqual(verdicts["Canyon Grizl 7 GRX RX810"], "reject")
+
+
+class TestBrands(unittest.TestCase):
+    def setUp(self):
+        self.cfg, self.db = Config.load(), GeometryDB()
+
+    def _a(self, title, desc=""):
+        return assess(Listing(source="t", source_id="1", url="u", title=title,
+                              description=desc), self.cfg, self.db)
+
+    def test_detection(self):
+        self.assertEqual(detect_brand("Rose Backroad GRX").value, "rose")
+        self.assertEqual(detect_brand("Кањон Гризл 7").value, "canyon")
+        self.assertEqual(detect_brand("Santa Cruz Stigmata").value, "santa cruz")
+        self.assertEqual(detect_brand("B'Twin Triban 520").value, "btwin")
+
+    def test_component_brands_are_not_bike_brands(self):
+        """SRAM Force must not read as the Czech bicycle brand Force."""
+        self.assertIsNone(detect_brand("gravel, SRAM Force 1x11").value)
+        self.assertIsNone(detect_brand("bicikl povoljno, malo koriscen").value)
+
+    def test_rejected_brand_blocks_an_otherwise_perfect_ad(self):
+        a = self._a("Cube Nuroad Race vel. S",
+                    "gravel, Shimano GRX 600 2x11, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "reject")
+        self.assertTrue(any("Cube" in b for b in a.blockers))
+
+    def test_wanted_brand_is_a_reason(self):
+        a = self._a("Rose Backroad vel. 52",
+                    "gravel, GRX RX810 2x11, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "match")
+        self.assertTrue(any("Rose" in r for r in a.reasons))
+
+    def test_title_beats_a_brand_mentioned_in_the_description(self):
+        """Otherwise a seller comparing his Cube to a Specialized launders it."""
+        a = self._a("Cube Nuroad Race (Size-S) 2x11 GRX",
+                    "hidraulicne disk kocnice, kvalitet kao Specialized Diverge")
+        self.assertEqual(a.brand, "cube")
+        self.assertEqual(a.verdict, "reject")
+
+    def test_unlisted_brand_is_a_question_not_a_no(self):
+        a = self._a("Carver gravel vel. 52",
+                    "gravel, GRX 600 2x11, hidraulicne disk kocnice")
+        self.assertEqual(a.verdict, "maybe")
+        self.assertTrue(any("brand" in u for u in a.unknowns))
+
+
+class TestParserFallback(unittest.TestCase):
+    """Without lxml the scout must still see the same ads, or a phone is useless."""
+
+    def test_both_parsers_agree_on_every_fixture(self):
+        http = HttpClient(user_agent="test", delay_seconds=0)
+        cases = [(DvaBike, "2bike_list.html"), (KupujemProdajem, "kupujemprodajem_list.html")]
+        for source, fixture in cases:
+            html = (FIXTURES / fixture).read_text(encoding="utf-8")
+            seen = {}
+            for parser in ("lxml", "html.parser"):
+                base.PARSER = parser
+                seen[parser] = sorted(l.url for l in source({}, http).parse_page(html, "u"))
+            base.PARSER = _REAL_PARSER
+            self.assertTrue(seen["lxml"], f"{fixture} parsed to nothing")
+            self.assertEqual(seen["lxml"], seen["html.parser"], fixture)
+
+
+class TestBotWall(unittest.TestCase):
+    """A 403 that is a JS challenge has to read differently from a broken parser."""
+
+    CHALLENGE = ('<!DOCTYPE html><html><head><title>Just a moment...</title></head>'
+                 '<body><noscript>Enable JavaScript and cookies to continue</noscript>'
+                 '</body></html>')
+
+    def test_challenge_page_is_named(self):
+        why = challenge_reason(403, {}, self.CHALLENGE)
+        self.assertIsNotNone(why)
+        self.assertIn("Cloudflare", why)
+
+    def test_cf_mitigated_header_alone_is_enough(self):
+        why = challenge_reason(403, {"cf-mitigated": "challenge"}, "")
+        self.assertIsNotNone(why)
+
+    def test_plain_rate_limit_is_not_a_challenge(self):
+        self.assertIsNone(challenge_reason(429, {}, "Too many requests"))
+
+    def test_blocked_host_is_skipped_not_retried(self):
+        http = HttpClient(user_agent="test", delay_seconds=0)
+        http.blocked["www.example.rs"] = "HTTP 403, Cloudflare challenge"
+        # No request is made at all, so a missing network cannot make this pass.
+        self.assertIsNone(http.get("https://www.example.rs/oglasi/1"))
+        self.assertEqual(http.last_reason, "HTTP 403, Cloudflare challenge")
+        self.assertTrue(http.is_blocked("https://www.example.rs/anything/else"))
+        self.assertIsNone(http.is_blocked("https://www.other.rs/oglasi/1"))
 
 
 if __name__ == "__main__":

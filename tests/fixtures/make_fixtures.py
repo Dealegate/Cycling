@@ -42,6 +42,13 @@ TWOBIKE_HTML = """<!doctype html><html><head><title>Cikloberza</title></head><bo
     <span class="city">Beograd</span>
   </div>
   <div class="ad">
+    <a href="/cikloberza/mali-oglasi/bicikli-6/gravel-ciklokros-189/giant-revolt-2-51002">
+      Giant Revolt 2 GRX RX600 2x11, hidraulicne disk kocnice, vel. S</a>
+    <img src="/media/ads/51002_1.jpg" alt="Giant Revolt 2">
+    <span class="price">1.390 &euro;</span>
+    <span class="city">Novi Sad</span>
+  </div>
+  <div class="ad">
     <a href="/cikloberza/mali-oglasi/bicikli-6/drumski-trkacki-8/bianchi-via-nirone-9911">
       Bianchi Via Nirone 7 Sora, vel. 53</a>
     <img src="/media/ads/9911_1.jpg" alt="Bianchi">

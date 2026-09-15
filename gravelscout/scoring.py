@@ -15,9 +15,9 @@ from __future__ import annotations
 from .config import Config
 from .geometry import GeometryDB, FitWindow, check_fit
 from .models import Assessment, Listing
-from .sizing import parse_size
+from .sizing import parse_size, rider_height_range
 from .specs import (
-    detect_bar, detect_brakes, detect_groupset, detect_material,
+    detect_bar, detect_brakes, detect_brand, detect_groupset, detect_material,
     detect_type_with_model, detect_women,
 )
 
@@ -50,6 +50,23 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         unknowns.append(f"listed as a road bike ({t.evidence}) - could still be gravel-capable")
     elif t.value is None:
         unknowns.append("the ad never says what kind of bike this is")
+
+    # -- brand ------------------------------------------------------------
+    # The title is where the seller names the bike; the description is where
+    # they name every other bike they have ever owned.  A Cube in the title
+    # must not be talked out of its rejection by a Specialized further down.
+    bd = detect_brand(listing.title) or detect_brand(text)
+    a.brand = bd.value
+    preferred, rejected = cfg.brand_lists
+    if bd.value in rejected:
+        blockers.append(f"{bd.value.title()} is ruled out on build quality ({bd.evidence})")
+    elif bd.value in preferred:
+        reasons.append(f"{bd.value.title()} is a brand the rider wants")
+    elif bd.value:
+        unknowns.append(f"{bd.value.title()} is on neither list - look the frame "
+                        "up before spending a trip on it")
+    else:
+        unknowns.append("the ad never names the brand")
 
     # -- groupset ---------------------------------------------------------
     gs = detect_groupset(text)
@@ -94,7 +111,12 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         unknowns.append("no handlebar type in the ad")
 
     # -- size -------------------------------------------------------------
-    size = parse_size(text)
+    # Title first, and there a lone letter counts: "Gravel BOMBTRACK L sa GRX"
+    # is an L, and until the title was read on its own that ad sailed past the
+    # ceiling as "size not stated".
+    size = parse_size(listing.title, bare_letters=True)
+    if not (size.cm or size.letter):
+        size = parse_size(text)
     a.size_label = size.label if (size.cm or size.letter) else None
     sv, sreason = cfg.size_window.check(size)
     a.size_verdict = sv
@@ -104,6 +126,19 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         blockers.append(sreason)
     else:
         unknowns.append(sreason)
+
+    # -- the rider height the seller quotes --------------------------------
+    quoted = rider_height_range(text)
+    if quoted:
+        a.rider_height_quoted = list(quoted)
+        rider = cfg.get("rider", {}).get("height_cm", [167, 168])
+        lo, hi = float(min(rider)), float(max(rider))
+        if hi < quoted[0] or lo > quoted[1]:
+            blockers.append(
+                f"the seller sizes this for a rider of {quoted[0]:g}-{quoted[1]:g} cm, "
+                f"and {lo:g}-{hi:g} is outside that")
+        else:
+            reasons.append(f"seller's own fit range {quoted[0]:g}-{quoted[1]:g} cm covers the rider")
 
     # -- geometry / fit ---------------------------------------------------
     ident = db.identify(text)
@@ -145,14 +180,14 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         a.score = 0
         return a
 
-    a.score = _score(a, listing, gs)
+    a.score = _score(a, listing, gs, preferred)
     a.verdict = "match" if not unknowns else "maybe"
     if a.verdict == "match" and todos:
         reasons.append("hard requirements all confirmed; geometry still to be verified")
     return a
 
 
-def _score(a: Assessment, listing: Listing, gs) -> int:
+def _score(a: Assessment, listing: Listing, gs, preferred: set[str]) -> int:
     """0-100, used only to sort the shortlist."""
     score = 40
     score += {5: 25, 4: 20, 3: 12, 2: 4, 1: 0, 0: 0}.get(a.groupset_tier, 0)
@@ -160,6 +195,8 @@ def _score(a: Assessment, listing: Listing, gs) -> int:
         score += 12
     if a.bike_type in ("gravel", "cyclocross"):
         score += 8
+    if a.brand in preferred:
+        score += 10
     if a.size_verdict == "ok":
         score += 8
     if a.fit:
