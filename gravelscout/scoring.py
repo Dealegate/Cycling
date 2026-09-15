@@ -52,7 +52,10 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         unknowns.append("the ad never says what kind of bike this is")
 
     # -- brand ------------------------------------------------------------
-    bd = detect_brand(text)
+    # The title is where the seller names the bike; the description is where
+    # they name every other bike they have ever owned.  A Cube in the title
+    # must not be talked out of its rejection by a Specialized further down.
+    bd = detect_brand(listing.title) or detect_brand(text)
     a.brand = bd.value
     preferred, rejected = cfg.brand_lists
     if bd.value in rejected:
@@ -108,7 +111,12 @@ def assess(listing: Listing, cfg: Config, db: GeometryDB,
         unknowns.append("no handlebar type in the ad")
 
     # -- size -------------------------------------------------------------
-    size = parse_size(text)
+    # Title first, and there a lone letter counts: "Gravel BOMBTRACK L sa GRX"
+    # is an L, and until the title was read on its own that ad sailed past the
+    # ceiling as "size not stated".
+    size = parse_size(listing.title, bare_letters=True)
+    if not (size.cm or size.letter):
+        size = parse_size(text)
     a.size_label = size.label if (size.cm or size.letter) else None
     sv, sreason = cfg.size_window.check(size)
     a.size_verdict = sv

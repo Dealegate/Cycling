@@ -32,6 +32,13 @@ _LETTER = r"(xxs|xs|s|m|ml|l|xl|xxl)"
 # "28 inca" / "700c" / "27,5" are wheels, never frames.
 _WHEEL_CTX = r"(?:inc\w*|\"|''|cola|700\s*c|650\s*b|tock\w*|felne?|gume?|\bbar\b|\bpsi\b)"
 
+# A letter standing on its own, as in "Gravel BOMBTRACK L sa GRX opremom".  Only
+# trusted inside a title, and never for "s": that one is also the Serbian
+# preposition "with", which turns up in half the titles on the board.  Reading a
+# bare S wrongly would wave a wrong bike through; missing one only costs the ad
+# a trip through the "size not stated" pile, which is the safe way to be wrong.
+_BARE_LETTER = r"\b(xxs|xs|ml|xl|xxl|m|l)\b"
+
 
 @dataclass
 class Size:
@@ -81,7 +88,13 @@ def _numeric_candidates(t: str) -> list[tuple[float, str, int]]:
     return out
 
 
-def parse_size(text: str) -> Size:
+def parse_size(text: str, *, bare_letters: bool = False) -> Size:
+    """Read a frame size out of *text*.
+
+    ``bare_letters`` allows a letter with nothing to vouch for it, which is only
+    safe for a title - a description mentions every size the seller has ever
+    stocked.
+    """
     t = norm(text)
     size = Size()
 
@@ -91,7 +104,8 @@ def parse_size(text: str) -> Size:
           # and common enough in Serbian titles to matter for the size ceiling.
           or re.search(r"\b" + _LETTER + r"\s*[-\s]\s*" + _SIZE_WORDS[2:] + r"\b", t)
           or re.search(r"\b" + _LETTER + r"\s*(?:/|\s)\s*(\d{2})\s*(?:cm)?\b", t)
-          or re.search(r"\((" + _LETTER[1:-1] + r")\)", t))
+          or re.search(r"\((" + _LETTER[1:-1] + r")\)", t)
+          or (re.search(_BARE_LETTER, t) if bare_letters else None))
     if lm:
         letter = next((g for g in lm.groups() if g and g.lower() in LETTER_CM), None)
         if letter:

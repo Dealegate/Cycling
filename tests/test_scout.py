@@ -79,6 +79,17 @@ class TestSizing(unittest.TestCase):
         self.assertEqual(w.check(parse_size("vel. 52"))[0], "ok")
         self.assertEqual(w.check(parse_size("bicikl povoljno"))[0], "unknown")
 
+    def test_bare_letter_counts_in_a_title_only(self):
+        self.assertEqual(parse_size("Gravel BOMBTRACK L sa GRX", bare_letters=True).letter, "l")
+        self.assertEqual(parse_size("Scott cpeedster 40 xl Tiagra", bare_letters=True).letter, "xl")
+        # "s" is also the Serbian word "with", so it never counts on its own.
+        self.assertIsNone(parse_size("Rose Backroad s GRX opremom", bare_letters=True).letter)
+        self.assertIsNone(parse_size("Gravel BOMBTRACK L sa GRX").letter)
+
+    def test_postfix_size_words(self):
+        self.assertEqual(parse_size("Cannondale Topstone GRX M-SIZE").letter, "m")
+        self.assertEqual(parse_size("Scott Gravel GRX Ram XS").letter, "xs")
+
     def test_52_is_the_ceiling(self):
         """54 and 55 are not near misses - the rider has ruled them out."""
         w = Config.load().size_window
@@ -216,6 +227,13 @@ class TestBrands(unittest.TestCase):
                     "gravel, GRX RX810 2x11, hidraulicne disk kocnice")
         self.assertEqual(a.verdict, "match")
         self.assertTrue(any("Rose" in r for r in a.reasons))
+
+    def test_title_beats_a_brand_mentioned_in_the_description(self):
+        """Otherwise a seller comparing his Cube to a Specialized launders it."""
+        a = self._a("Cube Nuroad Race (Size-S) 2x11 GRX",
+                    "hidraulicne disk kocnice, kvalitet kao Specialized Diverge")
+        self.assertEqual(a.brand, "cube")
+        self.assertEqual(a.verdict, "reject")
 
     def test_unlisted_brand_is_a_question_not_a_no(self):
         a = self._a("Carver gravel vel. 52",
