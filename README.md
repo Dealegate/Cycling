@@ -175,9 +175,16 @@ python -m gravelscout probe          # проверить, что источни
 python -m gravelscout run            # один проход
 python -m gravelscout run --watch --interval 20
 python -m gravelscout check "Gravel bicikl, GRX 600 2x11, hidraulicne disk, vel 52"
+python -m gravelscout inspect https://www.2bike.rs/cikloberza/...   # разобрать одно объявление
 ```
 
 `probe` при неудаче складывает сырой HTML в `debug/` — оттуда чинятся ссылки.
+
+`inspect` берёт один URL объявления и печатает всё, что из него удалось вычитать:
+заголовок, цену, город, описание, атрибуты — и вердикт с разбором по пунктам.
+Нужен для досок, до которых не дотягивается машина разработчика: тот, кто до них
+дотягивается, запускает `inspect` на одной ссылке, и по выводу сразу видно, что
+парсер прочитал, а что потерял. Сырой HTML при этом тоже ложится в `debug/`.
 
 ### По расписанию
 

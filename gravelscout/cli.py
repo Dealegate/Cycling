@@ -5,6 +5,7 @@
     python -m gravelscout probe          fetch one page per source and report
                                          which parsing strategy worked
     python -m gravelscout check "text"   run the filters over pasted ad text
+    python -m gravelscout inspect <url>  fetch one ad and show what was parsed
     python -m gravelscout telegram       test the bot, print the chat id
 """
 from __future__ import annotations
@@ -173,6 +174,54 @@ def cmd_check(args) -> int:
     return 0
 
 
+def cmd_inspect(args) -> int:
+    """Fetch one ad and print everything the parsers made of it.
+
+    For boards this machine cannot reach.  Whoever can reach them runs this on
+    one URL and the output says exactly what was read and what was missed,
+    which beats guessing at markup from the other side of a bot wall.
+    """
+    cfg = Config.load(args.config)
+    db = GeometryDB(args.geometry) if args.geometry else GeometryDB()
+    http = _http(cfg, dump=True)
+    src = next((s for s in build_sources(cfg, http) if s.base_url in args.url), None)
+    if src is None:
+        print(f"No enabled source owns {args.url}")
+        return 1
+
+    # The title normally arrives from the listing page; inspect starts from a
+    # bare URL, so seed it from the slug and let the detail page improve on it.
+    slug = args.url.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
+    l = Listing(source=src.name, source_id="", url=args.url, title=slug)
+    src.fetch_detail(l)
+    if not l.detail_fetched:
+        print(f"{src.name}: {http.last_reason or 'no response'}")
+        return 2
+
+    print(f"source      {src.name}")
+    print(f"title       {l.title!r}")
+    print(f"price       {l.price_eur} ({l.price_raw!r})")
+    print(f"location    {l.location!r}")
+    print(f"posted      {l.posted_raw!r}")
+    print(f"images      {len(l.images)}")
+    print(f"attributes  {l.raw.get('attributes') or {}}")
+    desc = l.description or ""
+    print(f"description {len(desc)} chars")
+    print("  " + (desc[:600].replace("\n", "\n  ") if desc else "(empty)"))
+    print()
+    a = assess(l, cfg, db)
+    print(f"verdict {a.verdict}  score {a.score}  brand={a.brand} type={a.bike_type} "
+          f"size={a.size_label} groupset={a.groupset} brakes={a.brakes}")
+    for r in a.reasons:
+        print("  +", r)
+    for u in a.unknowns:
+        print("  ?", u)
+    for b in a.blockers:
+        print("  x", b)
+    print(f"\nRaw HTML saved under debug/ - attach it if the fields above look wrong.")
+    return 0
+
+
 def cmd_telegram(args) -> int:
     """Verify the Telegram bot and print the chat id when it is still missing."""
     return telegram_diagnose()
@@ -203,6 +252,12 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("text", nargs="?")
     check.add_argument("--url")
     check.set_defaults(func=cmd_check)
+
+    insp = sub.add_parser("inspect", help="fetch one ad URL and show what was parsed")
+    insp.add_argument("url")
+    insp.add_argument("--geometry")
+    insp.add_argument("--dump", action="store_true")
+    insp.set_defaults(func=cmd_inspect)
 
     tg = sub.add_parser("telegram", help="test the Telegram bot and find the chat id")
     tg.set_defaults(func=cmd_telegram)
