@@ -90,14 +90,23 @@ KupujemProdajem, он же самый крупный. То есть Actions ви
 
 ### Локальный прогон
 
+Репозиторий приватный, так что клонировать по https без пароля не выйдет —
+GitHub их не принимает с 2021 года. Нужен токен: Settings → Developer settings →
+Personal access tokens → Fine-grained tokens, доступ только к этому репозиторию,
+права Contents: Read (и Write, если хотите возвращать `data/seen.json`).
+
 Один раз:
 
 ```bash
-git clone https://github.com/Dealegate/Cycling.git
+git clone -b claude/repository-context-ojbu7t \
+  https://<ТОКЕН>@github.com/Dealegate/Cycling.git
 cd Cycling
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
+
+`-b` обязателен, пока эта ветка не влита: ветка по умолчанию — старая, в ней нет
+ни фильтра по брендам, ни потолка 52, ни `requirements-minimal.txt`.
 
 Дальше каждый раз:
 
@@ -131,13 +140,20 @@ KupujemProdajem в 769 КБ оба парсера дают одинаковый 
 версия из Play Store заброшена):
 
 ```bash
-pkg install python git
-git clone https://github.com/Dealegate/Cycling.git
+pkg update
+pkg install python git clang
+gh_token=...                      # тот же токен, что выше
+git clone -b claude/repository-context-ojbu7t \
+  https://$gh_token@github.com/Dealegate/Cycling.git
 cd Cycling
 pip install -r requirements-minimal.txt
 python -m gravelscout probe
 python -m gravelscout run --all
 ```
+
+`clang` в списке не для красоты: Termux — это Android, а не glibc-линукс, и
+готовые колёса с PyPI ему не подходят. Из трёх пакетов два чисто питоновские, а
+PyYAML собирается из исходников, и без компилятора pip на нём встанет.
 
 Termux умеет и по расписанию — `pkg install termux-services`, дальше обычный
 cron. С настроенным телеграм-ботом (см. ниже) телефон становится полноценным
