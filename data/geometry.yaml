@@ -1,0 +1,38 @@
+# Frame geometry for candidate bikes, in millimetres.
+#
+# `confidence` says how much to trust a row:
+#   high   - typed in from the manufacturer's own geometry chart
+#   medium - from a geometry database (geometrygeeks and friends)
+#   low    - approximate, treat as "verify before you travel to see the bike"
+#
+# Add rows with scripts/fetch_geometry.py.  Nothing here is guessed: a model
+# that is missing simply makes the scout say "look the geometry up", which is
+# the honest answer.
+
+anchor:
+  # The bike that already fit the rider.  Every fit window is derived from this
+  # row, not from a generic height-to-size table.
+  brand: liv
+  model: devote
+  size: S
+  note: >-
+    Liv Devote Advanced, size S - confirmed to fit the rider in person.
+    Stack/reach are the 2021 Devote numbers; Liv used the same frame geometry
+    for the Devote and Devote Advanced of that generation. Re-check against
+    liv-cycling.com before relying on it for a borderline bike.
+  source: https://geometrygeeks.bike/bike/liv-devote-2021/
+  confidence: medium
+  stack: 558
+  reach: 376
+
+bikes:
+  - brand: liv
+    model: devote
+    years: [2020, 2021, 2022, 2023, 2024]
+    source: https://geometrygeeks.bike/bike/liv-devote-2021/
+    confidence: medium
+    sizes:
+      XS: {stack: 530, reach: 378}
+      S:  {stack: 558, reach: 376}
+      M:  {stack: 588, reach: 372}
+      L:  {stack: 612, reach: 380}

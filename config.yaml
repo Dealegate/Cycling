@@ -1,0 +1,83 @@
+# What the scout is looking for.
+#
+# Rider: 167-168 cm tall, 80-82 cm inseam.  A Liv Devote Advanced size S has
+# already been confirmed to fit in person, so the geometry window below is
+# built around that bike rather than around a generic size chart.
+
+rider:
+  height_cm: [167, 168]
+  inseam_cm: [80, 82]
+
+requirements:
+  # Hard requirements.  A listing that provably breaks one of these is rejected;
+  # a listing that simply does not say is flagged as "needs checking".
+  bike_types: [gravel, cyclocross]
+  reject_types: [mtb, city, kids, ebike, trekking]
+  brakes: hydraulic_disc
+  handlebar: drop
+  # Shimano GRX (any), Tiagra 2x10 and equivalents.  Tier 3 is the floor:
+  # tier 3 = Tiagra 4700 / GRX RX400 / SRAM Apex, tier 4 = 105 / GRX RX600,
+  # tier 5 = GRX RX810+ / Ultegra / SRAM Force / Campagnolo Ekar.
+  min_groupset_tier: 3
+  # 1x is not what the rider asked for, but a wide-range 1x is worth seeing.
+  prefer_chainrings: 2
+  allow_1x: true
+
+size:
+  # Frame sizes worth opening.  Deliberately one notch wider than S/52 in both
+  # directions, as requested.
+  cm_min: 47
+  cm_max: 55
+  letters: [xxs, xs, s, ml, m]
+
+fit:
+  # Tolerance around the anchor bike's stack/reach, in millimetres.
+  # +-18 mm of reach is roughly one stem size in each direction.
+  stack_tolerance_mm: 28
+  reach_tolerance_mm: 18
+  standover_clearance_mm: 20   # subtracted from the smaller inseam
+  seat_tube_max_mm: 530
+
+price:
+  max_eur: 2500        # listings above this are still reported, just scored lower
+  rsd_per_eur: 117.0
+
+sources:
+  # Every source can be turned off without touching the code.
+  kupujemprodajem:
+    enabled: true
+    pages: 3
+    categories:
+      - {name: "Drumski, trkacki", path: "/bicikli/drumski-trkacki/grupa/912/919"}
+      - {name: "Ostali bicikli",   path: "/bicikli/ostali-bicikli/grupa/912/928"}
+    keywords: [gravel, grx, ciklokros, cyclocross, tiagra]
+  2bike:
+    enabled: true
+    pages: 3
+    categories:
+      - {name: "Gravel/Ciklokros", path: "/cikloberza/mali-oglasi/bicikli-6/gravel-ciklokros-189"}
+      - {name: "Drumski trkacki",  path: "/cikloberza/mali-oglasi/bicikli-6/drumski-trkacki-8"}
+  polovniautomobili:
+    enabled: true
+    pages: 2
+  lalafo:
+    enabled: false
+    pages: 2
+  halooglasi:
+    enabled: false
+    pages: 2
+
+http:
+  # Be a polite guest: one request at a time, with a pause between them.
+  delay_seconds: 2.0
+  timeout_seconds: 25
+  retries: 3
+  user_agent: >-
+    Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+    (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+
+output:
+  state_file: data/seen.json
+  report_dir: out
+  # Report a listing again if its price drops by at least this much.
+  price_drop_alert_pct: 7

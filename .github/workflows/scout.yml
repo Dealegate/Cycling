@@ -1,0 +1,73 @@
+name: gravel scout
+
+# Every 30 minutes.  GitHub's scheduler is best-effort and can run late under
+# load, which is fine: the state file means a delayed run just catches up.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      notify:
+        description: "Send Telegram/GitHub notifications for new hits"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # to commit the updated state file
+  issues: write     # one issue per new candidate
+
+concurrency:
+  group: gravel-scout
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run the offline tests first
+        run: python tests/test_scout.py
+
+      - name: Crawl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python -m gravelscout run \
+            ${{ (github.event_name == 'workflow_dispatch' && !inputs.notify) && '--no-notify' || '' }}
+
+      - name: Commit what changed
+        run: |
+          git config user.name  "gravel-scout"
+          git config user.email "gravel-scout@users.noreply.github.com"
+          git add data/seen.json out/ || true
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "scout: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            for i in 1 2 3 4; do
+              git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+              sleep $((2 ** i))
+            done
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shortlist
+          path: |
+            out/
+            debug/
+          if-no-files-found: ignore
+          retention-days: 14
