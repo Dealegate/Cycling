@@ -155,6 +155,6 @@ python scripts/fetch_geometry.py scrape --brand canyon --model grizl \
 python tests/test_scout.py
 ```
 
-24 теста, сеть не нужна. Фикстуры в `tests/fixtures/` синтетические —
+40 тестов, сеть не нужна. Фикстуры в `tests/fixtures/` синтетические —
 они проверяют, что JSON-стратегия и HTML-стратегия работают каждая сама по себе.
 Настоящие захваты страниц кладите туда же вместо них.
