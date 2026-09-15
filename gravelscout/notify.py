@@ -56,6 +56,65 @@ def _esc(s: str) -> str:
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def telegram_get(method: str) -> dict:
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    if not token:
+        return {"ok": False, "description": "TELEGRAM_BOT_TOKEN is not set"}
+    try:
+        with urllib.request.urlopen(
+                f"https://api.telegram.org/bot{token}/{method}", timeout=25) as r:
+            return json.loads(r.read().decode())
+    except Exception as exc:  # noqa: BLE001
+        return {"ok": False, "description": str(exc)}
+
+
+def telegram_diagnose() -> int:
+    """Check the bot credentials and print the chat ids the bot can see.
+
+    Telegram will not tell a bot its own chat ids until somebody writes to it,
+    so the flow is: create the bot with @BotFather, send it any message, then
+    run this to read the chat id back out of getUpdates.
+    """
+    me = telegram_get("getMe")
+    if not me.get("ok"):
+        print(f"getMe failed: {me.get('description')}")
+        print("Create a bot by messaging @BotFather, then export the token:")
+        print("  export TELEGRAM_BOT_TOKEN=123456:AA...")
+        return 2
+    bot = me["result"]
+    print(f"bot ok: @{bot.get('username')} ({bot.get('first_name')})")
+
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    if not chat_id:
+        updates = telegram_get("getUpdates")
+        chats = {}
+        for u in updates.get("result", []):
+            msg = u.get("message") or u.get("channel_post") or {}
+            chat = msg.get("chat") or {}
+            if chat.get("id"):
+                chats[chat["id"]] = chat.get("title") or chat.get("username") or chat.get("first_name")
+        if not chats:
+            print("TELEGRAM_CHAT_ID is not set and the bot has no messages yet.")
+            print(f"Send any message to @{bot.get('username')} in Telegram, then run this again.")
+            return 2
+        print("Chat ids the bot can see:")
+        for cid, name in chats.items():
+            print(f"  export TELEGRAM_CHAT_ID={cid}    # {name}")
+        return 2
+
+    status, body = _post(f"https://api.telegram.org/bot{os.getenv('TELEGRAM_BOT_TOKEN')}/sendMessage",
+                         {"chat_id": chat_id,
+                          "text": "gravelscout is wired up. This is what a hit will look like:\n"
+                                  "<b>Liv Devote Advanced 2, vel. S</b>\nEUR 1 500 \u2014 Beograd\n"
+                                  "SHIMANO GRX RX600 2x11, hydraulic disc, size S\nverdict: match (100/100)",
+                          "parse_mode": "HTML"})
+    if status == 200:
+        print(f"test message delivered to chat {chat_id}")
+        return 0
+    print(f"sendMessage failed ({status}): {body}")
+    return 2
+
+
 # --------------------------------------------------------------------------
 # GitHub issues - one issue per candidate, so the phone gets a notification and
 # there is somewhere to write "messaged the seller" / "sold".

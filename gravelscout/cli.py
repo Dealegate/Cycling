@@ -5,6 +5,7 @@
     python -m gravelscout probe          fetch one page per source and report
                                          which parsing strategy worked
     python -m gravelscout check "text"   run the filters over pasted ad text
+    python -m gravelscout telegram       test the bot, print the chat id
 """
 from __future__ import annotations
 
@@ -16,7 +17,8 @@ from pathlib import Path
 from .config import Config
 from .geometry import GeometryDB
 from .models import Listing
-from .notify import github_enabled, github_issue, issue_body, telegram_enabled, telegram_send
+from .notify import (github_enabled, github_issue, issue_body, telegram_diagnose,
+                     telegram_enabled, telegram_send)
 from .report import console_line, markdown, summary_counts
 from .scoring import assess
 from .sources import build_sources
@@ -169,6 +171,11 @@ def cmd_check(args) -> int:
     return 0
 
 
+def cmd_telegram(args) -> int:
+    """Verify the Telegram bot and print the chat id when it is still missing."""
+    return telegram_diagnose()
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="gravelscout", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -194,6 +201,9 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("text", nargs="?")
     check.add_argument("--url")
     check.set_defaults(func=cmd_check)
+
+    tg = sub.add_parser("telegram", help="test the Telegram bot and find the chat id")
+    tg.set_defaults(func=cmd_telegram)
     return p
 
 

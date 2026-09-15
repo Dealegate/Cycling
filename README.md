@@ -75,16 +75,26 @@ python -m gravelscout check "Gravel bicikl, GRX 600 2x11, hidraulicne disk, vel 
 и заводит issue на каждого нового кандидата. Ничего разворачивать не нужно —
 достаточно включить Actions в репозитории.
 
-### Уведомления
+### Уведомления в телеграм
 
-Обе опциональны, обе через переменные окружения:
+1. Написать [@BotFather](https://t.me/BotFather), команда `/newbot`, получить токен вида `123456:AA...`.
+2. Написать своему новому боту любое сообщение — пока вы не написали первым, Telegram не отдаст боту ваш chat_id.
+3. Узнать chat_id:
 
-| Переменная | Что делает |
-|---|---|
-| `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | Сообщение в телеграм на каждого нового кандидата |
-| `GITHUB_TOKEN`, `GITHUB_REPOSITORY` | Issue на каждого нового кандидата (в Actions подставляются сами) |
+```bash
+export TELEGRAM_BOT_TOKEN=123456:AA...
+python -m gravelscout telegram      # покажет chat_id
+export TELEGRAM_CHAT_ID=...
+python -m gravelscout telegram      # пришлёт тестовое сообщение
+```
 
-Без них скаут просто пишет `out/shortlist.md` и `out/new.md`.
+4. Для запуска по расписанию положить оба значения в секреты репозитория:
+   Settings → Secrets and variables → Actions → New repository secret,
+   имена `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`. Воркфлоу их уже читает.
+
+Issue на каждого кандидата заводятся параллельно, если есть `GITHUB_TOKEN` и
+`GITHUB_REPOSITORY` — в Actions они подставляются сами. Без обоих каналов скаут
+просто пишет `out/shortlist.md` и `out/new.md`.
 
 ## Геометрия
 
