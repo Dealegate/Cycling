@@ -1,10 +1,14 @@
 name: gravel scout
 
-# Every 30 minutes.  GitHub's scheduler is best-effort and can run late under
+# Every 8 hours.  GitHub's scheduler is best-effort and can run late under
 # load, which is fine: the state file means a delayed run just catches up.
+#
+# Half-hourly was noise.  A classifieds board does not turn over in thirty
+# minutes, and each run that finds something opens an issue, so the cost of
+# checking too often is paid in a cluttered issue list rather than in speed.
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "0 */8 * * *"
   workflow_dispatch:
     inputs:
       notify:
