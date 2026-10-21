@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bikecare</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+</head>
+<body>
+<header>
+  <div class="brand">bike<b>care</b></div>
+  <nav id="tabs">
+    <button data-tab="todo" class="on">To-do</button>
+    <button data-tab="bikes">Велосипеды</button>
+    <button data-tab="logs">Журнал</button>
+    <button data-tab="calendar">Календарь</button>
+    <button data-tab="rides">Поездки</button>
+  </nav>
+  <div id="strava"></div>
+</header>
+<main id="view"></main>
+<div id="toast" hidden></div>
+<dialog id="modal"><form method="dialog" id="modal-body"></form></dialog>
+<script src="app.js"></script>
+</body>
+</html>
