@@ -98,7 +98,9 @@ DEFAULT_SET = {
 }
 
 # Strava's frame_type numbers, from GET /gear/{id}.
-STRAVA_FRAME = {1: "mtb", 2: "city", 3: "road", 4: "city", 5: "gravel"}
+STRAVA_FRAME = {1: "mtb", 2: "city", 3: "road", 4: "city", 5: "gravel",
+                "MountainBike": "mtb", "Cross": "city", "Road": "road",
+                "TimeTrial": "road", "Gravel": "gravel"}
 
 DIRT_SPORTS = {"GravelRide", "MountainBikeRide", "EMountainBikeRide"}
 CYCLING_SPORTS = DIRT_SPORTS | {"Ride", "VirtualRide", "EBikeRide",

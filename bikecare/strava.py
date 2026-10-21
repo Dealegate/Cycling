@@ -109,22 +109,60 @@ def ride_from_activity(a: dict, bike_id: int | None) -> dict:
             "commute": int(bool(a.get("commute")))}
 
 
-def _bike_for_gear(db: DB, gear_id: str, token: str, cache: dict) -> int:
-    if gear_id in cache:
-        return cache[gear_id]
+def wanted(a: dict) -> bool:
+    """A cycling activity that actually went somewhere.  Watches log a
+    zero-distance "indoor ride" next to the real one; it would only inflate
+    the hours."""
+    sport = a.get("sport_type") or a.get("type")
+    return sport in catalog.CYCLING_SPORTS and (a.get("distance") or 0) > 0
+
+
+def add_gear(db: DB, g: dict, installed_at: str | None = None) -> int:
+    """A bike from a Strava gear record, unless it is already here."""
+    gear_id = str(g["id"])
     row = db.one("SELECT id FROM bikes WHERE strava_gear_id = ?", gear_id)
     if row:
-        cache[gear_id] = row["id"]
         return row["id"]
-    g = _request(f"{API}/gear/{gear_id}", token=token)
     frame = catalog.STRAVA_FRAME.get(g.get("frame_type"), "road")
     name = g.get("name") or " ".join(
         x for x in (g.get("brand_name"), g.get("model_name")) if x) or gear_id
-    bike_id = db.add_bike(name, frame, strava_gear_id=gear_id)
+    bike_id = db.add_bike(name, frame, strava_gear_id=gear_id,
+                          installed_at=installed_at)
     if g.get("retired"):
         db.run("UPDATE bikes SET retired = 1 WHERE id = ?", bike_id)
-    cache[gear_id] = bike_id
     return bike_id
+
+
+def _bike_for_gear(db: DB, gear_id: str, token: str, cache: dict) -> int:
+    if gear_id not in cache:
+        row = db.one("SELECT id FROM bikes WHERE strava_gear_id = ?", gear_id)
+        cache[gear_id] = row["id"] if row else add_gear(
+            db, _request(f"{API}/gear/{gear_id}", token=token))
+    return cache[gear_id]
+
+
+def import_dump(db: DB, dump: dict) -> dict:
+    """Load ``{"bikes": [gear...], "activities": [activity...]}`` - the shapes
+    GET /gear/{id} and GET /athlete/activities return - without OAuth.  For
+    when the rides came out of Strava some other way.
+
+    A bike's parts are taken to be as old as its first ride here: with the
+    whole history in hand that is a better guess than "installed today".
+    An hour before it, so that the first ride counts."""
+    acts = [a for a in dump.get("activities", []) if wanted(a)]
+    first: dict[str, str] = {}
+    for a in acts:
+        g = a.get("gear_id")
+        if g and (str(g) not in first or a["start_date"] < first[str(g)]):
+            first[str(g)] = a["start_date"]
+    first = {g: time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(calendar.timegm(
+        time.strptime(t, "%Y-%m-%dT%H:%M:%SZ")) - 3600)) for g, t in first.items()}
+    bikes = {str(g["id"]): add_gear(db, g, first.get(str(g["id"])))
+             for g in dump.get("bikes", [])}
+    for a in acts:
+        g = a.get("gear_id")
+        db.upsert_ride(ride_from_activity(a, bikes.get(str(g)) if g else None))
+    return {"rides": len(acts), "bikes": len(bikes)}
 
 
 def sync(db: DB) -> dict:
@@ -147,8 +185,7 @@ def sync(db: DB) -> dict:
         if not batch:
             break
         for a in batch:
-            sport = a.get("sport_type") or a.get("type")
-            if sport not in catalog.CYCLING_SPORTS:
+            if not wanted(a):
                 continue
             gear = a.get("gear_id")
             bike_id = _bike_for_gear(db, gear, token, cache) if gear else None

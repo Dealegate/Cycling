@@ -163,6 +163,31 @@ class Strava(unittest.TestCase):
         self.assertEqual(db.get("strava")["synced_until"], 1788418800)
 
 
+class Import(unittest.TestCase):
+    def test_dump_without_oauth(self):
+        db = DB()
+        self.addCleanup(db.conn.close)
+        act = lambda i, day, gear, km=20: {
+            "id": i, "sport_type": "Ride", "gear_id": gear, "distance": km * 1000,
+            "moving_time": 3600, "start_date": f"2026-07-{day}T10:00:00Z"}
+        out = strava.import_dump(db, {
+            "bikes": [{"id": "7", "name": "First gravel", "frame_type": "Gravel"},
+                      {"id": "8", "name": "rental", "frame_type": "Gravel",
+                       "retired": True}],
+            "activities": [act(1, 22, "7"), act(2, 25, "7"), act(3, 16, "8"),
+                           act(4, 11, None), act(5, 12, "7", km=0)]})
+        self.assertEqual(out, {"rides": 4, "bikes": 2})
+        bike = db.one("SELECT * FROM bikes WHERE strava_gear_id = '7'")
+        self.assertEqual(bike["frame"], "gravel")
+        self.assertEqual(db.one("SELECT retired FROM bikes WHERE strava_gear_id = '8'")
+                         ["retired"], 1)
+        # Parts start just before the first ride, so both rides count.
+        chain = next(c for b in wear.fleet(db, NOW) if b["id"] == bike["id"]
+                     for c in b["components"] if c["kind"] == "chain")
+        self.assertEqual(chain["wear"]["used"]["km"], 40)
+        self.assertEqual(chain["installed_at"], "2026-07-22T09:00:00Z")
+
+
 class Server(unittest.TestCase):
     def setUp(self):
         self.db = DB()

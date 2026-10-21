@@ -3,11 +3,13 @@
     python -m bikecare serve [--port 8765] [--host 127.0.0.1]
     python -m bikecare demo               fill an empty database with a made-up garage
     python -m bikecare sync               pull new rides from Strava once
+    python -m bikecare import dump.json   load bikes and rides from a JSON file
     python -m bikecare todo               print the to-do list
 """
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 
@@ -26,6 +28,8 @@ def main(argv=None) -> int:
     s.add_argument("--port", type=int, default=8765)
     sub.add_parser("demo")
     sub.add_parser("sync")
+    i = sub.add_parser("import")
+    i.add_argument("file")
     sub.add_parser("todo")
     args = p.parse_args(argv)
     db = DB(args.db)
@@ -42,6 +46,9 @@ def main(argv=None) -> int:
         print(f"Демо-гараж записан в {args.db}")
     elif args.cmd == "sync":
         print(strava.sync(db))
+    elif args.cmd == "import":
+        with open(args.file, encoding="utf-8") as f:
+            print(strava.import_dump(db, json.load(f)))
     elif args.cmd == "todo":
         for i in wear.todo(db):
             print(f"{i['status']:9} {i['bike']:20} {i['title']:24} {i['label']}")
